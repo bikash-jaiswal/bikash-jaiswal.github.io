@@ -9,9 +9,9 @@ const IntroWithImage = () => {
       <div className="flex-1">
         <h2 className="text-2xl font-bold mb-4">Hey, I'm Bikash</h2>
         <p className="text">
-          Welcome to my Digital Realm. I`&apos;`m a Software developer, Entrepreneur,
+          Welcome to my Digital Realm. I&apos;m a Software developer, Entrepreneur,
           author, and content creator living in Canada. And here, I share what
-          I`&apos;`ve been working on recently and things I learned along the way.
+          I&apos;ve been working on recently and things I learned along the way.
         </p>
       </div>
 
