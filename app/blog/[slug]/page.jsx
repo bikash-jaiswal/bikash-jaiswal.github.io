@@ -5,6 +5,7 @@ import gfm from "remark-gfm";
 import matter from "gray-matter";
 import { FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
+import getPostMetadata from "@/app/Component/getPostMetaData";
 
 const getPostContent = (slug) => {
   const folder = "app/posts/";
@@ -13,6 +14,13 @@ const getPostContent = (slug) => {
   const matterContent = matter(content);
   return matterContent;
 };
+
+export const generateStaticParams = async() => {
+  const posts = getPostMetadata();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
 const postDetails = ({ params }) => {
   const postid = params.slug;
