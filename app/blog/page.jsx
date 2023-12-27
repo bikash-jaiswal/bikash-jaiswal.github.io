@@ -23,7 +23,7 @@ const BlogPage = () => {
   return (
   <div className="">
     <div className="font-bold text-white p-4 text-center">Recent Blogs</div>
-    <div className="p-4"> {postPreviews}</div>
+    <div className="p-4 min-h-full"> {postPreviews}</div>
   </div>
   )};
 

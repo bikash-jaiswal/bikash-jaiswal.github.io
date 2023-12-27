@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="">
       <body className="flex flex-col md:flex-row bg-neutral-800">
-        <side className="flex-none w-3/12">
+        <side className="flex-none w-2/12">
           {/* Sidebar content */}
         </side>
         <main className="flex-grow ">
@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
           {children}
           {/* <Footer /> */}
         </main>
-        <side className="flex-none w-3/12">
+        <side className="flex-none w-2/12">
           {/* Another sidebar content */}
         </side>
       </body>
