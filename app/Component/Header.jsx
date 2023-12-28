@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <nav className="p-4">
-      <div className="flex items-center justify-between font-medium">
+      <div className="flex items-center justify-between ">
         <div className="hidden md:flex space-x-4">
           {/* Hide on screens smaller than md */}
           <Link href="/" className="text-white font-bold">
