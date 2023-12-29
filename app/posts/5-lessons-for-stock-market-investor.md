@@ -1,7 +1,7 @@
 ---
 title: "Mastering the Stock Market: Five Crucial Lessons"
 author: "Bikash Jaiswal"
-date: "2024-12-27"
+date: "2023-12-27"
 ---
 
 

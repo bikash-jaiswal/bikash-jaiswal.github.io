@@ -5,7 +5,9 @@ import getPostMetadata from "../Component/getPostMetaData";
 
 const BlogPage = () => {
   const postMetadata = getPostMetadata();
-  const postPreviews = postMetadata.map((post) => (
+  const sortedPosts = postMetadata.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  const postPreviews = sortedPosts.map((post) => (
     <article key={post.slug} className="text-white" >
       <div>
         <Link href={`/blog/${post.slug}`}>

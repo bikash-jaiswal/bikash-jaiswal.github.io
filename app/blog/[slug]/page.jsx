@@ -35,7 +35,7 @@ const postDetails = ({ params }) => {
         <h1 className="text-2xl text-green-600">{post.data.title}</h1>
         <p className="text-slate-400 mt-2">{post.data.date}</p>
       </div>
-      <article className="min-w-full prose dark:prose-invert text-white p-4 bg-slate-700 ">
+      <article className="min-w-full prose-img:mx-auto prose dark:prose-invert text-white p-4 bg-slate-700 ">
         <ReactMarkdown remarkPlugins={[gfm]}>
           {post.content}
         </ReactMarkdown>
