@@ -26,7 +26,7 @@ const postDetails = ({ params }) => {
   const postid = params.slug;
   const post = getPostContent(postid);
   return (
-    <div className="mt-8">
+    <div className="mt-8 bg-white">
       <Link href="/" className="flex items-center text-blue-600 ">
         <FaArrowLeft className="mr-2" />
         <p className="text-lg ">Back to Home</p>
@@ -35,7 +35,7 @@ const postDetails = ({ params }) => {
         <h1 className="text-2xl text-green-600">{post.data.title}</h1>
         <p className="text-slate-400 mt-2">{post.data.date}</p>
       </div>
-      <article className="min-w-full prose-img:mx-auto prose dark:prose-invert text-white p-4 bg-slate-700 ">
+      <article className="min-w-full prose-img:mx-auto prose p-4 bg-white ">
         <ReactMarkdown remarkPlugins={[gfm]}>
           {post.content}
         </ReactMarkdown>
