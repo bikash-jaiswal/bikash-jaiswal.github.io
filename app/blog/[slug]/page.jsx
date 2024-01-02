@@ -5,7 +5,7 @@ import gfm from "remark-gfm";
 import matter from "gray-matter";
 import { FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
-import getPostMetadata from "@/app/Component/getPostMetaData";
+import getPostMetadata from "../../Component/getPostMetaData";
 
 const getPostContent = (slug) => {
   const folder = "app/posts/";

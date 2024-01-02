@@ -2,8 +2,10 @@ import Link from "next/link";
 import React from "react";
 import getPostMetadata from "../Component/getPostMetaData";
 
-const BlogPage = ({ blogNum }) => {
+
+const BlogPage = (props) => {
   const postMetadata = getPostMetadata();
+  const blogNum = props.blogNum
   const sortedPosts = postMetadata.sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );

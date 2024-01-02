@@ -28,7 +28,7 @@ const ContactForm = () => {
 
 return (
     <div className="flex flex-col justify-center items-center my-10 text-white p-4">
-    <h1 className="text-5xl font-bold mb-4 text-center">Let’s talk about your project</h1>
+    <h1 className="text-5xl font-bold mb-4 text-center">Let&apos;s talk about your project</h1>
     <h3 className="text-sm mb-4 text-center">Achieve all your goals and get long-term value for your business with our professional services </h3>
       <div className="max-w-md w-full p-4 bg-gray-900 rounded shadow-lg">
         <form onSubmit={handleSubmit}>
@@ -80,7 +80,7 @@ return (
             type="submit"
             className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300"
           >
-            Let's Talk
+            Let&apos;s Talk
           </button>
         </form>
       </div>
