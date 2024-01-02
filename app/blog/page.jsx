@@ -18,8 +18,9 @@ const BlogPage = ({ blogNum }) => {
               <h4 className="text-sm">{post.title}</h4>
               <p className="text-xs w-20">{post.date}</p>
             </div>
+             <p className="text-xs text-gray-500">{post.subtitle}</p>
           </div>
-          <p className="text-grey-500">{post.subtitle}</p>
+         
         </Link>
       </div>
     </article>

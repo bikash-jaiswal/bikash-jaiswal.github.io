@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaFacebook, FaLinkedin, FaTwitter, FaInstagram } from "react-icons/fa";
+import { FaFacebook, FaLinkedin, FaTwitter, FaInstagram, FaMedium, FaGithub} from "react-icons/fa";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,25 +11,31 @@ const Footer = () => {
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © {currentYear}{" "}
             <a href="/" className="hover:underline">
-              Datenium
+              Bikash Jaiswal
             </a>
             . All Rights Reserved.
           </span>
 
           <div className="flex mt-4 sm:justify-center sm:mt-0">
             <div className="flex justify-center space-x-4">
-              <Link href="https://www.facebook.com" passHref>
-                <FaFacebook className="text-2xl text-violet-500 cursor-pointer hover:text-blue-500" />
+             <Link href="https://medium.com/@bikash_jaiswal" passHref target="_blank" rel="noopener noreferrer">
+                <FaMedium className="text-2xl text-violet-500 cursor-pointer hover:text-blue-500" />
               </Link>
-              <Link href="https://www.linkedin.com" passHref>
+              <Link href="https://github.com/bikash-jaiswal" passHref target="_blank" rel="noopener noreferrer">
+                <FaGithub className="text-2xl  text-violet-500 cursor-pointer hover:text-blue-500" />
+              </Link>
+              {/* <Link href="https://www.facebook.com" passHref target="_blank" rel="noopener noreferrer">
+                <FaFacebook className="text-2xl text-violet-500 cursor-pointer hover:text-blue-500" />
+              </Link> */}
+              <Link href="https://www.linkedin.com/in/bikashjaiswal/" passHref target="_blank" rel="noopener noreferrer">
                 <FaLinkedin className="text-2xl text-violet-500 cursor-pointer hover:text-blue-500" />
               </Link>
-              <Link href="https://twitter.com" passHref>
+              <Link href="https://twitter.com" passHref target="_blank" rel="noopener noreferrer">
                 <FaTwitter className="text-2xl  text-violet-500 cursor-pointer hover:text-blue-500" />
               </Link>
-              <Link href="https://www.instagram.com" passHref>
+              {/* <Link href="https://www.instagram.com" passHref target="_blank" rel="noopener noreferrer">
                 <FaInstagram className="text-2xl  text-violet-500 cursor-pointer hover:text-blue-500" />
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

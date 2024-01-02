@@ -1,6 +1,6 @@
 ---
-title: "Most Common Data Structires for Coding Interviews"
-subtitle: "Arrays, Linked Lists, Stacks, Queues, Trees, and Hash Tables are essential data structures for coding interviews, optimizing problem-solving skills.."
+title: "Most Common Data Structures for Coding Interviews"
+subtitle: "Arrays, Linked Lists, Stacks, Queues, Trees, and Hash Tables are essential data structures for coding interviews."
 date: "2023-12-29"
 ---
 

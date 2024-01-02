@@ -1,5 +1,6 @@
 ---
 title: "Mastering the Stock Market: Five Crucial Lessons"
+subtitle: "Unlocking Wealth: A Beginner's Guide to Navigating the Stock Market for Successful Investments"
 author: "Bikash Jaiswal"
 date: "2023-12-27"
 ---

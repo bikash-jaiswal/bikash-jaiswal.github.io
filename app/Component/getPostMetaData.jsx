@@ -10,6 +10,7 @@ const getPostMetadata = () => {
     const matterResult = matter(fileContents);
     return {
       title: matterResult.data.title,
+      subtitle: matterResult.data.subtitle,
       date: matterResult.data.date,
       author: matterResult.data.author,
       slug: fileName.replace(".md", ""),
