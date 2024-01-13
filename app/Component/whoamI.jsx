@@ -19,8 +19,8 @@ const IntroWithImage = () => {
       {/* Image Section (on the right for small screens, on the bottom for medium and larger screens) */}
       <div className="flex justify-center">
         <Image
-          src="/my_photo.jpg" 
-          alt="Your Image"
+          src="/my-photo.jpeg" 
+          alt="My Image"
           className="rounded-md"
           width={250} 
           height={500} 
