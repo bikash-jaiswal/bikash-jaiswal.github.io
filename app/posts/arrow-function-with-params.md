@@ -14,7 +14,7 @@ tags:
 
 In JavaScript, arrow functions provide a concise syntax for writing functions. They can also take parameters, allowing you to create more flexible and expressive code.
 
-![Type of Data Structure](/images/categories-of-ds.png)
+![Arrow Function](/images/arrow-function.png)
 
 
 The basic syntax of an arrow function looks like this:
