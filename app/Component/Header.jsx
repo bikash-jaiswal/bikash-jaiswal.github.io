@@ -24,9 +24,10 @@ const Navbar = () => {
           <Link href="/blog" className="text-white">
             Blogs
           </Link>
-          {/* <Link href="/courses" className="text-white">
+          <Link href="/courses" className="text-white">
             Courses
           </Link>
+          {/* 
           <Link href="/work" className="text-white">
             Work with me
           </Link> */}
@@ -68,6 +69,9 @@ const Navbar = () => {
           </Link>
           <Link href="/work" className="block py-2 text-gray-800">
             Work with me
+          </Link>
+          <Link href="/courses" className="text-white">
+            Courses
           </Link>
           <Link href="/contacts" className="block py-2 text-gray-800">
             Contact
