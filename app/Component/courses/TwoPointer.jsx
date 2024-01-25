@@ -22,7 +22,7 @@ const TwoPointer = () => {
                     </ol>
                 </li>
                  <li>Modified Binary Search: Introduction:
-                    <div className='p-2'>Modified Binary Search refers to variations or adjustments made to the traditional binary search algorithm to solve specific types of problems. While the traditional binary search is used to find a specific element in a sorted array, modified versions are applied to solve problems where a binary search-like approach can be beneficial. Here`&apos;`s  a general idea of how Modified Binary Search works and an example to illustrate its usage:</div>
+                    <div className='p-2'>Modified Binary Search refers to variations or adjustments made to the traditional binary search algorithm to solve specific types of problems. While the traditional binary search is used to find a specific element in a sorted array, modified versions are applied to solve problems where a binary search-like approach can be beneficial. Here&apos;s  a general idea of how Modified Binary Search works and an example to illustrate its usage:</div>
                     <ol className='list-disc ml-6'>
                         <li> <b>Usage:</b> Modified Binary Search is employed to efficiently find the first or last occurrence of a target element in a sorted array, adapting the standard binary search for specific requirements.</li>
                         <li><b>How it works: </b>The algorithm maintains pointers and adjusts them based on comparisons with the target element, ensuring a focused search in either the left or right half of the sorted array to locate the desired occurrence efficiently.</li>
