@@ -1,10 +1,15 @@
 import React, { ReactNode } from 'react';
 import TwoPointer from '../Component/courses/TwoPointer';
+import BinarySearch from '../Component/courses/BinarySearch'
 
 const faqData = [
     {
       question: "Two Pointers Patterns",
       answer: <TwoPointer />,
+    },
+    {
+      question: "Binary Search Patterns",
+      answer: <BinarySearch />,
     },
     {
         question: "Linked List, Stacks, Queue, Matrices",

@@ -24,9 +24,9 @@ const Navbar = () => {
           <Link href="/blog" className="text-white">
             Blogs
           </Link>
-          {/* <Link href="/courses" className="text-white">
+          <Link href="/courses" className="text-white">
             Courses
-          </Link> */}
+          </Link>
            <Link href="/services" className="text-white">
             Services
           </Link>
