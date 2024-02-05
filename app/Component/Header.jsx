@@ -63,17 +63,17 @@ const Navbar = () => {
         </div>
       </div>
       {isMenuOpen && (
-        <div className="bg-white p-4 rounded shadow-md">
+        <div className="bg-white p-4 rounded shadow-md" onClick={handleToggleMenu}>
           <Link href="/" className="block py-2 text-gray-800">
             Home
           </Link>
-          <Link href="/blog" className="block py-2 text-gray-800">
+          <Link href="/blog" className="block py-2 text-gray-800" onClick={handleToggleMenu}>
             Blogs
           </Link>
-          <Link href="/services" className="text-white">
+          <Link href="/services" className="block py-2 text-gray-800" onClick={handleToggleMenu}>
             Services
           </Link>
-          <Link href="/contacts" className="block py-2 text-gray-800">
+          <Link href="/contacts" className="block py-2 text-gray-800" oonClick={handleToggleMenu}>
             Contact
           </Link>
         </div>
