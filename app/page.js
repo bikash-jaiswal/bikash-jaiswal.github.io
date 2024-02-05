@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main className="flex flex-col text-xl">
       <IntroWithImage />
-      <BlogPage blogNum="5"/>
+      <BlogPage blogNum="3"/>
     </main>
   )
 }

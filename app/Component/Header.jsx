@@ -18,14 +18,17 @@ const Navbar = () => {
           <Link href="/" className="text-white font-bold">
             Bikash Jaiswal
           </Link>
-           <Link href="/gentools" className="text-white">
+           {/* <Link href="/gentools" className="text-white">
             AITools
-          </Link>
+          </Link> */}
           <Link href="/blog" className="text-white">
             Blogs
           </Link>
-          <Link href="/courses" className="text-white">
+          {/* <Link href="/courses" className="text-white">
             Courses
+          </Link> */}
+           <Link href="/services" className="text-white">
+            Services
           </Link>
           {/* 
           <Link href="/work" className="text-white">
@@ -64,14 +67,11 @@ const Navbar = () => {
           <Link href="/" className="block py-2 text-gray-800">
             Home
           </Link>
-          <Link href="/courses" className="block py-2 text-gray-800">
-            Courses
+          <Link href="/blog" className="block py-2 text-gray-800">
+            Blogs
           </Link>
-          <Link href="/work" className="block py-2 text-gray-800">
-            Work with me
-          </Link>
-          <Link href="/courses" className="text-white">
-            Courses
+          <Link href="/services" className="text-white">
+            Services
           </Link>
           <Link href="/contacts" className="block py-2 text-gray-800">
             Contact
