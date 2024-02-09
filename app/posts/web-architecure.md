@@ -29,19 +29,19 @@ We can build websites in different ways, depending on what we need. Here are thr
 
 Imagine all team members tightly linked, making it easy to work together. But, it can be tough to grow and keep everything organized.
 
-![Monolithic architecture](url-to-image)
+![Monolithic architecture](/images/monolithic.webp)
 
 ### 2. Microservices Architecture
 
 Picture a team with independent members, each doing their own thing. It's easier to grow and keep things tidy, but it's a bit more complex.
 
-![Microservices architecture](url-to-image)
+![Microservices architecture](/images/microservices.webp)
 
 ### 3. Serverless Architecture
 
 This is like using ready-made tools to build a website. It's simple for growth and maintenance, but it can be tricky for developers.
 
-![Serverless architecture](url-to-image)
+![Serverless architecture](/images/serverless.jpg)
 
 ## Things to Think About
 
@@ -301,6 +301,10 @@ In the Push method, also known as server-initiated communication, the server sen
 ### Example of Push Method:
 Consider a real-time chat application where users can send messages to each other. When a user sends a message, the server can push the message to all connected clients in real-time without waiting for them to request it. This ensures that all users receive new messages instantly as they are sent.
 
-## Conclusion
-
 HTTP Pull and Push methods offer different approaches to data exchange between clients and servers. While Pull method requires the client to initiate communication by requesting data from the server, Push method allows the server to proactively send data to the client without the client's explicit request. Understanding these methods is crucial for building efficient and responsive web applications that meet the needs of users in various scenarios.
+
+## Conclusion
+Ultimately, the choice among these technologies depends on the specific requirements of the application, including factors such as performance, scalability, security, and real-time capabilities. By understanding the strengths and limitations of each option, developers can make informed decisions to create robust and efficient web solutions tailored to their needs.
+
+
+
