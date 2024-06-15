@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useState } from 'react';
 
 const ContactForm = () => {
@@ -8,28 +8,41 @@ const ContactForm = () => {
     message: '',
   });
 
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const handleChange = (e) => {
+    e.preventDefault();
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+    
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form Data:', formData);
-    // You can add logic here to send the form data to a server or perform other actions.
-    setFormData({
-      name: '',
-      email: '',
-      message: '',
-    });
+     // Here you can add your logic to handle form submission (e.g., send email, save data)
+    // For demo purposes, we'll just simulate a submission delay
+    setFormSubmitted(true);
+
+    // Simulating async submission with a delay
+    setTimeout(() => {
+      // Reset the form after submission (optional)
+      setFormData({
+        name: '',
+        email: '',
+        message: ''
+      });
+      setFormSubmitted(false); // Reset the form submission state
+    }, 5000); // Adjust the delay as needed
+
   };
 
-return (
+  return (
     <div className="flex flex-col justify-center items-center my-10 text-white p-4">
-    <h1 className="text-5xl font-bold mb-4 text-center">Let&apos;s talk about your project</h1>
-    <h3 className="text-sm mb-4 text-center">Achieve all your goals and get long-term value for your business with our professional services </h3>
+      <h1 className="text-5xl font-bold mb-4 text-center">Let&apos;s talk about your project</h1>
+      <h3 className="text-sm mb-4 text-center">Achieve all your goals and get long-term value for your business with our professional services</h3>
       <div className="max-w-md w-full p-4 bg-gray-900 rounded shadow-lg">
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -79,8 +92,9 @@ return (
           <button
             type="submit"
             className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300"
+            disabled={formSubmitted} // Disable button while form is submitting
           >
-            Let&apos;s Talk
+            {formSubmitted ? 'Email sent' : "Let's Talk"}
           </button>
         </form>
       </div>

@@ -67,7 +67,7 @@ const Navbar = () => {
           <Link href="/services" className="block py-2 text-white-800" onClick={handleToggleMenu}>
             Services
           </Link>
-          <Link href="/contacts" className="block py-2 text-white-800" oonClick={handleToggleMenu}>
+          <Link href="/contacts" className="block py-2 text-white-800" onClick={handleToggleMenu}>
             Contact
           </Link>
         </div>
