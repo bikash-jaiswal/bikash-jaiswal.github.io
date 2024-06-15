@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaFacebook, FaLinkedin, FaTwitter, FaInstagram, FaMedium, FaGithub} from "react-icons/fa";
+import {FaLinkedin, FaTwitter, FaInstagram, FaMedium, FaGithub} from "react-icons/fa";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -24,18 +24,15 @@ const Footer = () => {
               <Link href="https://github.com/bikash-jaiswal" passHref target="_blank" rel="noopener noreferrer">
                 <FaGithub className="text-2xl  text-violet-500 cursor-pointer hover:text-blue-500" />
               </Link>
-              {/* <Link href="https://www.facebook.com" passHref target="_blank" rel="noopener noreferrer">
-                <FaFacebook className="text-2xl text-violet-500 cursor-pointer hover:text-blue-500" />
-              </Link> */}
               <Link href="https://www.linkedin.com/in/bikashjaiswal/" passHref target="_blank" rel="noopener noreferrer">
                 <FaLinkedin className="text-2xl text-violet-500 cursor-pointer hover:text-blue-500" />
               </Link>
               <Link href="https://twitter.com" passHref target="_blank" rel="noopener noreferrer">
                 <FaTwitter className="text-2xl  text-violet-500 cursor-pointer hover:text-blue-500" />
               </Link>
-              {/* <Link href="https://www.instagram.com" passHref target="_blank" rel="noopener noreferrer">
+              <Link href="https://www.instagram.com" passHref target="_blank" rel="noopener noreferrer">
                 <FaInstagram className="text-2xl  text-violet-500 cursor-pointer hover:text-blue-500" />
-              </Link> */}
+              </Link>
             </div>
           </div>
         </div>
