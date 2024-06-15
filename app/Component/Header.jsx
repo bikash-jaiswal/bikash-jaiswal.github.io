@@ -24,19 +24,19 @@ const Navbar = () => {
           <Link href="/blog" className="text-white">
             Blogs
           </Link>
-          {/* <Link href="/courses" className="text-white">
+          <Link href="/courses" className="text-white">
             Courses
           </Link>
            <Link href="/services" className="text-white">
             Services
-          </Link> */}
-          {/* 
+          </Link>
+          
           <Link href="/work" className="text-white">
             Work with me
-          </Link> */}
-          {/* <Link href="/contacts" className="text-white">
+          </Link>
+          <Link href="/contacts" className="text-white">
             Contact
-          </Link> */}
+          </Link>
         </div>
         {/* <button className=" hidden md:flex text-white border-solid border-2 border-white hover:bg-violet-600 px-4">
           Sign In
@@ -67,15 +67,15 @@ const Navbar = () => {
           <Link href="/" className="block py-2 text-gray-800">
             Home
           </Link>
-          {/* <Link href="/blog" className="block py-2 text-gray-800" onClick={handleToggleMenu}>
+          <Link href="/blog" className="block py-2 text-gray-800" onClick={handleToggleMenu}>
             Blogs
-          </Link> */}
-          {/* <Link href="/services" className="block py-2 text-gray-800" onClick={handleToggleMenu}>
+          </Link>
+          <Link href="/services" className="block py-2 text-gray-800" onClick={handleToggleMenu}>
             Services
-          </Link> */}
-          {/* <Link href="/contacts" className="block py-2 text-gray-800" oonClick={handleToggleMenu}>
+          </Link>
+          <Link href="/contacts" className="block py-2 text-gray-800" oonClick={handleToggleMenu}>
             Contact
-          </Link> */}
+          </Link>
         </div>
       )}
     </nav>
