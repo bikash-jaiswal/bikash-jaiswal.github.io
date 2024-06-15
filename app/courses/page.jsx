@@ -8,7 +8,7 @@ const CoursesPage = () => (
       <div className="rounded-md shadow-md p-2 bg-gray-250">
         <Link href="/courses/blind-75">
         <Image
-          src="https://github.com/bikash-jaiswal/content_assets/blob/master/blind-75-leetcode.png?raw=true" 
+          src="/images/blind-75.jpg" 
           alt="blind 75 leetcode problem" 
           className="rounded-md"
           width={500} 
