@@ -11,7 +11,7 @@ const LeetCodeQuestions = () => {
       name: "Two Sum",
       leetcode: "https://leetcode.com/problems/two-sum",
       difficulty: "Easy",
-      youtubeLink: "https://www.youtube.com/watch?v=jeZdKBrF-a0",
+      youtubeLink: "https://www.youtube.com/watch?v=XeNyaWzwbws&t=56s",
       notes: "Use a hashmap to store complements of each element.",
     },
     {
