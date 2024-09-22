@@ -22,12 +22,12 @@ const Navbar = () => {
           <Link href="/blog" className="text-white">
             Blogs
           </Link>
-          <Link href="/courses" className="text-white">
+          {/* <Link href="/courses" className="text-white">
             Courses
           </Link>
           <Link href="/services" className="text-white">
             Services
-          </Link>
+          </Link> */}
           <Link href="/contacts" className="text-white">
             Contact
           </Link>
@@ -64,9 +64,9 @@ const Navbar = () => {
           <Link href="/blog" className="block py-2 text-white-800" onClick={handleToggleMenu}>
             Blogs
           </Link>
-          <Link href="/services" className="block py-2 text-white-800" onClick={handleToggleMenu}>
+          {/* <Link href="/services" className="block py-2 text-white-800" onClick={handleToggleMenu}>
             Services
-          </Link>
+          </Link> */}
           <Link href="/contacts" className="block py-2 text-white-800" onClick={handleToggleMenu}>
             Contact
           </Link>

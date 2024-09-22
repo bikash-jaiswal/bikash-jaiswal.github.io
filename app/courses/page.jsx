@@ -15,6 +15,15 @@ const CoursesPage = () => (
           height={500} 
         />
         </Link>
+         <Link href="/courses/system-design">
+        <Image
+          src="/images/blind-75.jpg" 
+          alt="System Design" 
+          className="rounded-md"
+          width={500} 
+          height={500} 
+        />
+        </Link>
       </div>
     </div>
   </div>
