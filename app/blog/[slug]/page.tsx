@@ -5,10 +5,13 @@ import gfm from "remark-gfm";
 import { FaArrowLeft } from "react-icons/fa";
 import { getPostContent, getPostMetadata } from "../../services/posts";
 import { PostMetadata } from "../../types/blog";
+import logger from "../../utils/logger";
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
+  searchParams?: Record<string, string | string[] | undefined>;  
 };
+
 
 export const generateStaticParams = async () => {
   const posts = await getPostMetadata();
@@ -18,19 +21,35 @@ export const generateStaticParams = async () => {
 };
 
 export default async function PostDetails({ params }: Props) {
-  // In static exports, params needs to be awaited
+  // Get the slug before using it in logger
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
   
+  logger.startTimer(`render:post:${slug}`);
+  
+  // Use Promise.all to parallelize data fetching
   const [content, allPosts] = await Promise.all([
     getPostContent(slug),
     getPostMetadata()
   ]);
-  const post = allPosts.find((p: PostMetadata) => p.slug === slug);
-
-  if (!content || !post) {
+  
+  // Early return for 404 to avoid processing when content is missing
+  if (!content) {
+    logger.warn(`Post content not found: ${slug}`);
+    logger.endTimer(`render:post:${slug}`);
     notFound();
   }
+  
+  const post = allPosts.find((p: PostMetadata) => p.slug === slug);
+  
+  if (!post) {
+    logger.warn(`Post metadata not found: ${slug}`);
+    logger.endTimer(`render:post:${slug}`);
+    notFound();
+  }
+
+  logger.info(`Successfully rendered post: ${slug}`);
+  logger.endTimer(`render:post:${slug}`);
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8 text-white">
