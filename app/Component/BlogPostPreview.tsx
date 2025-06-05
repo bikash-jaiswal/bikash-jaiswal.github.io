@@ -3,7 +3,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { FaCalendarAlt, FaClock, FaTag } from "react-icons/fa";
 import { PostMetadata } from "../types/blog";
-import { formatDate, isValidDate } from "../utils/date";
+import { formatDate } from "../utils/date";
 
 interface BlogPostPreviewProps {
   post: PostMetadata;

@@ -49,6 +49,17 @@ export interface ResourceFilters {
 // Sample data for resources
 export const sampleResources: Resource[] = [
   {
+    id: '999', // Nim Days resource
+    title: 'Nim Days',
+    description: 'A practical book about using the Nim programming language to build useful applications like parsers, testing frameworks, build systems, clients, and more.',
+    url: 'https://xmonader.github.io/nimdays/book_intro.html',
+    category: 'book',
+    tags: ['programming', 'nim', 'tutorial', 'practical'],
+    dateAdded: '2025-06-05',
+    icon: 'FiBook',
+    favorite: true
+  },
+  {
     id: '1',
     title: 'React Documentation',
     description: 'Official documentation for React library',
