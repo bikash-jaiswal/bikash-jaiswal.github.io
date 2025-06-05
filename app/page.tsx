@@ -1,4 +1,4 @@
-import ProfessionalIntro from './Component/whoamI';
+import ProfessionalIntro from './Component/whoAmI';
 import { Suspense } from 'react';
 import Link from 'next/link';
 import { getPostMetadata } from './services/posts';
@@ -27,7 +27,7 @@ export default async function Home(): Promise<React.ReactElement> {
         <div className="grid gap-8">
           <Suspense fallback={<div>Loading recent articles...</div>}>
             {recentPosts.length > 0 ? (
-              recentPosts.map(post => (
+              recentPosts.map((post: PostMetadata) => (
                 <BlogPostPreview key={post.slug} post={post} />
               ))
             ) : (

@@ -5,6 +5,11 @@ export interface PostMetadata {
   date: string;
   subtitle?: string;
   slug: string;
+  content?: string;
+  tags?: string[];
+  author?: string;
+  readingTime?: number;
+  coverImage?: string;
 }
 
 export interface BlogPageProps {

@@ -19,7 +19,7 @@ export const viewport = {
 
 export const metadata: Metadata = {
   title: "Bikash Jaiswal",
-  description: "Developer, Investor and Entreprenuer"
+  description: "Developer, Investor and Entrepreneur"
 };
 
 interface RootLayoutProps {
@@ -29,18 +29,15 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className={inter.className}>
-      <body className="min-h-screen flex flex-col md:flex-row bg-neutral-800">
-        <aside className="flex-none w-2/12" aria-label="Left sidebar">
-          {/* Sidebar content */}
-        </aside>
-        <main className="flex-grow" role="main">
+      <body className="min-h-screen flex flex-col bg-neutral-900">
+        {/* Full-width main content area */}
+        <main className="flex-grow max-w-7xl mx-auto px-4 w-full" role="main">
           <Navbar />
-          {children}
+          <div className="transition-all duration-300 ease-in-out">
+            {children}
+          </div>
           <Footer />
         </main>
-        <aside className="flex-none w-2/12" aria-label="Right sidebar">
-          {/* Another sidebar content */}
-        </aside>
       </body>
     </html>
   );

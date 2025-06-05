@@ -5,23 +5,31 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { FiCode, FiBookOpen, FiTrendingUp, FiArrowRight } from "react-icons/fi";
-import Button from './Button';
 
-// Professional highlight component
-const ProfessionalHighlight = ({ icon, title, description, delay = 0 }) => (
+interface ProfessionalHighlightProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  delay?: number;
+}
+
+const ProfessionalHighlight: React.FC<ProfessionalHighlightProps> = ({ icon, title, description, delay = 0 }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay }}
-    className="card card-hover"
+    className="card card-hover relative z-10 overflow-hidden"
   >
-    <div className="text-violet-400 mb-4 text-3xl">{icon}</div>
-    <h3 className="text-xl font-bold mb-3">{title}</h3>
-    <p className="text-gray-300">{description}</p>
+    <div className="absolute inset-0 bg-gradient-to-br from-violet-600/5 to-transparent z-0" />
+    <div className="relative z-10">
+      <div className="text-violet-400 mb-4 text-3xl">{icon}</div>
+      <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
+      <p className="text-gray-300">{description}</p>
+    </div>
   </motion.div>
 );
 
-const WhoAmI = () => {
+const WhoAmI: React.FC = () => {
   // Staggered animation variants for child elements
   const container = {
     hidden: { opacity: 0 },
@@ -92,7 +100,7 @@ const WhoAmI = () => {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="social-icon-link"
+              className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-800 text-gray-400 hover:text-violet-400 hover:shadow-lg hover:shadow-violet-500/20 transition-all duration-300 focus-ring"
               aria-label={social.label}
             >
               {social.icon}
@@ -134,22 +142,14 @@ const WhoAmI = () => {
           Explore my projects and articles to see what I&apos;ve been working on and what I&apos;ve learned along the way.
         </p>
         <div className="flex flex-col md:flex-row justify-center gap-4">
-          <Button 
-            href="/projects" 
-            variant="primary" 
-            icon={<FiArrowRight />} 
-            iconPosition="right"
-          >
-            View Projects
-          </Button>
-          <Button 
-            href="/blog" 
-            variant="secondary" 
-            icon={<FiArrowRight />}
-            iconPosition="right"
-          >
-            Read Blog
-          </Button>
+          <Link href="/projects" className="btn btn-primary">
+            <span>View Projects</span>
+            <FiArrowRight className="ml-2" />
+          </Link>
+          <Link href="/blog" className="btn btn-secondary">
+            <span>Read Blog</span>
+            <FiArrowRight className="ml-2" />
+          </Link>
         </div>
       </motion.div>
     </div>

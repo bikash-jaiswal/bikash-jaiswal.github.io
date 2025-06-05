@@ -3,20 +3,181 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
+  /* Primary Color Palette */
+  --color-primary: 124, 58, 237; /* violet-600 */
+  --color-primary-light: 167, 139, 250; /* violet-400 */
+  --color-primary-dark: 109, 40, 217; /* violet-700 */
+  
+  /* Secondary Color Palette */
+  --color-secondary: 59, 130, 246; /* blue-500 */
+  --color-secondary-light: 96, 165, 250; /* blue-400 */
+  
+  /* Accent Color */
+  --color-accent: 236, 72, 153; /* pink-500 */
+  
+  /* Background Colors */
+  --color-bg-dark: 23, 23, 23; /* neutral-900 */
+  --color-bg-card: 38, 38, 38; /* gray-800 */
+  
+  /* Text Colors */
+  --color-text-primary: 255, 255, 255;
+  --color-text-secondary: 209, 213, 219; /* gray-300 */
+  --color-text-muted: 156, 163, 175; /* gray-400 */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-neutral-900 text-white leading-relaxed;
+    color: rgb(var(--color-text-primary));
+    background: rgb(var(--color-bg-dark));
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold leading-tight;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl mb-6;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl mb-5;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl mb-4;
+  }
+  
+  h4 {
+    @apply text-xl md:text-2xl mb-3;
+  }
+  
+  p {
+    @apply mb-4;
+  }
+  
+  a:focus-visible {
+    @apply outline outline-2 outline-violet-400 outline-offset-2 rounded;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(---foreground-rgb))
+@layer components {
+  /* Button Styles */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-200 relative overflow-hidden focus-ring;
+  }
+  
+  .btn-primary {
+    @apply bg-violet-600 hover:bg-violet-700 text-white shadow-lg hover:shadow-violet-600/25;
+  }
+  
+  .btn-primary:after {
+    @apply content-[''] absolute inset-0 w-0 bg-white opacity-20 transition-all duration-300 ease-in-out;
+  }
+  
+  .btn-primary:hover:after {
+    @apply w-full;
+  }
+  
+  .btn-secondary {
+    @apply border border-violet-600 text-violet-400 hover:bg-violet-600/10 hover:text-white hover:border-violet-400;
+  }
+  
+  .btn-sm {
+    @apply px-4 py-2 text-sm;
+  }
+  
+  .btn-icon {
+    @apply flex items-center justify-center;
+  }
+  
+  .btn-icon svg {
+    @apply mr-2;
+  }
+  
+  /* Card Styles */
+  .card {
+    @apply bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:border-violet-500/30 transition-all duration-300 relative;
+  }
+  
+  .card-gradient {
+    @apply bg-gradient-to-br from-gray-800 to-gray-900 border-none;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .card-hover:hover {
+    @apply transform -translate-y-1;
+  }
+  
+  .skeleton-card {
+    @apply bg-gray-800 border border-gray-800 rounded-xl overflow-hidden;
+  }
+  
+  /* Container */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .badge-primary {
+    @apply bg-violet-600/20 text-violet-400;
+  }
+  
+  .badge-secondary {
+    @apply bg-blue-600/20 text-blue-400;
+  }
+  
+  /* Social Icons */
+  .social-icon-link {
+    @apply flex items-center justify-center w-12 h-12 rounded-full bg-gray-800 text-gray-400 hover:text-violet-400 hover:shadow-lg hover:shadow-violet-500/20 transition-all duration-300 focus-ring;
+  }
+}
+
+/* Improved Accessibility */
+@layer utilities {
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Animation utilities */
+.hover-lift {
+  transition: transform 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* For skeleton loading states */
+.skeleton {
+  animation: skeleton-loading 1.5s infinite;
+  @apply bg-gray-700;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.6;
+  }
 }

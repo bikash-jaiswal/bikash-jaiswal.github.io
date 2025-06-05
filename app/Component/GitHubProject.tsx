@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { FiExternalLink, FiGithub, FiStar } from 'react-icons/fi';
 
 interface GitHubProjectProps {
