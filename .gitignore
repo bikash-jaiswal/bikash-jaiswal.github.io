@@ -34,3 +34,30 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Development artifacts
+.next/cache/         # Already in .gitignore, but can be cleaned locally
+.turbo/              # Turbo build cache
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files (if not needed)
+.env*.local
+
+# Editor directories and files
+.vscode/*
+.idea/*
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Optional: Remove old/backup files
+*.bak
+*~
