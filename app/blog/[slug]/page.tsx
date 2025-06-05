@@ -18,11 +18,15 @@ export const generateStaticParams = async () => {
 };
 
 export default async function PostDetails({ params }: Props) {
+  // In static exports, params needs to be awaited
+  const resolvedParams = await params;
+  const slug = resolvedParams.slug;
+  
   const [content, allPosts] = await Promise.all([
-    getPostContent(params.slug),
+    getPostContent(slug),
     getPostMetadata()
   ]);
-  const post = allPosts.find((p: PostMetadata) => p.slug === params.slug);
+  const post = allPosts.find((p: PostMetadata) => p.slug === slug);
 
   if (!content || !post) {
     notFound();
