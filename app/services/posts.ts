@@ -1,10 +1,7 @@
-// Mark this file as server-only to prevent client-side imports
-'use server';
-
-import { readdir, readFile } from 'node:fs/promises';
-import { existsSync, mkdirSync } from 'node:fs';
+import { readdir, readFile } from 'fs/promises';
+import { existsSync, mkdirSync } from 'fs';
 import matter from "gray-matter";
-import path from "node:path";
+import path from "path";
 import { cache } from "react";
 import { PostContent, PostMetadata } from "../types/blog";
 import { sortByDate } from "../utils/date";

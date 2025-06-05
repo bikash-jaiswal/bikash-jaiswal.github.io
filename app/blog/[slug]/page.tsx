@@ -4,16 +4,20 @@ import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
 import { FaArrowLeft } from "react-icons/fa";
 import { getPostContent, getPostMetadata } from "../../services/posts";
-import { PostDetailsProps, PostMetadata } from "../../types/blog";
+import { PostMetadata } from "../../types/blog";
 
-export const generateStaticParams = async (): Promise<{ slug: string }[]> => {
+type Props = {
+  params: { slug: string };
+};
+
+export const generateStaticParams = async () => {
   const posts = await getPostMetadata();
   return posts.map((post: PostMetadata) => ({
     slug: post.slug,
   }));
 };
 
-export default async function PostDetails({ params }: PostDetailsProps) {
+export default async function PostDetails({ params }: Props) {
   const [content, allPosts] = await Promise.all([
     getPostContent(params.slug),
     getPostMetadata()

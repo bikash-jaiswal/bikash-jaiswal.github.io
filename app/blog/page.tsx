@@ -74,7 +74,7 @@ function BlogPosts({ posts, searchTerm }: { posts: PostMetadata[]; searchTerm: s
   );
 }
 
-export default async function BlogPage({ searchParams }: PageProps) {
+export default async function BlogPage() {
   let allPosts: PostMetadata[] = [];
   let error: Error | null = null;
 
@@ -92,10 +92,9 @@ export default async function BlogPage({ searchParams }: PageProps) {
     );
   }
   
-  // Parse blogNum safely - convert to number or use default (all posts)
-  const blogNumParam = searchParams?.blogNum;
-  const displayCount = blogNumParam ? Number(blogNumParam) : allPosts.length;
-  const postsToShow = allPosts.slice(0, displayCount);
+  // For static export, we'll show all posts and let the client component handle pagination
+  // Default to showing all posts - client-side will handle pagination
+  const postsToShow = allPosts;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">

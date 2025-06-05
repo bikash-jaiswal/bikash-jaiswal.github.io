@@ -12,10 +12,6 @@ export interface BlogPageProps {
   searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-export interface PostDetailsProps {
-  params: {
-    slug: string;
-  };
-}
+// Removed PostDetailsProps - using Next.js native types instead
 
 export type PostContent = GrayMatterFile<string>;
