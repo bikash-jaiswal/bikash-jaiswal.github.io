@@ -49,7 +49,18 @@ export interface ResourceFilters {
 // Sample data for resources
 export const sampleResources: Resource[] = [
   {
-    id: '999', // Nim Days resource
+    id: '1', // Free Certifications resource
+    title: 'Free Certifications',
+    description: 'A curated collection of free professional certifications across various industries including cloud, cybersecurity, programming, and more.',
+    url: 'https://free-certifications.com/',
+    category: 'reference',
+    tags: ['certifications', 'learning', 'career', 'education', 'free'],
+    dateAdded: '2025-06-06',
+    icon: 'FiAward',
+    favorite: true
+  },
+  {
+    id: '2', // Nim Days resource
     title: 'Nim Days',
     description: 'A practical book about using the Nim programming language to build useful applications like parsers, testing frameworks, build systems, clients, and more.',
     url: 'https://xmonader.github.io/nimdays/book_intro.html',
@@ -60,7 +71,7 @@ export const sampleResources: Resource[] = [
     favorite: true
   },
   {
-    id: '1',
+    id: '3',
     title: 'React Documentation',
     description: 'Official documentation for React library',
     url: 'https://reactjs.org/docs',
@@ -71,7 +82,7 @@ export const sampleResources: Resource[] = [
     icon: 'FiCode'
   },
   {
-    id: '2',
+    id: '4',
     title: 'Next.js Documentation',
     description: 'Learn how to use Next.js for production React applications',
     url: 'https://nextjs.org/docs',
@@ -82,40 +93,40 @@ export const sampleResources: Resource[] = [
     icon: 'FiCode'
   },
   {
-    id: '3',
+    id: '5',
     title: 'Free for Dev',
     description: 'A comprehensive list of services with free tiers for developers, including education resources and career development tools',
     url: 'https://free-for.dev/#/?id=education-and-career-development',
     category: 'reference',
     tags: ['free', 'developer-tools', 'education', 'resources', 'career'],
-    favorite: false,
+    favorite: true,
     dateAdded: '2025-06-05',
     icon: 'FiBookOpen'
   },
   {
-    id: '12',
+    id: '6',
     title: 'Build Your Own X - AI',
     description: 'Collection of tutorials on how to build your own AI systems and tools from scratch',
     url: 'https://build-your-own-x.vercel.app/#build-your-own-ai',
     category: 'tutorial',
     tags: ['ai', 'machine-learning', 'tutorial', 'learning', 'projects'],
-    favorite: false,
+    favorite: true,
     dateAdded: '2025-06-05',
     icon: 'FiCpu'
   },
   {
-    id: '13',
+    id: '7',
     title: 'Refactoring Guru - Design Patterns',
     description: 'Clear explanations and examples of design patterns and refactoring techniques with visual illustrations',
     url: 'https://refactoring.guru/design-patterns/',
     category: 'reference',
     tags: ['design-patterns', 'architecture', 'software-design', 'refactoring', 'best-practices'],
-    favorite: false,
+    favorite: true,
     dateAdded: '2025-06-05',
     icon: 'FiLayers'
   },
   {
-    id: '4',
+    id: '8',
     title: 'TypeScript Handbook',
     description: 'Comprehensive guide to TypeScript',
     url: 'https://www.typescriptlang.org/docs/',
@@ -125,7 +136,7 @@ export const sampleResources: Resource[] = [
     icon: 'FiBook'
   },
   {
-    id: '5',
+    id: '9',
     title: 'Tailwind CSS',
     description: 'A utility-first CSS framework for rapid UI development',
     url: 'https://tailwindcss.com/docs',
@@ -136,7 +147,7 @@ export const sampleResources: Resource[] = [
     icon: 'FiLayout'
   },
   {
-    id: '6',
+    id: '10',
     title: 'GitHub Copilot Documentation',
     description: 'Learn how to use GitHub Copilot for AI-assisted coding',
     url: 'https://github.com/features/copilot',
@@ -146,7 +157,7 @@ export const sampleResources: Resource[] = [
     icon: 'FiTool'
   },
   {
-    id: '7',
+    id: '11',
     title: 'System Design Primer',
     description: 'Learn how to design large-scale systems',
     url: 'https://github.com/donnemartin/system-design-primer',
@@ -157,7 +168,7 @@ export const sampleResources: Resource[] = [
     icon: 'FiDatabase'
   },
   {
-    id: '8',
+    id: '12',
     title: 'JavaScript Algorithms and Data Structures',
     description: 'Comprehensive collection of algorithms and data structures implemented in JavaScript',
     url: 'https://github.com/trekhleb/javascript-algorithms',
@@ -167,7 +178,7 @@ export const sampleResources: Resource[] = [
     icon: 'FiCode'
   },
   {
-    id: '9',
+    id: '13',
     title: 'Web Development Roadmap',
     description: 'Step by step guide to becoming a modern frontend or backend developer',
     url: 'https://roadmap.sh/',
@@ -178,7 +189,7 @@ export const sampleResources: Resource[] = [
     icon: 'FiMap'
   },
   {
-    id: '10',
+    id: '14',
     title: 'Framer Motion',
     description: 'Production-ready motion library for React',
     url: 'https://www.framer.com/motion/',
@@ -188,7 +199,7 @@ export const sampleResources: Resource[] = [
     icon: 'FiActivity'
   },
   {
-    id: '11',
+    id: '15',
     title: 'Docker Documentation',
     description: 'Learn how to containerize your applications',
     url: 'https://docs.docker.com/',
@@ -196,5 +207,16 @@ export const sampleResources: Resource[] = [
     tags: ['devops', 'containers', 'deployment'],
     dateAdded: '2025-01-30',
     icon: 'FiBox'
+  },
+  {
+    id: '16',
+    title: 'OODesign.com',
+    description: 'Object Oriented Design Principles',
+    url: 'https://www.oodesign.com/',
+    favorite: true,
+    category: 'reference',
+    tags: ['design patterns', 'object-oriented', 'principles'],
+    dateAdded: '2025-03-01',
+    icon: 'FiCode'
   }
 ];
