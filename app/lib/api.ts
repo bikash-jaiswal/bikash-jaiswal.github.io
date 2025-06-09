@@ -9,7 +9,8 @@ export class ResourceApi {
    */
   static async getResources(): Promise<Resource[]> {
     try {
-      const response = await fetch('/api/resources', {
+      // Using static JSON file instead of API route for static site export
+      const response = await fetch('/data/resources.json', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
