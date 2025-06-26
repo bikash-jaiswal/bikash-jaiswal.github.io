@@ -1,8 +1,24 @@
-import GitHubProjects from '../Component/GitHubProjects';
+import GitHubProjects from '../../components/GitHubProjects';
+import { Metadata } from 'next';
 
-export const metadata = {
-  title: 'GitHub Projects - Bikash Jaiswal',
-  description: 'Projects and repositories by Bikash Jaiswal on GitHub',
+export const metadata: Metadata = {
+  title: 'Projects',
+  description: 'Explore my GitHub repositories and personal projects in web development, machine learning, and more.',
+  openGraph: {
+    title: 'Projects | Bikash Jaiswal',
+    description: 'Explore my GitHub repositories and personal projects in web development, machine learning, and more.',
+    url: 'https://bikash-jaiswal.github.io/projects',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Projects | Bikash Jaiswal',
+    description: 'Explore my GitHub repositories and personal projects in web development, machine learning, and more.',
+  },
+  alternates: {
+    canonical: '/projects',
+  },
+  keywords: ['GitHub', 'projects', 'repositories', 'code', 'portfolio', 'developer', 'software engineer']
 };
 
 export default function ProjectsPage() {

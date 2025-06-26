@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiSearch, FiFilter, FiStar, FiX } from 'react-icons/fi';
-import ResourceCard from '../Component/ResourceCard';
-import { Resource, ResourceCategory, ResourceFilters } from '../types/resource';
-import { ResourceApi } from '../lib/api';
+import ResourceCard from '../../components/ResourceCard';
+import { Resource, ResourceCategory, ResourceFilters } from '../../types/resource';
+import { ResourceApi } from '../../lib/api';
 
 const ResourcesPage: React.FC = () => {
   const [resources, setResources] = useState<Resource[]>([]);

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { PostMetadata } from '../types/blog';
-import { sortByDate } from '../utils/date';
+import { sortByDate } from '../lib/date';
 
 interface UsePostsOptions {
   initialPosts: PostMetadata[];

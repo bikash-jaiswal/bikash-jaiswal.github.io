@@ -8,7 +8,7 @@ import { FiExternalLink, FiStar, FiCode, FiBook, FiBox, FiDatabase,
 
 interface ResourceCardProps {
   resource: Resource;
-  onToggleFavorite: (id: string) => void;
+  onToggleFavorite?: (id: string) => void;
 }
 
 // Map of resource icons based on icon string in resource data
@@ -64,7 +64,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, onToggleFavorite 
             </span>
           </div>
           <motion.button 
-            onClick={() => onToggleFavorite(id)}
+            onClick={() => onToggleFavorite?.(id)}
             whileTap={{ scale: 0.9 }}
             className="text-gray-400 hover:text-yellow-400 focus:outline-none focus-ring rounded-full p-1"
             aria-label={favorite ? 'Remove from favorites' : 'Add to favorites'}

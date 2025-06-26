@@ -1,9 +1,29 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { BlogPostPreview } from "../Component/BlogPostPreview";
-import { getPostMetadata } from "../services/posts";
-import { PostMetadata } from "../types/blog";
+import { BlogPostPreview } from "../../components/BlogPostPreview";
+import { getPostMetadata } from "../../lib/posts";
+import { PostMetadata } from "../../types/blog";
 import ClientBlogContent from "./ClientBlogContent";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Blog',
+  description: 'Articles and insights on software development, technology, and personal projects.',
+  openGraph: {
+    title: 'Blog | Bikash Jaiswal',
+    description: 'Articles and insights on software development, technology, and personal projects.',
+    url: 'https://bikash-jaiswal.github.io/blog',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog | Bikash Jaiswal',
+    description: 'Articles and insights on software development, technology, and personal projects.',
+  },
+  alternates: {
+    canonical: '/blog',
+  }
+};
 
 interface PageProps {
   params: Record<string, never>;

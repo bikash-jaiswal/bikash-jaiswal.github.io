@@ -2,12 +2,11 @@ import { readdir, readFile } from 'fs/promises';
 import { existsSync, mkdirSync } from 'fs';
 import matter from "gray-matter";
 import path from "path";
-import { cache } from "react";
 import { PostContent, PostMetadata } from "../types/blog";
-import { sortByDate } from "../utils/date";
-import logger from "../utils/logger";
+import { sortByDate } from "../lib/date";
+import logger from "../lib/logger";
 
-const POSTS_DIRECTORY = path.join(process.cwd(), "app/posts");
+const POSTS_DIRECTORY = path.join(process.cwd(), "content/posts");
 
 function validatePostMetadata(metadata: any): metadata is PostMetadata {
   return (
@@ -38,7 +37,11 @@ function formatDate(date: string): string {
   return new Date(date).toISOString().split("T")[0];
 }
 
-export const getPostMetadata = cache(async () => {
+// Using memoization instead of cache
+let postMetadataCache: PostMetadata[] | null = null;
+
+export const getPostMetadata = async () => {
+  if (postMetadataCache) return postMetadataCache;
   logger.startTimer('getPostMetadata');
 
   if (!existsSync(POSTS_DIRECTORY)) {
@@ -91,12 +94,12 @@ export const getPostMetadata = cache(async () => {
     logger.error("Error reading posts directory:", error);
     return [];
   }
-});
+};
 
 // Add memory cache for post contents
 const postContentCache: Record<string, string | null> = {};
 
-export const getPostContent = cache(async (slug: string) => {
+export const getPostContent = async (slug: string) => {
   logger.startTimer(`getPostContent:${slug}`);
 
   // Return from cache if available
@@ -141,4 +144,4 @@ export const getPostContent = cache(async (slug: string) => {
     logger.endTimer(`getPostContent:${slug}`);
     return null;
   }
-});
+};

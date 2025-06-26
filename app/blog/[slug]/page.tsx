@@ -3,9 +3,9 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
 import { FaArrowLeft } from "react-icons/fa";
-import { getPostContent, getPostMetadata } from "../../services/posts";
-import { PostMetadata } from "../../types/blog";
-import logger from "../../utils/logger";
+import { getPostContent, getPostMetadata } from "../../../lib/posts";
+import { PostMetadata } from "../../../types/blog";
+import logger from "../../../lib/logger";
 
 type Props = {
   params: Promise<{ slug: string }>;

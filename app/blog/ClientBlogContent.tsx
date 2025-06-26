@@ -1,10 +1,11 @@
 'use client';
 
-import { usePosts } from "../hooks";
-import { BlogPostPreview } from "../Component/BlogPostPreview";
-import { Pagination } from "../Component/Pagination";
-import { SearchBar } from "../Component/SearchBar";
-import { PostMetadata } from "../types/blog";
+import { usePosts } from "../../hooks";
+import { BlogPostPreview } from "../../components/BlogPostPreview";
+import { Pagination } from "../../components/Pagination";
+import { SearchBar } from "../../components/SearchBar";
+import { PostMetadata } from "../../types/blog";
+import { formatDate } from "../../lib/date";
 
 export interface ClientBlogContentProps {
   initialPosts: PostMetadata[];
