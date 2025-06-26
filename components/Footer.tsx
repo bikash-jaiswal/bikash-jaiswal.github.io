@@ -68,12 +68,12 @@ const Footer: React.FC = () => {
                 label="GitHub Profile"
               />
               <SocialLink 
-                href="https://www.linkedin.com/in/bikashjaiswal/" 
+                href="https://www.linkedin.com/in/bikash-jaiswal/" 
                 icon={<FaLinkedin size={18} />}
                 label="LinkedIn Profile"
               />
-              <SocialLink 
-                href="https://twitter.com" 
+              {/* <SocialLink 
+                href="https://twitter.com/bikash_jaiswal" 
                 icon={<FaTwitter size={18} />}
                 label="Twitter Profile"
               />
@@ -86,8 +86,8 @@ const Footer: React.FC = () => {
                 href="/rss.xml" 
                 icon={<FaRss size={16} />}
                 label="RSS Feed"
-              />
-            </div>
+              />*/}
+            </div> 
           </div>
 
           {/* Second column - Quick Links */}

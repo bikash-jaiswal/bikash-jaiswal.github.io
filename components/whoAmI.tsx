@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
+// import Link from "next/link";
+import Link, { default as NextLink } from "next/link";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { FiCode, FiBookOpen, FiTrendingUp, FiArrowRight } from "react-icons/fi";
@@ -85,7 +86,7 @@ const WhoAmI: React.FC = () => {
             label: "GitHub Profile"
           }, {
             icon: <FaLinkedin size={24} />,
-            href: "https://linkedin.com/in/bikash-jaiswal",
+            href: "https://linkedin.com/in/bikashjaiswal",
             label: "LinkedIn Profile"
           }, {
             icon: <FaTwitter size={24} />,
@@ -142,14 +143,14 @@ const WhoAmI: React.FC = () => {
           Explore my projects and articles to see what I&apos;ve been working on and what I&apos;ve learned along the way.
         </p>
         <div className="flex flex-col md:flex-row justify-center gap-4">
-          <Link href="/projects" className="btn btn-primary">
+        <a href="/projects" className="btn btn-primary">
             <span>View Projects</span>
             <FiArrowRight className="ml-2" />
-          </Link>
-          <Link href="/blog" className="btn btn-secondary">
+        </a>
+        <a href="/blog" className="btn btn-secondary">
             <span>Read Blog</span>
             <FiArrowRight className="ml-2" />
-          </Link>
+        </a>  
         </div>
       </motion.div>
     </div>
