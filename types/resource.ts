@@ -10,15 +10,15 @@ export interface Resource {
   icon?: string; // Icon identifier (e.g., 'FiCode', 'FiBook')
 }
 
-export type ResourceCategory = 
-  | 'tool' 
-  | 'reference' 
-  | 'library' 
-  | 'framework' 
-  | 'tutorial' 
-  | 'course' 
-  | 'book' 
-  | 'article' 
+export type ResourceCategory =
+  | 'tool'
+  | 'reference'
+  | 'library'
+  | 'framework'
+  | 'tutorial'
+  | 'course'
+  | 'book'
+  | 'article'
   | 'documentation'
   | 'cheatsheet'
   | 'video'
@@ -51,24 +51,26 @@ export const sampleResources: Resource[] = [
   {
     id: '1', // Free Certifications resource
     title: 'Free Certifications',
-    description: 'A curated collection of free professional certifications across various industries including cloud, cybersecurity, programming, and more.',
+    description:
+      'A curated collection of free professional certifications across various industries including cloud, cybersecurity, programming, and more.',
     url: 'https://free-certifications.com/',
     category: 'reference',
     tags: ['certifications', 'learning', 'career', 'education', 'free'],
     dateAdded: '2025-06-06',
     icon: 'FiAward',
-    favorite: true
+    favorite: true,
   },
   {
     id: '2', // Nim Days resource
     title: 'Nim Days',
-    description: 'A practical book about using the Nim programming language to build useful applications like parsers, testing frameworks, build systems, clients, and more.',
+    description:
+      'A practical book about using the Nim programming language to build useful applications like parsers, testing frameworks, build systems, clients, and more.',
     url: 'https://xmonader.github.io/nimdays/book_intro.html',
     category: 'book',
     tags: ['programming', 'nim', 'tutorial', 'practical'],
     dateAdded: '2025-06-05',
     icon: 'FiBook',
-    favorite: true
+    favorite: true,
   },
   {
     id: '3',
@@ -79,7 +81,7 @@ export const sampleResources: Resource[] = [
     tags: ['react', 'javascript', 'frontend'],
     favorite: true,
     dateAdded: '2025-01-15',
-    icon: 'FiCode'
+    icon: 'FiCode',
   },
   {
     id: '4',
@@ -90,40 +92,43 @@ export const sampleResources: Resource[] = [
     tags: ['react', 'nextjs', 'ssr'],
     favorite: true,
     dateAdded: '2025-01-20',
-    icon: 'FiCode'
+    icon: 'FiCode',
   },
   {
     id: '5',
     title: 'Free for Dev',
-    description: 'A comprehensive list of services with free tiers for developers, including education resources and career development tools',
+    description:
+      'A comprehensive list of services with free tiers for developers, including education resources and career development tools',
     url: 'https://free-for.dev/#/?id=education-and-career-development',
     category: 'reference',
     tags: ['free', 'developer-tools', 'education', 'resources', 'career'],
     favorite: true,
     dateAdded: '2025-06-05',
-    icon: 'FiBookOpen'
+    icon: 'FiBookOpen',
   },
   {
     id: '6',
     title: 'Build Your Own X - AI',
-    description: 'Collection of tutorials on how to build your own AI systems and tools from scratch',
+    description:
+      'Collection of tutorials on how to build your own AI systems and tools from scratch',
     url: 'https://build-your-own-x.vercel.app/#build-your-own-ai',
     category: 'tutorial',
     tags: ['ai', 'machine-learning', 'tutorial', 'learning', 'projects'],
     favorite: true,
     dateAdded: '2025-06-05',
-    icon: 'FiCpu'
+    icon: 'FiCpu',
   },
   {
     id: '7',
     title: 'Refactoring Guru - Design Patterns',
-    description: 'Clear explanations and examples of design patterns and refactoring techniques with visual illustrations',
+    description:
+      'Clear explanations and examples of design patterns and refactoring techniques with visual illustrations',
     url: 'https://refactoring.guru/design-patterns/',
     category: 'reference',
     tags: ['design-patterns', 'architecture', 'software-design', 'refactoring', 'best-practices'],
     favorite: true,
     dateAdded: '2025-06-05',
-    icon: 'FiLayers'
+    icon: 'FiLayers',
   },
   {
     id: '8',
@@ -133,7 +138,7 @@ export const sampleResources: Resource[] = [
     category: 'documentation',
     tags: ['typescript', 'javascript'],
     dateAdded: '2025-02-05',
-    icon: 'FiBook'
+    icon: 'FiBook',
   },
   {
     id: '9',
@@ -144,7 +149,7 @@ export const sampleResources: Resource[] = [
     tags: ['css', 'frontend', 'design'],
     favorite: true,
     dateAdded: '2025-01-10',
-    icon: 'FiLayout'
+    icon: 'FiLayout',
   },
   {
     id: '10',
@@ -154,7 +159,7 @@ export const sampleResources: Resource[] = [
     category: 'tool',
     tags: ['ai', 'productivity', 'coding'],
     dateAdded: '2025-03-01',
-    icon: 'FiTool'
+    icon: 'FiTool',
   },
   {
     id: '11',
@@ -165,17 +170,18 @@ export const sampleResources: Resource[] = [
     tags: ['system design', 'architecture', 'interviews'],
     favorite: true,
     dateAdded: '2025-02-15',
-    icon: 'FiDatabase'
+    icon: 'FiDatabase',
   },
   {
     id: '12',
     title: 'JavaScript Algorithms and Data Structures',
-    description: 'Comprehensive collection of algorithms and data structures implemented in JavaScript',
+    description:
+      'Comprehensive collection of algorithms and data structures implemented in JavaScript',
     url: 'https://github.com/trekhleb/javascript-algorithms',
     category: 'reference',
     tags: ['algorithms', 'data structures', 'javascript'],
     dateAdded: '2025-01-25',
-    icon: 'FiCode'
+    icon: 'FiCode',
   },
   {
     id: '13',
@@ -186,7 +192,7 @@ export const sampleResources: Resource[] = [
     tags: ['career', 'learning path', 'web development'],
     favorite: true,
     dateAdded: '2025-02-10',
-    icon: 'FiMap'
+    icon: 'FiMap',
   },
   {
     id: '14',
@@ -196,7 +202,7 @@ export const sampleResources: Resource[] = [
     category: 'library',
     tags: ['react', 'animation', 'frontend'],
     dateAdded: '2025-03-05',
-    icon: 'FiActivity'
+    icon: 'FiActivity',
   },
   {
     id: '15',
@@ -206,7 +212,7 @@ export const sampleResources: Resource[] = [
     category: 'documentation',
     tags: ['devops', 'containers', 'deployment'],
     dateAdded: '2025-01-30',
-    icon: 'FiBox'
+    icon: 'FiBox',
   },
   {
     id: '16',
@@ -217,6 +223,6 @@ export const sampleResources: Resource[] = [
     category: 'reference',
     tags: ['design patterns', 'object-oriented', 'principles'],
     dateAdded: '2025-03-01',
-    icon: 'FiCode'
-  }
+    icon: 'FiCode',
+  },
 ];

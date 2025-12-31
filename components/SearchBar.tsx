@@ -1,7 +1,7 @@
 'use client';
 
 import { ChangeEvent, KeyboardEvent, useCallback, useEffect, useState } from 'react';
-import { useDebounce } from '../hooks';
+import { useDebounce } from '../lib/hooks';
 
 interface SearchBarProps {
   onSearch: (term: string) => void;
@@ -12,23 +12,29 @@ interface SearchBarProps {
 export function SearchBar({
   onSearch,
   placeholder = 'Search posts...',
-  debounceMs = 300
+  debounceMs = 300,
 }: SearchBarProps) {
   const [value, setValue] = useState('');
   const debouncedSearch = useDebounce(onSearch, debounceMs);
 
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setValue(newValue);
-    debouncedSearch(newValue);
-  }, [debouncedSearch]);
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value;
+      setValue(newValue);
+      debouncedSearch(newValue);
+    },
+    [debouncedSearch]
+  );
 
-  const handleKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Escape') {
-      setValue('');
-      debouncedSearch('');
-    }
-  }, [debouncedSearch]);
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Escape') {
+        setValue('');
+        debouncedSearch('');
+      }
+    },
+    [debouncedSearch]
+  );
 
   const handleClear = useCallback(() => {
     setValue('');
@@ -63,12 +69,7 @@ export function SearchBar({
             className="p-1 text-gray-500 hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-violet-500 rounded-full"
             aria-label="Clear search"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

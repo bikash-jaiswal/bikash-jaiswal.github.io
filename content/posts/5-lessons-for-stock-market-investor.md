@@ -1,18 +1,16 @@
 ---
-title: "Mastering the Stock Market: Five Crucial Lessons"
+title: 'Mastering the Stock Market: Five Crucial Lessons'
 subtitle: "Unlocking Wealth: A Beginner's Guide to Navigating the Stock Market for Successful Investments"
-author: "Bikash Jaiswal"
-date: "2023-12-27"
+author: 'Bikash Jaiswal'
+date: '2023-12-27'
 ---
 
-
-
 ## Diversification is Key
+
 - **Spread Investments Across Asset Classes:**
   - Allocate funds to stocks, bonds, and real estate to mitigate risk associated with any single asset class.
 - **Diversify Within the Stock Market:**
   - Invest in various sectors such as technology, healthcare, and consumer goods to balance the impact of sector-specific downturns.
-
 
 **Chart:**
 [Insert a pie chart illustrating a diversified portfolio across different asset classes.]

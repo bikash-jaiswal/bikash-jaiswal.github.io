@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
@@ -15,11 +15,11 @@ const ResourcesPage: React.FC = () => {
     category: 'all',
     searchTerm: '',
     showFavoritesOnly: false,
-    tags: []
+    tags: [],
   });
   const [availableTags, setAvailableTags] = useState<string[]>([]);
   const [isFilterExpanded, setIsFilterExpanded] = useState(false);
-  
+
   // Fetch resources from API
   useEffect(() => {
     const fetchResources = async () => {
@@ -35,14 +35,14 @@ const ResourcesPage: React.FC = () => {
         setLoading(false);
       }
     };
-    
+
     fetchResources();
   }, []);
-  
+
   // Extract all unique tags from resources
   useEffect(() => {
     const allTags = resources
-      .flatMap(resource => resource.tags)
+      .flatMap((resource) => resource.tags)
       .filter((tag, index, self) => self.indexOf(tag) === index)
       .sort();
     setAvailableTags(allTags);
@@ -52,14 +52,12 @@ const ResourcesPage: React.FC = () => {
   const handleToggleFavorite = async (id: string) => {
     try {
       const success = await ResourceApi.toggleFavorite(id);
-      
+
       if (success) {
         // Update local state optimistically
-        setResources(prevResources => 
-          prevResources.map(resource => 
-            resource.id === id 
-              ? { ...resource, favorite: !resource.favorite } 
-              : resource
+        setResources((prevResources) =>
+          prevResources.map((resource) =>
+            resource.id === id ? { ...resource, favorite: !resource.favorite } : resource
           )
         );
       }
@@ -70,17 +68,17 @@ const ResourcesPage: React.FC = () => {
 
   // Update filters when user changes input
   const handleFilterChange = (
-    key: keyof ResourceFilters, 
+    key: keyof ResourceFilters,
     value: string | boolean | ResourceCategory | string[]
   ) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
   // Toggle a tag in the filters
   const handleTagToggle = (tag: string) => {
-    setFilters(prev => {
+    setFilters((prev) => {
       if (prev.tags.includes(tag)) {
-        return { ...prev, tags: prev.tags.filter(t => t !== tag) };
+        return { ...prev, tags: prev.tags.filter((t) => t !== tag) };
       } else {
         return { ...prev, tags: [...prev.tags, tag] };
       }
@@ -93,33 +91,36 @@ const ResourcesPage: React.FC = () => {
       category: 'all',
       searchTerm: '',
       showFavoritesOnly: false,
-      tags: []
+      tags: [],
     });
   };
 
   // Apply filters to resources
-  const filteredResources = resources.filter(resource => {
+  const filteredResources = resources.filter((resource) => {
     // Filter by category
     if (filters.category !== 'all' && resource.category !== filters.category) {
       return false;
     }
-    
+
     // Filter by search term
-    if (filters.searchTerm && !resource.title.toLowerCase().includes(filters.searchTerm.toLowerCase()) && 
-        !resource.description.toLowerCase().includes(filters.searchTerm.toLowerCase())) {
+    if (
+      filters.searchTerm &&
+      !resource.title.toLowerCase().includes(filters.searchTerm.toLowerCase()) &&
+      !resource.description.toLowerCase().includes(filters.searchTerm.toLowerCase())
+    ) {
       return false;
     }
-    
+
     // Filter by favorites
     if (filters.showFavoritesOnly && !resource.favorite) {
       return false;
     }
-    
+
     // Filter by tags
-    if (filters.tags.length > 0 && !filters.tags.some(tag => resource.tags.includes(tag))) {
+    if (filters.tags.length > 0 && !filters.tags.some((tag) => resource.tags.includes(tag))) {
       return false;
     }
-    
+
     return true;
   });
 
@@ -135,7 +136,7 @@ const ResourcesPage: React.FC = () => {
     { value: 'book', label: 'Books' },
     { value: 'article', label: 'Articles' },
     { value: 'documentation', label: 'Documentation' },
-    { value: 'cheatsheet', label: 'Cheatsheets' }
+    { value: 'cheatsheet', label: 'Cheatsheets' },
   ];
 
   // Display loading state
@@ -154,7 +155,7 @@ const ResourcesPage: React.FC = () => {
       </div>
     );
   }
-  
+
   // Display error state
   if (error) {
     return (
@@ -164,7 +165,7 @@ const ResourcesPage: React.FC = () => {
             Developer Resources
           </h1>
           <p className="text-xl text-red-400 mb-4">{error}</p>
-          <button 
+          <button
             onClick={() => window.location.reload()}
             className="px-4 py-2 bg-violet-600 text-white rounded-md hover:bg-violet-700 transition-colors"
           >
@@ -177,7 +178,7 @@ const ResourcesPage: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -187,7 +188,8 @@ const ResourcesPage: React.FC = () => {
           Developer Resources
         </h1>
         <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-          A curated collection of tools, libraries, tutorials and resources I frequently use for software development.
+          A curated collection of tools, libraries, tutorials and resources I frequently use for
+          software development.
         </p>
       </motion.div>
 
@@ -205,7 +207,7 @@ const ResourcesPage: React.FC = () => {
             />
             <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             {filters.searchTerm && (
-              <button 
+              <button
                 onClick={() => handleFilterChange('searchTerm', '')}
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white focus:outline-none focus-ring rounded-full p-1"
                 aria-label="Clear search"
@@ -217,7 +219,7 @@ const ResourcesPage: React.FC = () => {
 
           {/* Filter Toggle Button */}
           <div className="flex items-center space-x-4">
-            <button 
+            <button
               onClick={() => setIsFilterExpanded(!isFilterExpanded)}
               className="flex items-center px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg hover:border-violet-500 focus:outline-none focus-ring transition-colors duration-200"
             >
@@ -228,8 +230,8 @@ const ResourcesPage: React.FC = () => {
             <button
               onClick={() => handleFilterChange('showFavoritesOnly', !filters.showFavoritesOnly)}
               className={`flex items-center px-4 py-2 rounded-lg transition-colors duration-200 focus:outline-none focus-ring ${
-                filters.showFavoritesOnly 
-                  ? 'bg-yellow-600/20 text-yellow-400 border border-yellow-500/30' 
+                filters.showFavoritesOnly
+                  ? 'bg-yellow-600/20 text-yellow-400 border border-yellow-500/30'
                   : 'bg-gray-800 border border-gray-700 hover:border-yellow-500/30'
               }`}
             >
@@ -241,7 +243,7 @@ const ResourcesPage: React.FC = () => {
 
         {/* Expanded Filter Panel */}
         {isFilterExpanded && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -249,7 +251,7 @@ const ResourcesPage: React.FC = () => {
           >
             <div className="flex flex-wrap items-center justify-between mb-4">
               <h3 className="font-medium mb-2">Categories</h3>
-              
+
               <button
                 onClick={handleResetFilters}
                 className="text-xs text-violet-400 hover:underline focus:outline-none focus-ring px-1 rounded"

@@ -1,147 +1,133 @@
 import { readdir, readFile } from 'fs/promises';
 import { existsSync, mkdirSync } from 'fs';
-import matter from "gray-matter";
-import path from "path";
-import { PostContent, PostMetadata } from "../types/blog";
-import { sortByDate } from "../lib/date";
-import logger from "../lib/logger";
+import matter from 'gray-matter';
+import path from 'path';
+import { PostContent, PostMetadata } from '../types/blog';
+import { sortByDate } from '../lib/date';
 
-const POSTS_DIRECTORY = path.join(process.cwd(), "content/posts");
+const POSTS_DIRECTORY = path.join(process.cwd(), 'content/posts');
 
-function validatePostMetadata(metadata: any): metadata is PostMetadata {
+const cache = {
+  metadata: null as PostMetadata[] | null,
+  content: new Map<string, string | null>(),
+};
+
+function isValidMetadata(data: unknown): data is PostMetadata {
+  if (typeof data !== 'object' || data === null) return false;
+  const obj = data as Record<string, unknown>;
   return (
-    typeof metadata === "object" &&
-    typeof metadata.title === "string" &&
-    typeof metadata.date === "string" &&
-    typeof metadata.slug === "string" &&
-    (!metadata.subtitle || typeof metadata.subtitle === "string")
+    typeof obj.title === 'string' &&
+    typeof obj.date === 'string' &&
+    typeof obj.slug === 'string' &&
+    (obj.subtitle === undefined || typeof obj.subtitle === 'string')
   );
 }
 
-function validatePostContent(content: any): content is PostContent {
+function isValidContent(data: unknown): data is PostContent {
+  if (typeof data !== 'object' || data === null) return false;
+  const obj = data as Record<string, unknown>;
+  const contentData = obj.data as Record<string, unknown> | undefined;
   return (
-    typeof content === "object" &&
-    typeof content.content === "string" &&
-    typeof content.data === "object" &&
-    typeof content.data.title === "string" &&
-    typeof content.data.date === "string" &&
-    (!content.data.subtitle || typeof content.data.subtitle === "string")
+    typeof obj.content === 'string' &&
+    typeof contentData === 'object' &&
+    contentData !== null &&
+    typeof contentData.title === 'string' &&
+    typeof contentData.date === 'string'
   );
 }
 
 function createSlug(filename: string): string {
-  return filename.replace(/\.md$/, "");
+  return filename.replace(/\.md$/, '');
 }
 
-function formatDate(date: string): string {
-  return new Date(date).toISOString().split("T")[0];
+function formatDateString(date: string): string {
+  return new Date(date).toISOString().split('T')[0];
 }
 
-// Using memoization instead of cache
-let postMetadataCache: PostMetadata[] | null = null;
+async function parsePostFile(filePath: string, slug: string): Promise<PostMetadata | null> {
+  try {
+    const fileContent = await readFile(filePath, 'utf8');
+    const { data } = matter(fileContent);
 
-export const getPostMetadata = async () => {
-  if (postMetadataCache) return postMetadataCache;
-  logger.startTimer('getPostMetadata');
+    const metadata: PostMetadata = {
+      ...data,
+      date: formatDateString(data.date),
+      slug,
+    } as PostMetadata;
+
+    if (!isValidMetadata(metadata)) {
+      console.error(`Invalid metadata in ${slug}.md`);
+      return null;
+    }
+
+    return metadata;
+  } catch (error) {
+    console.error(`Error parsing ${slug}.md:`, error);
+    return null;
+  }
+}
+
+export async function getPostMetadata(): Promise<PostMetadata[]> {
+  if (cache.metadata) return cache.metadata;
 
   if (!existsSync(POSTS_DIRECTORY)) {
     mkdirSync(POSTS_DIRECTORY, { recursive: true });
-    logger.info(`Created posts directory: ${POSTS_DIRECTORY}`);
+    return [];
   }
 
   try {
     const files = await readdir(POSTS_DIRECTORY);
-    logger.debug(`Found ${files.length} files in posts directory`);
-    
-    const postsPromises = files
-      .filter((file: string) => file.endsWith(".md"))
-      .map(async (file: string) => {
+    const mdFiles = files.filter((file) => file.endsWith('.md'));
+
+    const posts = await Promise.all(
+      mdFiles.map((file) => {
         const filePath = path.join(POSTS_DIRECTORY, file);
         const slug = createSlug(file);
+        return parsePostFile(filePath, slug);
+      })
+    );
 
-        try {
-          const fileContent = await readFile(filePath, "utf8");
-          const matterResult = matter(fileContent);
-
-          const metadata = {
-            ...matterResult.data,
-            date: formatDate(matterResult.data.date),
-            slug,
-          };
-
-          if (!validatePostMetadata(metadata)) {
-            console.error(`Invalid metadata in ${file}`);
-            return null;
-          }
-
-          return metadata;
-        } catch (error) {
-          console.error(`Error reading ${file}:`, error);
-          return null;
-        }
-      });
-
-    const posts = await Promise.all(postsPromises);
-    logger.debug(`Processed ${posts.length} markdown files`);
-    
-    // Use a proper type guard to filter out null posts
-    const result = sortByDate(posts.filter((post): post is PostMetadata => post !== null));
-    logger.info(`Returning ${result.length} valid posts`);
-    logger.endTimer('getPostMetadata');
-    return result;
+    const validPosts = posts.filter((post): post is PostMetadata => post !== null);
+    cache.metadata = sortByDate(validPosts);
+    return cache.metadata;
   } catch (error) {
-    console.error("Error reading posts directory:", error);
-    logger.error("Error reading posts directory:", error);
+    console.error('Error reading posts directory:', error);
     return [];
   }
-};
+}
 
-// Add memory cache for post contents
-const postContentCache: Record<string, string | null> = {};
-
-export const getPostContent = async (slug: string) => {
-  logger.startTimer(`getPostContent:${slug}`);
-
-  // Return from cache if available
-  if (slug in postContentCache) {
-    logger.debug(`Cache hit for post: ${slug}`);
-    logger.endTimer(`getPostContent:${slug}`);
-    return postContentCache[slug];
+export async function getPostContent(slug: string): Promise<string | null> {
+  if (cache.content.has(slug)) {
+    return cache.content.get(slug) ?? null;
   }
-  
-  logger.debug(`Cache miss for post: ${slug}`);
+
   const filePath = path.join(POSTS_DIRECTORY, `${slug}.md`);
 
   if (!existsSync(filePath)) {
-    logger.warn(`Post not found: ${slug}`);
-    postContentCache[slug] = null;
-    logger.endTimer(`getPostContent:${slug}`);
+    cache.content.set(slug, null);
     return null;
   }
 
   try {
-    const fileContent = await readFile(filePath, "utf8");
-    logger.debug(`Read ${fileContent.length} bytes from ${slug}.md`);
-    
+    const fileContent = await readFile(filePath, 'utf8');
     const matterResult = matter(fileContent);
-    
-    if (!validatePostContent(matterResult)) {
-      logger.error(`Invalid content in ${slug}.md`);
-      postContentCache[slug] = null;
-      logger.endTimer(`getPostContent:${slug}`);
+
+    if (!isValidContent(matterResult)) {
+      console.error(`Invalid content in ${slug}.md`);
+      cache.content.set(slug, null);
       return null;
     }
 
-    // Cache the result before returning
-    postContentCache[slug] = matterResult.content;
-    logger.info(`Successfully loaded and cached post: ${slug}`);
-    logger.endTimer(`getPostContent:${slug}`);
+    cache.content.set(slug, matterResult.content);
     return matterResult.content;
   } catch (error) {
     console.error(`Error reading ${slug}.md:`, error);
-    logger.error(`Error reading ${slug}.md:`, error);
-    postContentCache[slug] = null;
-    logger.endTimer(`getPostContent:${slug}`);
+    cache.content.set(slug, null);
     return null;
   }
-};
+}
+
+export function clearCache(): void {
+  cache.metadata = null;
+  cache.content.clear();
+}

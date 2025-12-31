@@ -1,9 +1,43 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { PostMetadata } from '../types/blog';
-import { sortByDate } from '../lib/date';
+import { sortByDate } from './date';
 
+// ============ useDebounce ============
+type AnyFunction = (...args: never[]) => unknown;
+
+interface DebouncedFunction<T extends AnyFunction> {
+  (...args: Parameters<T>): void;
+  cancel: () => void;
+}
+
+export function useDebounce<T extends AnyFunction>(fn: T, delay: number): DebouncedFunction<T> {
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const debouncedFn = useCallback(
+    (...args: Parameters<T>) => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      timeoutRef.current = setTimeout(() => {
+        fn(...(args as Parameters<T>));
+      }, delay);
+    },
+    [fn, delay]
+  );
+
+  const cancel = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  }, []);
+
+  (debouncedFn as DebouncedFunction<T>).cancel = cancel;
+  return debouncedFn as DebouncedFunction<T>;
+}
+
+// ============ usePosts ============
 interface UsePostsOptions {
   initialPosts: PostMetadata[];
   postsPerPage?: number;
@@ -32,9 +66,10 @@ export function usePosts({ initialPosts, postsPerPage = 10 }: UsePostsOptions): 
     if (!searchTerm) return sorted;
 
     const searchLower = searchTerm.toLowerCase();
-    return sorted.filter(post => 
-      post.title.toLowerCase().includes(searchLower) ||
-      (post.subtitle?.toLowerCase().includes(searchLower) ?? false)
+    return sorted.filter(
+      (post) =>
+        post.title.toLowerCase().includes(searchLower) ||
+        (post.subtitle?.toLowerCase().includes(searchLower) ?? false)
     );
   }, [initialPosts, searchTerm]);
 
@@ -46,15 +81,11 @@ export function usePosts({ initialPosts, postsPerPage = 10 }: UsePostsOptions): 
   const hasPrevPage = currentPage > 1;
 
   const goToNextPage = () => {
-    if (hasNextPage) {
-      setCurrentPage(prev => prev + 1);
-    }
+    if (hasNextPage) setCurrentPage((prev) => prev + 1);
   };
 
   const goToPrevPage = () => {
-    if (hasPrevPage) {
-      setCurrentPage(prev => prev - 1);
-    }
+    if (hasPrevPage) setCurrentPage((prev) => prev - 1);
   };
 
   return {

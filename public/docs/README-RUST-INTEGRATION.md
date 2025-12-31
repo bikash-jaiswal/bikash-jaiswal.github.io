@@ -21,6 +21,7 @@ GET /resources
 ```
 
 **Response:**
+
 ```json
 {
   "resources": [
@@ -46,6 +47,7 @@ POST /resources
 ```
 
 **Request Body:**
+
 ```json
 {
   "title": "string",
@@ -59,6 +61,7 @@ POST /resources
 ```
 
 **Response:**
+
 ```json
 {
   "resource": {
@@ -82,6 +85,7 @@ PATCH /resources/{id}/favorite
 ```
 
 **Response:**
+
 ```json
 {
   "success": boolean
@@ -93,6 +97,7 @@ PATCH /resources/{id}/favorite
 The frontend is already configured to work with these endpoints. When you're ready to implement the Rust microservice:
 
 1. Configure the URL in `.env.local`:
+
    ```
    RESOURCE_API_URL=http://localhost:8000
    ```
@@ -106,11 +111,13 @@ The frontend is already configured to work with these endpoints. When you're rea
 ## Development Workflow
 
 During development:
+
 1. The frontend uses sample data from `app/types/resource.ts`
 2. The Resource API in the frontend calls the Next.js API routes
 3. The API routes return the sample data
 
 When the Rust microservice is implemented:
+
 1. The frontend will call the Next.js API routes (no change needed)
 2. The API routes will forward requests to the Rust microservice
 3. The Rust microservice will handle data storage and retrieval

@@ -1,33 +1,27 @@
 'use client';
 
-import { usePosts } from "../../hooks";
-import { BlogPostPreview } from "../../components/BlogPostPreview";
-import { Pagination } from "../../components/Pagination";
-import { SearchBar } from "../../components/SearchBar";
-import { PostMetadata } from "../../types/blog";
-import { formatDate } from "../../lib/date";
+import dynamic from 'next/dynamic';
+import { usePosts } from '../../lib/hooks';
+import { SearchBar } from '../../components/SearchBar';
+import { EmptyState } from '../../components/EmptyState';
+import { PostMetadata } from '../../types/blog';
 
-export interface ClientBlogContentProps {
+const BlogPostPreview = dynamic(
+  () => import('../../components/BlogPostPreview').then((mod) => ({ default: mod.BlogPostPreview })),
+  { loading: () => <div className="animate-pulse h-32 bg-gray-800 rounded-lg" /> }
+);
+
+const Pagination = dynamic(
+  () => import('../../components/Pagination').then((mod) => ({ default: mod.Pagination })),
+  { loading: () => <div className="h-10" /> }
+);
+
+interface ClientBlogContentProps {
   initialPosts: PostMetadata[];
-  blogNumParam?: string;
+  postsPerPage?: number;
 }
 
-function EmptyState({ searchTerm }: { searchTerm?: string }) {
-  return (
-    <div className="text-center py-12">
-      <h2 className="text-white text-xl mb-4">
-        {searchTerm ? `No posts found for "${searchTerm}"` : 'No Posts Found'}
-      </h2>
-      <p className="text-gray-400 mb-8">
-        {searchTerm 
-          ? 'Try adjusting your search terms or browse all posts.'
-          : 'There are no blog posts available at the moment.'}
-      </p>
-    </div>
-  );
-}
-
-function BlogPosts({ posts, searchTerm }: { posts: PostMetadata[]; searchTerm: string }) {
+function BlogPostList({ posts, searchTerm }: { posts: PostMetadata[]; searchTerm: string }) {
   if (posts.length === 0) {
     return <EmptyState searchTerm={searchTerm} />;
   }
@@ -41,13 +35,10 @@ function BlogPosts({ posts, searchTerm }: { posts: PostMetadata[]; searchTerm: s
   );
 }
 
-export default function ClientBlogContent({ initialPosts, blogNumParam }: ClientBlogContentProps) {
-  // If blogNumParam is provided, use it to limit the number of posts shown
-  const limitPosts = blogNumParam ? Number(blogNumParam) : undefined;
-  
-  // If we have a limit from URL, filter posts before passing to the hook
-  const postsToUse = limitPosts ? initialPosts.slice(0, limitPosts) : initialPosts;
-  
+export default function ClientBlogContent({
+  initialPosts,
+  postsPerPage = 5,
+}: ClientBlogContentProps) {
   const {
     currentPosts,
     searchTerm,
@@ -58,14 +49,14 @@ export default function ClientBlogContent({ initialPosts, blogNumParam }: Client
     hasNextPage,
     hasPrevPage,
   } = usePosts({
-    initialPosts: postsToUse,
-    postsPerPage: 5,
+    initialPosts,
+    postsPerPage,
   });
 
   return (
     <div className="space-y-6">
       <SearchBar onSearch={setSearchTerm} />
-      <BlogPosts posts={currentPosts} searchTerm={searchTerm} />
+      <BlogPostList posts={currentPosts} searchTerm={searchTerm} />
       {totalPages > 1 && (
         <Pagination
           currentPage={currentPage}

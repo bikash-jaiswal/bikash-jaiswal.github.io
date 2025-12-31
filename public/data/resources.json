@@ -72,7 +72,13 @@
       "description": "Clear explanations and examples of design patterns and refactoring techniques with visual illustrations",
       "url": "https://refactoring.guru/design-patterns/",
       "category": "reference",
-      "tags": ["design-patterns", "architecture", "software-design", "refactoring", "best-practices"],
+      "tags": [
+        "design-patterns",
+        "architecture",
+        "software-design",
+        "refactoring",
+        "best-practices"
+      ],
       "favorite": true,
       "dateAdded": "2025-06-05",
       "icon": "FiLayers"

@@ -41,26 +41,37 @@ export default function GitHubProject({
           <span>{stars}</span>
         </div>
       </div>
-      
+
       <p className="text-gray-400 mb-4">{description}</p>
-      
+
       <div className="flex flex-wrap mb-4">
         {topics.map((topic) => (
-          <span key={topic} className="text-xs mr-2 mb-2 px-2 py-1 bg-gray-700 text-gray-300 rounded-full">
+          <span
+            key={topic}
+            className="text-xs mr-2 mb-2 px-2 py-1 bg-gray-700 text-gray-300 rounded-full"
+          >
             {topic}
           </span>
         ))}
       </div>
-      
+
       <div className="flex space-x-4">
-        <a href={url} target="_blank" rel="noopener noreferrer"
-          className="flex items-center text-violet-400 hover:text-violet-300">
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center text-violet-400 hover:text-violet-300"
+        >
           <FiGithub className="mr-1" />
           <span>Repository</span>
         </a>
         {homepage && (
-          <a href={homepage} target="_blank" rel="noopener noreferrer"
-            className="flex items-center text-violet-400 hover:text-violet-300">
+          <a
+            href={homepage}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center text-violet-400 hover:text-violet-300"
+          >
             <FiExternalLink className="mr-1" />
             <span>Live Demo</span>
           </a>

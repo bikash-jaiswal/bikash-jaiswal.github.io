@@ -1,18 +1,19 @@
 ---
 title: "Web Architecture 101: A Developer's Essential Handbook"
-subtitle: "Simplified Guidance for Building Robust Web Solutions"
-author: "Bikash Jaiswal"
-date: "2024-02-05"
+subtitle: 'Simplified Guidance for Building Robust Web Solutions'
+author: 'Bikash Jaiswal'
+date: '2024-02-05'
 ---
 
 ## What is Web Architecture?
+
 Web architecture is like the blueprint of a website, deciding how all the parts fit together to make it work. Imagine it as the design and structure that ensures a website runs smoothly and delivers content to users. It's crucial to make websites perform well, handle more visitors, and stay easy to update.
 
 ## Parts of Web Architecture
+
 Think of a website like a team. Each member has a specific role:
 
 - **Client:** This is you – using a web browser, mobile app, or computer program to access a website.
-  
 - **Server:** Picture this as the brain – a computer or group of them storing and sending website content to users.
 
 - **Network:** It's like the roads connecting the client and server, allowing them to communicate.
@@ -48,9 +49,7 @@ This is like using ready-made tools to build a website. It's simple for growth a
 When designing a website, there are a few important things to consider:
 
 - **Speed:** How quickly does the website load and respond?
-  
 - **Size:** Can the website handle more people using it?
-  
 - **Updates:** How easy is it to change and improve the website?
 
 - **Safety:** Is the website and its information secure?
@@ -58,7 +57,6 @@ When designing a website, there are a few important things to consider:
 - **Cost:** How much does it take to build and keep the website running?
 
 By thinking about these things, developers can make websites that work well, stay reliable, and are easy to take care of.
-
 
 ## What is REST?
 
@@ -159,9 +157,7 @@ Simple Object Access Protocol (SOAP) is a protocol for exchanging structured inf
 SOAP messages are structured using XML (eXtensible Markup Language). A SOAP message typically consists of:
 
 - **Envelope:** The outermost element that defines the start and end of the SOAP message.
-  
 - **Header (Optional):** Contains additional information about the message, such as authentication credentials or metadata.
-  
 - **Body:** Contains the actual data being transmitted, such as method calls or responses.
 
 ## Request and Response
@@ -171,7 +167,6 @@ SOAP messages are structured using XML (eXtensible Markup Language). A SOAP mess
 A SOAP request consists of a method call from a client to a server. The method call is typically defined within the `<Body>` element of the SOAP message. It includes:
 
 - **Method Name:** The name of the method being called.
-  
 - **Parameters:** Any input data required by the method.
 
 #### Example of a SOAP request:
@@ -223,8 +218,6 @@ SOAP is used in various applications, including:
 
 In summary, SOAP provides a standardized way to exchange structured information between different systems, making it a popular choice for web service communication in various industries.
 
-
-
 ## What are WebSockets?
 
 Imagine you're chatting with a friend on your phone. You send a message, and your friend instantly receives it – that's quick, right? Now, think about websites. Usually, when you open a webpage, your browser asks the server for information, and the server responds. But what if you want information to be sent instantly, without asking every time? That's where WebSockets come in.
@@ -252,10 +245,8 @@ Think of a chat app on your phone where messages appear instantly without refres
 
 - **Real-Time Fun:**
   Great for games, live scores in sports apps, or updating social media feeds instantly.
-  
 - **Need for Speed:**
   Perfect for situations where waiting even a second is too long, like online games or quick updates in apps.
-  
 - **Keeping it Light:**
   If you want to save energy and resources, like when using IoT devices (smart gadgets), WebSockets are efficient.
 
@@ -263,13 +254,10 @@ Think of a chat app on your phone where messages appear instantly without refres
 
 - **Taking it Slow:**
   If your app doesn't need to update very often, like a simple webpage with occasional changes, WebSockets might be too much.
-  
 - **Big and Heavy:**
   When dealing with large files or tons of data, WebSockets can become a bit too chatty. Sometimes regular methods are better.
-  
 - **Old School:**
   If you need to support really old browsers, they might not understand WebSockets well. In those cases, it's better to use other ways to talk.
-  
 - **Serious Security:**
   If your conversations need to be super secret or have special security, you might want to use other methods to be extra safe.
 
@@ -284,10 +272,12 @@ In the world of web communication, there are two primary methods for exchanging 
 In the Pull method, also known as client-initiated communication, the client sends a request to the server to fetch data. The server then responds to the client's request by sending the requested data. This process is initiated by the client whenever it needs new or updated information.
 
 ### Structure of Pull Method:
+
 1. **Client Requests Data:** The client sends a request to the server, asking for specific data or resources.
 2. **Server Responds:** The server processes the request and sends back the requested data as a response to the client's request.
 
 ### Example of Pull Method:
+
 When you open a web page in your browser, the browser sends a request to the server for the webpage's HTML, CSS, and JavaScript files. The server then responds by sending these files back to the client, allowing the browser to render the webpage.
 
 ## Push Method
@@ -295,16 +285,16 @@ When you open a web page in your browser, the browser sends a request to the ser
 In the Push method, also known as server-initiated communication, the server sends data to the client without the client explicitly requesting it. The server can initiate communication with the client whenever new data or updates are available, pushing the information to the client in real-time.
 
 ### Structure of Push Method:
+
 1. **Server Sends Data:** The server proactively sends data or updates to the client without waiting for a request.
 2. **Client Receives Data:** The client receives the pushed data from the server and processes it accordingly.
 
 ### Example of Push Method:
+
 Consider a real-time chat application where users can send messages to each other. When a user sends a message, the server can push the message to all connected clients in real-time without waiting for them to request it. This ensures that all users receive new messages instantly as they are sent.
 
 HTTP Pull and Push methods offer different approaches to data exchange between clients and servers. While Pull method requires the client to initiate communication by requesting data from the server, Push method allows the server to proactively send data to the client without the client's explicit request. Understanding these methods is crucial for building efficient and responsive web applications that meet the needs of users in various scenarios.
 
 ## Conclusion
+
 Ultimately, the choice among these technologies depends on the specific requirements of the application, including factors such as performance, scalability, security, and real-time capabilities. By understanding the strengths and limitations of each option, developers can make informed decisions to create robust and efficient web solutions tailored to their needs.
-
-
-

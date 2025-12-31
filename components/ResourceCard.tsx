@@ -1,10 +1,20 @@
-"use client";
+'use client';
 
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Resource } from '../types/resource';
-import { FiExternalLink, FiStar, FiCode, FiBook, FiBox, FiDatabase, 
-  FiLayout, FiMap, FiTool, FiActivity } from 'react-icons/fi';
+import {
+  FiExternalLink,
+  FiStar,
+  FiCode,
+  FiBook,
+  FiBox,
+  FiDatabase,
+  FiLayout,
+  FiMap,
+  FiTool,
+  FiActivity,
+} from 'react-icons/fi';
 
 interface ResourceCardProps {
   resource: Resource;
@@ -20,7 +30,7 @@ const iconMap: Record<string, React.ReactNode> = {
   FiLayout: <FiLayout />,
   FiMap: <FiMap />,
   FiTool: <FiTool />,
-  FiActivity: <FiActivity />
+  FiActivity: <FiActivity />,
 };
 
 const ResourceCard: React.FC<ResourceCardProps> = ({ resource, onToggleFavorite }) => {
@@ -59,11 +69,13 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, onToggleFavorite 
             <div className="text-violet-400 text-xl">
               {icon && iconMap[icon] ? iconMap[icon] : <FiCode />}
             </div>
-            <span className={`inline-block px-2 py-0.5 text-xs font-medium rounded-full ${categoryColors[category] || 'bg-gray-600/20 text-gray-400'}`}>
+            <span
+              className={`inline-block px-2 py-0.5 text-xs font-medium rounded-full ${categoryColors[category] || 'bg-gray-600/20 text-gray-400'}`}
+            >
               {category}
             </span>
           </div>
-          <motion.button 
+          <motion.button
             onClick={() => onToggleFavorite?.(id)}
             whileTap={{ scale: 0.9 }}
             className="text-gray-400 hover:text-yellow-400 focus:outline-none focus-ring rounded-full p-1"
@@ -72,32 +84,27 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, onToggleFavorite 
             <FiStar className={favorite ? 'fill-yellow-400 text-yellow-400' : ''} />
           </motion.button>
         </div>
-        
+
         {/* Resource title and description */}
         <h3 className="text-lg font-bold text-white group-hover:text-violet-400 transition-colors mb-2">
           {title}
         </h3>
         <p className="text-gray-300 text-sm mb-4 line-clamp-2">{description}</p>
-        
+
         {/* Tags */}
         <div className="mb-3 flex flex-wrap gap-1">
           {tags.map((tag, index) => (
-            <span 
-              key={index} 
-              className="text-xs bg-gray-800 text-gray-400 px-2 py-0.5 rounded"
-            >
+            <span key={index} className="text-xs bg-gray-800 text-gray-400 px-2 py-0.5 rounded">
               #{tag}
             </span>
           ))}
         </div>
-        
+
         {/* Footer with date and link */}
         <div className="mt-auto pt-2 flex items-center justify-between text-xs text-gray-400 border-t border-gray-800">
-          <div className="text-gray-500">
-            Added {formatDate(dateAdded)}
-          </div>
-          
-          <a 
+          <div className="text-gray-500">Added {formatDate(dateAdded)}</div>
+
+          <a
             href={url}
             target="_blank"
             rel="noopener noreferrer"

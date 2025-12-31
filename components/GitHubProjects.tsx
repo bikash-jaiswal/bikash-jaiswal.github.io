@@ -25,15 +25,17 @@ export default function GitHubProjects() {
       try {
         setLoading(true);
         // You can replace 'bikash-jaiswal' with your actual GitHub username
-        const response = await fetch('https://api.github.com/users/bikash-jaiswal/repos?sort=updated&direction=desc');
-        
+        const response = await fetch(
+          'https://api.github.com/users/bikash-jaiswal/repos?sort=updated&direction=desc'
+        );
+
         if (!response.ok) {
           throw new Error(`GitHub API responded with status: ${response.status}`);
         }
-        
+
         const data: GitHubRepo[] = await response.json();
         // Filter out forked repositories if desired
-        const filteredData = data.filter(repo => !repo.fork);
+        const filteredData = data.filter((repo) => !repo.fork);
         setProjects(filteredData);
       } catch (err) {
         console.error('Error fetching GitHub repos:', err);

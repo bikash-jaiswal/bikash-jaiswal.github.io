@@ -1,7 +1,7 @@
 ---
 title: Arrow functions in JavaScript
 author: Bikash Jaiswal
-date: "2024-01-16"
+date: '2024-01-16'
 subtitle: Learn how to use arrow functions with or without parameters in JavaScript.
 tags:
   - JavaScript
@@ -9,13 +9,11 @@ tags:
   - Programming
 ---
 
-
 # Arrow functions with Parameters in JavaScript
 
 In JavaScript, arrow functions provide a concise syntax for writing functions. They can also take parameters, allowing you to create more flexible and expressive code.
 
 ![Arrow Function](/images/arrow-function.png)
-
 
 The basic syntax of an arrow function looks like this:
 
@@ -43,7 +41,9 @@ param => {
 ```
 
 We Should store the arrow function expression inside a variable or constant or use it as a callback function
+
 ### Variable
+
 ```
 let myFunction = (a, b) => {
     //function body
@@ -61,6 +61,7 @@ button.addEventListener('click', () => {
 ```
 
 ## Single Parameters
+
 When we have single parametes, we can exclude the parantheses from the defination:
 
 ```
@@ -70,7 +71,8 @@ When we have single parametes, we can exclude the parantheses from the definatio
  }
 
 ```
-if we remove console printing, the above function will only contains a single expression. 
+
+if we remove console printing, the above function will only contains a single expression.
 In such scenario the braces not required.
 
 ```
@@ -105,4 +107,5 @@ const tSquared = t.map(p => p * p)
 - If generator functionality is required, traditional functions should be used instead.
 
 ## Further Reading Resources
+
 1. [MDN Web Docs - Arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)

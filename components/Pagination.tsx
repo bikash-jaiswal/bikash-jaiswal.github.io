@@ -66,9 +66,7 @@ export function Pagination({
           onClick={() => onPageChange(i)}
           onKeyDown={(e) => handleKeyDown(e, i)}
           className={`px-3 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 ${
-            isCurrentPage
-              ? 'bg-violet-600 text-white'
-              : 'text-white hover:bg-violet-600'
+            isCurrentPage ? 'bg-violet-600 text-white' : 'text-white hover:bg-violet-600'
           }`}
           aria-label={`Page ${i}`}
           aria-current={isCurrentPage ? 'page' : undefined}
@@ -103,8 +101,8 @@ export function Pagination({
   };
 
   return (
-    <nav 
-      className="flex justify-center items-center space-x-2 mt-8" 
+    <nav
+      className="flex justify-center items-center space-x-2 mt-8"
       aria-label="Pagination"
       role="navigation"
     >

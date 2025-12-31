@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { FaGithub, FaLinkedin, FaTwitter, FaUser } from 'react-icons/fa';
@@ -8,7 +8,7 @@ const ProfileCard: React.FC = () => {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.1 }}
@@ -23,8 +23,8 @@ const ProfileCard: React.FC = () => {
                 <FaUser size={40} />
               </div>
             ) : (
-              <Image 
-                src="/images/profile-placeholder.jpg" 
+              <Image
+                src="/images/profile-placeholder.jpg"
                 alt="Bikash Jaiswal"
                 width={96}
                 height={96}
@@ -36,41 +36,41 @@ const ProfileCard: React.FC = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Profile Info */}
       <div className="pt-14 pb-6 px-4 text-center">
         <h3 className="text-xl font-semibold text-white mb-1">Bikash Jaiswal</h3>
         <p className="text-violet-400 text-sm mb-4">Software Developer & Entrepreneur</p>
-        
+
         {/* Social Links */}
         <div className="flex justify-center space-x-4 mb-6">
-          <motion.a 
+          <motion.a
             whileHover={{ y: -3 }}
             whileTap={{ scale: 0.95 }}
-            href="https://github.com/bikash-jaiswal" 
-            target="_blank" 
+            href="https://github.com/bikash-jaiswal"
+            target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-white transition-colors focus-ring"
             aria-label="GitHub Profile"
           >
             <FaGithub size={20} />
           </motion.a>
-          <motion.a 
+          <motion.a
             whileHover={{ y: -3 }}
             whileTap={{ scale: 0.95 }}
-            href="https://linkedin.com/in/bikash-jaiswal" 
-            target="_blank" 
+            href="https://linkedin.com/in/bikash-jaiswal"
+            target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-white transition-colors focus-ring"
             aria-label="LinkedIn Profile"
           >
             <FaLinkedin size={20} />
           </motion.a>
-          <motion.a 
+          <motion.a
             whileHover={{ y: -3 }}
             whileTap={{ scale: 0.95 }}
-            href="https://twitter.com/bikash_jaiswal" 
-            target="_blank" 
+            href="https://twitter.com/bikash_jaiswal"
+            target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-white transition-colors focus-ring"
             aria-label="Twitter Profile"
@@ -78,12 +78,12 @@ const ProfileCard: React.FC = () => {
             <FaTwitter size={20} />
           </motion.a>
         </div>
-        
+
         {/* Bio */}
         <p className="text-gray-300 text-sm mb-5 leading-relaxed">
           Building software solutions, sharing knowledge, and exploring new technologies.
         </p>
-        
+
         {/* Location */}
         <div className="text-sm text-gray-400 flex items-center justify-center">
           <span className="inline-flex items-center">

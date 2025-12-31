@@ -1,11 +1,10 @@
 ---
-title: "Most useful command of Git"
-subtitle: "Git Command that most developer must know about"
-date: "2024-03-26"
+title: 'Most useful command of Git'
+subtitle: 'Git Command that most developer must know about'
+date: '2024-03-26'
 ---
 
 Git has revolutionized the way developers collaborate and manage their codebases. From tracking changes to facilitating teamwork, Git offers a plethora of commands and functionalities to streamline the development process. In this guide, we'll explore essential Git commands and their functionalities to empower you in mastering version control.
-
 
 # Basic Operations
 
@@ -93,6 +92,5 @@ Git has revolutionized the way developers collaborate and manage their codebases
     - `git bisect start`: Start the bisect process.
     - `git bisect good <commit>`: Mark a commit as good.
     - `git bisect bad <commit>`: Mark a commit as bad.
-
 
 https://medium.com/@bikash_jaiswal/title-git-command-that-all-developer-must-know-4f3c83171773?sk=f58d9d423279efb635df4af64a19e237

@@ -1,11 +1,10 @@
-"use client";
+'use client';
 
-import React from "react";
-// import Link from "next/link";
-import Link, { default as NextLink } from "next/link";
-import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
-import { FiCode, FiBookOpen, FiTrendingUp, FiArrowRight } from "react-icons/fi";
+import React from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FiCode, FiBookOpen, FiTrendingUp, FiArrowRight } from 'react-icons/fi';
 
 interface ProfessionalHighlightProps {
   icon: React.ReactNode;
@@ -14,7 +13,12 @@ interface ProfessionalHighlightProps {
   delay?: number;
 }
 
-const ProfessionalHighlight: React.FC<ProfessionalHighlightProps> = ({ icon, title, description, delay = 0 }) => (
+const ProfessionalHighlight: React.FC<ProfessionalHighlightProps> = ({
+  icon,
+  title,
+  description,
+  delay = 0,
+}) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -37,14 +41,14 @@ const WhoAmI: React.FC = () => {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
-      }
-    }
+        staggerChildren: 0.2,
+      },
+    },
   };
 
   const item = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
+    show: { opacity: 1, y: 0 },
   };
 
   return (
@@ -56,16 +60,19 @@ const WhoAmI: React.FC = () => {
         transition={{ duration: 0.8 }}
         className="mb-20 text-center"
       >
-        <motion.h1 
+        <motion.h1
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
         >
-          Hey, I&apos;m <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-violet-600">Bikash</span>
+          Hey, I&apos;m{' '}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-violet-600">
+            Bikash
+          </span>
         </motion.h1>
-        
-        <motion.p 
+
+        <motion.p
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -73,26 +80,30 @@ const WhoAmI: React.FC = () => {
         >
           Software developer, Entrepreneur, Investor, Author, and Content Creator based in Canada
         </motion.p>
-        
-        <motion.div 
+
+        <motion.div
           variants={container}
           initial="hidden"
           animate="show"
           className="flex justify-center space-x-6"
         >
-          {[{
-            icon: <FaGithub size={24} />,
-            href: "https://github.com/bikash-jaiswal",
-            label: "GitHub Profile"
-          }, {
-            icon: <FaLinkedin size={24} />,
-            href: "https://linkedin.com/in/bikashjaiswal",
-            label: "LinkedIn Profile"
-          }, {
-            icon: <FaTwitter size={24} />,
-            href: "https://twitter.com/bikash_jaiswal",
-            label: "Twitter Profile"
-          }].map((social, index) => (
+          {[
+            {
+              icon: <FaGithub size={24} />,
+              href: 'https://github.com/bikash-jaiswal',
+              label: 'GitHub Profile',
+            },
+            {
+              icon: <FaLinkedin size={24} />,
+              href: 'https://linkedin.com/in/bikashjaiswal',
+              label: 'LinkedIn Profile',
+            },
+            {
+              icon: <FaTwitter size={24} />,
+              href: 'https://twitter.com/bikash_jaiswal',
+              label: 'Twitter Profile',
+            },
+          ].map((social, index) => (
             <motion.a
               key={index}
               variants={item}
@@ -112,45 +123,46 @@ const WhoAmI: React.FC = () => {
 
       {/* Professional Highlights */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-        <ProfessionalHighlight 
-          icon={<FiCode />} 
-          title="Software Development" 
-          description="Building robust applications with modern technologies and best practices." 
+        <ProfessionalHighlight
+          icon={<FiCode />}
+          title="Software Development"
+          description="Building robust applications with modern technologies and best practices."
           delay={0.2}
         />
-        <ProfessionalHighlight 
-          icon={<FiTrendingUp />} 
-          title="Business & Investment" 
-          description="Applying strategic thinking to entrepreneurial and investment ventures." 
+        <ProfessionalHighlight
+          icon={<FiTrendingUp />}
+          title="Business & Investment"
+          description="Applying strategic thinking to entrepreneurial and investment ventures."
           delay={0.4}
         />
-        <ProfessionalHighlight 
-          icon={<FiBookOpen />} 
-          title="Content Creation" 
-          description="Sharing knowledge and insights through articles, courses, and tutorials." 
+        <ProfessionalHighlight
+          icon={<FiBookOpen />}
+          title="Content Creation"
+          description="Sharing knowledge and insights through articles, courses, and tutorials."
           delay={0.6}
         />
       </div>
 
       {/* CTA Section */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
         className="text-center mb-8"
       >
         <p className="text-xl text-gray-300 mb-8">
-          Explore my projects and articles to see what I&apos;ve been working on and what I&apos;ve learned along the way.
+          Explore my projects and articles to see what I&apos;ve been working on and what I&apos;ve
+          learned along the way.
         </p>
         <div className="flex flex-col md:flex-row justify-center gap-4">
-        <a href="/projects" className="btn btn-primary">
+          <Link href="/projects" className="btn btn-primary">
             <span>View Projects</span>
             <FiArrowRight className="ml-2" />
-        </a>
-        <a href="/blog" className="btn btn-secondary">
+          </Link>
+          <Link href="/blog" className="btn btn-secondary">
             <span>Read Blog</span>
             <FiArrowRight className="ml-2" />
-        </a>  
+          </Link>
         </div>
       </motion.div>
     </div>
