@@ -51,6 +51,7 @@ const Navbar: React.FC = () => {
 
   const navItems = [
     { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
     { href: '/projects', label: 'Projects' },
     { href: '/blog', label: 'Blog' },
     { href: '/resources', label: 'Resources' },
@@ -81,12 +82,9 @@ const Navbar: React.FC = () => {
             <div className="relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-violet-600 to-blue-600 rounded-lg opacity-0 group-hover:opacity-20 blur transition-opacity duration-300" />
               <span className="relative text-2xl font-black bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">
-                B
+                Bikash Jaiswal
               </span>
             </div>
-            <span className="text-lg font-semibold text-white group-hover:text-gray-200 transition-colors">
-              Jaiswal
-            </span>
           </Link>
 
           <div className="hidden md:flex items-center gap-1 bg-gray-800/30 rounded-xl p-1">
@@ -105,11 +103,13 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center gap-3">
             <ThemeToggle />
             <Link
-              href="/resources"
-              className="group relative inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-violet-600 to-violet-700 hover:from-violet-500 hover:to-violet-600 text-white text-sm font-medium rounded-xl transition-all duration-300 shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40"
+              href="/til"
+              className="group relative inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-sm font-medium rounded-xl transition-all duration-300 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40"
             >
-              <span>Get Started</span>
-              <FiArrowRight className="group-hover:translate-x-0.5 transition-transform" size={16} />
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+              <span>TIL</span>
             </Link>
           </div>
 
@@ -186,12 +186,14 @@ const Navbar: React.FC = () => {
                   className="pt-3 mt-3 border-t border-gray-800"
                 >
                   <Link
-                    href="/resources"
-                    className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-gradient-to-r from-violet-600 to-violet-700 text-white font-medium rounded-xl"
+                    href="/til"
+                    className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-medium rounded-xl"
                     onClick={() => setMenuOpen(false)}
                   >
-                    <span>Get Started</span>
-                    <FiArrowRight size={16} />
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                    <span>Today I Learned</span>
                   </Link>
                 </motion.div>
               </div>

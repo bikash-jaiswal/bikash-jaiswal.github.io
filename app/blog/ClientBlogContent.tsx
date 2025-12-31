@@ -21,9 +21,9 @@ interface ClientBlogContentProps {
   postsPerPage?: number;
 }
 
-function BlogPostList({ posts, searchTerm }: { posts: PostMetadata[]; searchTerm: string }) {
+function BlogPostList({ posts, searchTerm, selectedTag }: { posts: PostMetadata[]; searchTerm: string; selectedTag: string | null }) {
   if (posts.length === 0) {
-    return <EmptyState searchTerm={searchTerm} />;
+    return <EmptyState searchTerm={searchTerm || selectedTag || ''} />;
   }
 
   return (
@@ -43,6 +43,9 @@ export default function ClientBlogContent({
     currentPosts,
     searchTerm,
     setSearchTerm,
+    selectedTag,
+    setSelectedTag,
+    allTags,
     currentPage,
     totalPages,
     setCurrentPage,
@@ -55,8 +58,13 @@ export default function ClientBlogContent({
 
   return (
     <div className="space-y-6">
-      <SearchBar onSearch={setSearchTerm} />
-      <BlogPostList posts={currentPosts} searchTerm={searchTerm} />
+      <SearchBar 
+        onSearch={setSearchTerm} 
+        tags={allTags}
+        selectedTag={selectedTag ?? undefined}
+        onTagSelect={setSelectedTag}
+      />
+      <BlogPostList posts={currentPosts} searchTerm={searchTerm} selectedTag={selectedTag} />
       {totalPages > 1 && (
         <Pagination
           currentPage={currentPage}

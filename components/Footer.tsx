@@ -88,12 +88,9 @@ const Footer: React.FC = () => {
                 <div className="relative">
                   <div className="absolute -inset-2 bg-gradient-to-r from-violet-600 to-blue-600 rounded-xl opacity-0 group-hover:opacity-20 blur-lg transition-opacity duration-500" />
                   <span className="relative text-3xl font-black bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">
-                    B
+                    Bikash Jaiswal
                   </span>
                 </div>
-                <span className="text-xl font-bold text-white group-hover:text-gray-200 transition-colors">
-                  Jaiswal
-                </span>
               </Link>
               
               <p className="text-gray-400 mb-6 text-sm leading-relaxed max-w-sm">

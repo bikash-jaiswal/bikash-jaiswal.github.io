@@ -2,31 +2,55 @@
 
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FiCopy, FiCheck, FiTerminal } from 'react-icons/fi';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { oneDark, oneLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 interface MarkdownContentProps {
   content: string;
 }
 
-const customTheme = {
-  ...oneDark,
+const createCustomTheme = (baseTheme: typeof oneDark) => ({
+  ...baseTheme,
   'pre[class*="language-"]': {
-    ...oneDark['pre[class*="language-"]'],
+    ...baseTheme['pre[class*="language-"]'],
     background: 'transparent',
     margin: 0,
     padding: 0,
   },
   'code[class*="language-"]': {
-    ...oneDark['code[class*="language-"]'],
+    ...baseTheme['code[class*="language-"]'],
     background: 'transparent',
   },
-};
+});
+
+const darkTheme = createCustomTheme(oneDark);
+const lightTheme = createCustomTheme(oneLight);
 
 function CodeBlock({ children, language }: { children: string; language: string }) {
   const [copied, setCopied] = useState(false);
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    // Check initial theme
+    const checkTheme = () => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    };
+    checkTheme();
+
+    // Watch for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          checkTheme();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
+    return () => observer.disconnect();
+  }, []);
 
   const handleCopy = async () => {
     try {
@@ -41,12 +65,20 @@ function CodeBlock({ children, language }: { children: string; language: string 
   const displayLanguage = language || 'text';
 
   return (
-    <div className="relative group my-6 rounded-xl overflow-hidden border border-gray-700/50 bg-[#1e1e1e] shadow-lg">
+    <div className={`relative group my-6 rounded-xl overflow-hidden border shadow-lg transition-colors ${
+      isDark 
+        ? 'border-gray-700/50 bg-[#1e1e1e]' 
+        : 'border-gray-300 bg-[#fafafa]'
+    }`}>
       {/* Header bar */}
-      <div className="flex items-center justify-between px-4 py-2 bg-gray-800/80 border-b border-gray-700/50">
+      <div className={`flex items-center justify-between px-4 py-2 border-b transition-colors ${
+        isDark 
+          ? 'bg-gray-800/80 border-gray-700/50' 
+          : 'bg-gray-100 border-gray-300'
+      }`}>
         <div className="flex items-center gap-2">
-          <FiTerminal size={14} className="text-gray-500" />
-          <span className="text-xs font-medium text-gray-400 uppercase tracking-wide">
+          <FiTerminal size={14} className={isDark ? 'text-gray-500' : 'text-gray-400'} />
+          <span className={`text-xs font-medium uppercase tracking-wide ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
             {displayLanguage}
           </span>
         </div>
@@ -54,8 +86,10 @@ function CodeBlock({ children, language }: { children: string; language: string 
           onClick={handleCopy}
           className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-all ${
             copied
-              ? 'bg-green-500/20 text-green-400'
-              : 'bg-gray-700/50 text-gray-400 hover:bg-gray-600/50 hover:text-white'
+              ? 'bg-green-500/20 text-green-600'
+              : isDark 
+                ? 'bg-gray-700/50 text-gray-400 hover:bg-gray-600/50 hover:text-white'
+                : 'bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-900'
           }`}
           aria-label={copied ? 'Copied!' : 'Copy code'}
         >
@@ -77,7 +111,7 @@ function CodeBlock({ children, language }: { children: string; language: string 
       <div className="overflow-x-auto p-4">
         <SyntaxHighlighter
           language={language || 'text'}
-          style={customTheme}
+          style={isDark ? darkTheme : lightTheme}
           customStyle={{
             margin: 0,
             padding: 0,
@@ -94,7 +128,7 @@ function CodeBlock({ children, language }: { children: string; language: string 
           lineNumberStyle={{
             minWidth: '2.5em',
             paddingRight: '1em',
-            color: '#4a5568',
+            color: isDark ? '#4a5568' : '#9ca3af',
             userSelect: 'none',
           }}
         >
@@ -132,7 +166,7 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
           if (isInline) {
             return (
               <code 
-                className="px-1.5 py-0.5 rounded-md bg-violet-500/10 text-violet-400 text-sm font-medium"
+                className="px-1.5 py-0.5 rounded-md bg-violet-500/10 text-violet-600 dark:text-violet-400 text-sm font-medium"
                 {...props}
               >
                 {children}
