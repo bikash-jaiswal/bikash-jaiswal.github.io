@@ -52,7 +52,7 @@ Every time you make an API call, send a message, or load a webpage, data travels
 5. **Frame**: A unit of data that is transmitted over a network. It contains a header, a payload, and a footer.
 
 ![Data Transfer in Network Stack](/images/distributed-system/data-transfer-in-newtork-stack.jpg)
-* Figure 2: Data Transfer in Network Stack. Reference: [https://en.wikipedia.org/wiki/Internet_protocol_suite](https://en.wikipedia.org/wiki/Internet_protocol_suite) *
+* Figure 2: Data Transfer in Network Stack. Reference: [https://en.wikipedia.org/wiki/Internet_protocol_suite](https://en.wikipedia.org/wiki/Internet_protocol_suite)
 
 ## Network Layers role in debugging distributed system
 when a distributed system is not working, it is important to understand the network protocols used by the system. The troubleshooting engineer might ask for the following information:
