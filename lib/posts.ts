@@ -6,6 +6,7 @@ import { PostContent, PostMetadata } from '../types/blog';
 import { sortByDate } from '../lib/date';
 
 const POSTS_DIRECTORY = path.join(process.cwd(), 'content/posts');
+const isDev = process.env.NODE_ENV === 'development';
 
 const cache = {
   metadata: null as PostMetadata[] | null,
@@ -40,19 +41,35 @@ function createSlug(filename: string): string {
   return filename.replace(/\.md$/, '');
 }
 
+function calculateReadingTime(text: string): number {
+  const wordsPerMinute = 200;
+  const wordCount = text.trim().split(/\s+/).length;
+  return Math.max(1, Math.ceil(wordCount / wordsPerMinute));
+}
+
 function formatDateString(date: string): string {
-  return new Date(date).toISOString().split('T')[0];
+  // Parse date string directly to avoid timezone issues
+  // Input format: 'YYYY-MM-DD' or similar
+  const parsed = new Date(date + 'T00:00:00');
+  if (isNaN(parsed.getTime())) {
+    return date; // Return original if parsing fails
+  }
+  const year = parsed.getFullYear();
+  const month = String(parsed.getMonth() + 1).padStart(2, '0');
+  const day = String(parsed.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 }
 
 async function parsePostFile(filePath: string, slug: string): Promise<PostMetadata | null> {
   try {
     const fileContent = await readFile(filePath, 'utf8');
-    const { data } = matter(fileContent);
+    const { data, content } = matter(fileContent);
 
     const metadata: PostMetadata = {
       ...data,
       date: formatDateString(data.date),
       slug,
+      readingTime: calculateReadingTime(content),
     } as PostMetadata;
 
     if (!isValidMetadata(metadata)) {
@@ -68,7 +85,7 @@ async function parsePostFile(filePath: string, slug: string): Promise<PostMetada
 }
 
 export async function getPostMetadata(): Promise<PostMetadata[]> {
-  if (cache.metadata) return cache.metadata;
+  if (!isDev && cache.metadata) return cache.metadata;
 
   if (!existsSync(POSTS_DIRECTORY)) {
     mkdirSync(POSTS_DIRECTORY, { recursive: true });
@@ -97,7 +114,7 @@ export async function getPostMetadata(): Promise<PostMetadata[]> {
 }
 
 export async function getPostContent(slug: string): Promise<string | null> {
-  if (cache.content.has(slug)) {
+  if (!isDev && cache.content.has(slug)) {
     return cache.content.get(slug) ?? null;
   }
 

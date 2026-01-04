@@ -2,6 +2,13 @@ import '../styles/globals.css';
 import Navbar from '../components/Header';
 import Footer from '../components/Footer';
 import { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 export const viewport = {
   width: 'device-width',
@@ -9,6 +16,17 @@ export const viewport = {
 };
 
 const SITE_URL = 'https://www.bikashjaiswal.com';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Bikash Jaiswal',
+  url: SITE_URL,
+  jobTitle: 'Software Developer',
+  sameAs: [
+    'https://github.com/bikash-jaiswal',
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

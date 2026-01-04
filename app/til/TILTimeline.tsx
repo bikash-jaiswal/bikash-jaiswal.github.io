@@ -3,10 +3,24 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import tsx from 'react-syntax-highlighter/dist/cjs/languages/prism/tsx';
+import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript';
+import javascript from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
+import bash from 'react-syntax-highlighter/dist/cjs/languages/prism/bash';
+import json from 'react-syntax-highlighter/dist/cjs/languages/prism/json';
+import css from 'react-syntax-highlighter/dist/cjs/languages/prism/css';
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { FiChevronDown, FiChevronUp, FiCalendar, FiTag } from 'react-icons/fi';
 import { TILEntry } from '../../lib/til';
+
+SyntaxHighlighter.registerLanguage('tsx', tsx);
+SyntaxHighlighter.registerLanguage('typescript', typescript);
+SyntaxHighlighter.registerLanguage('javascript', javascript);
+SyntaxHighlighter.registerLanguage('js', javascript);
+SyntaxHighlighter.registerLanguage('bash', bash);
+SyntaxHighlighter.registerLanguage('json', json);
+SyntaxHighlighter.registerLanguage('css', css);
 
 interface TILTimelineProps {
   entries: TILEntry[];

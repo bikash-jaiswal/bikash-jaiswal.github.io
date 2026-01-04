@@ -1,6 +1,7 @@
 export function formatDate(dateStr: string): string {
   try {
-    const date = new Date(dateStr);
+    // Parse as local time to avoid timezone shift
+    const date = new Date(dateStr + 'T00:00:00');
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',

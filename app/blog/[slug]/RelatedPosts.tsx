@@ -44,7 +44,7 @@ export default function RelatedPosts({ posts, currentSlug }: RelatedPostsProps) 
                 <div className="flex items-center gap-2 text-xs text-gray-500">
                   <FiCalendar size={12} />
                   <time dateTime={post.date}>
-                    {new Date(post.date).toLocaleDateString('en-US', {
+                    {new Date(post.date + 'T00:00:00').toLocaleDateString('en-US', {
                       month: 'short',
                       day: 'numeric',
                     })}
