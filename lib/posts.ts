@@ -234,6 +234,22 @@ export async function getPostContent(slug: string): Promise<string | null> {
 }
 
 /**
+ * Fetches a single blog post by its slug.
+ * More efficient than getPostMetadata() when you only need one post.
+ * 
+ * Called by:
+ * - app/blog/[slug]/page.tsx to get post metadata for display
+ * - generateMetadata() for SEO metadata
+ * 
+ * @param slug - URL-friendly identifier (e.g., "why-system-design")
+ * @returns PostMetadata object if found, null otherwise
+ */
+export async function getPostItem(slug: string): Promise<PostMetadata | null> {
+  const posts = await getPostMetadata();
+  return posts.find((post) => post.slug === slug) ?? null;
+}
+
+/**
  * Clears the in-memory cache for blog posts.
  * Useful for testing or forcing a refresh of data.
  * 

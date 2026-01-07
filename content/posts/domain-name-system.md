@@ -1,7 +1,7 @@
 ---
 title: Domain Name System (DNS) and How it works
 author: Bikash Jaiswal
-date: '2026-01-01'
+date: '2026-01-07'
 subtitle: System Design is not just for Architects. It is for every developer 
   who is building scalable and maintainable applications for global audience.
 tags:

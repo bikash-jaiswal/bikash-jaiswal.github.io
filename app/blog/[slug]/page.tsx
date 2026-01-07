@@ -13,7 +13,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { FiArrowLeft, FiCalendar, FiClock, FiUser } from 'react-icons/fi';
-import { getPostContent, getPostMetadata } from '../../../lib/posts';
+import { getPostContent, getPostMetadata, getPostItem } from '../../../lib/posts';
 import { PostMetadata } from '../../../types/blog';
 import ReadingProgress from './ReadingProgress';
 import { Metadata } from 'next';
@@ -73,18 +73,6 @@ type Props = {
 /** Base URL for the site, used for generating canonical URLs and OpenGraph metadata */
 const SITE_URL = 'https://www.bikashjaiswal.com';
 
-/**
- * Calculates estimated reading time for the blog post.
- * Uses average reading speed of 200 words per minute.
- * 
- * @param text - The full text content of the blog post
- * @returns Estimated reading time in minutes (minimum 1)
- */
-function calculateReadingTime(text: string): number {
-  const wordsPerMinute = 200;
-  const wordCount = text.trim().split(/\s+/).length;
-  return Math.max(1, Math.ceil(wordCount / wordsPerMinute));
-}
 
 /**
  * Generates dynamic metadata for SEO and social sharing.
@@ -177,19 +165,16 @@ export default async function PostDetails({ params }: Props) {
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
 
-  const [content, allPosts] = await Promise.all([getPostContent(slug), getPostMetadata()]);
+  const [content, post, allPosts] = await Promise.all([
+    getPostContent(slug),
+    getPostItem(slug),
+    getPostMetadata(),
+  ]);
 
-  if (!content) {
+  if (!content || !post) {
     notFound();
   }
 
-  const post = allPosts.find((p: PostMetadata) => p.slug === slug);
-
-  if (!post) {
-    notFound();
-  }
-
-  const readingTime = calculateReadingTime(content);
   const formattedDate = new Date(post.date + 'T00:00:00').toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -198,7 +183,7 @@ export default async function PostDetails({ params }: Props) {
 
   return (
     <>
-      <ReadingProgress readingTime={readingTime} />
+      <ReadingProgress readingTime={post.readingTime || 1} />
       
       <article className="relative">
         {/* Hero Section */}
@@ -211,7 +196,7 @@ export default async function PostDetails({ params }: Props) {
                 fill
                 priority
                 className="object-cover"
-                sizes="100vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-gray-900/60 via-gray-900/80 to-gray-900" />
             </div>
@@ -266,7 +251,7 @@ export default async function PostDetails({ params }: Props) {
                       </span>
                       <span className="flex items-center gap-1">
                         <FiClock size={12} />
-                        {readingTime} min read
+                        {post.readingTime || 1} min read
                       </span>
                     </div>
                   </div>
