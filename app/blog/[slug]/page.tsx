@@ -1,3 +1,13 @@
+/**
+ * Blog Post Detail Page
+ * 
+ * Displays a single blog post with full content, metadata, and related features.
+ * Uses dynamic imports for performance optimization of non-critical components.
+ * 
+ * Route: /blog/[slug]
+ * Data Source: content/posts/*.md files via lib/posts.ts
+ */
+
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -8,6 +18,11 @@ import { PostMetadata } from '../../../types/blog';
 import ReadingProgress from './ReadingProgress';
 import { Metadata } from 'next';
 
+/**
+ * Dynamically imported RelatedPosts component.
+ * Loaded lazily to improve initial page load performance.
+ * Shows skeleton loading state while component loads.
+ */
 const RelatedPosts = dynamic(() => import('./RelatedPosts'), {
   loading: () => (
     <div className="grid md:grid-cols-3 gap-4">
@@ -18,6 +33,11 @@ const RelatedPosts = dynamic(() => import('./RelatedPosts'), {
   ),
 });
 
+/**
+ * Dynamically imported MarkdownContent component.
+ * Renders the blog post markdown content with syntax highlighting.
+ * Shows skeleton loading state while component and content loads.
+ */
 const MarkdownContent = dynamic(() => import('./MarkdownContent'), {
   loading: () => (
     <div className="animate-pulse space-y-6">
@@ -32,25 +52,50 @@ const MarkdownContent = dynamic(() => import('./MarkdownContent'), {
   ),
 });
 
+/** Dynamically imported TableOfContents - generates navigation from headings */
 const TableOfContents = dynamic(() => import('./TableOfContents'));
 
+/** Dynamically imported ShareButtons - social media sharing functionality */
 const ShareButtons = dynamic(() => import('./ShareButtons'));
 
+/** Dynamically imported NewsletterSignup - email subscription form */
 const NewsletterSignup = dynamic(() => import('../../../components/NewsletterSignup'));
 
+/**
+ * Props for the dynamic blog post page.
+ * Next.js App Router passes params as a Promise for dynamic routes.
+ */
 type Props = {
   params: Promise<{ slug: string }>;
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
+/** Base URL for the site, used for generating canonical URLs and OpenGraph metadata */
 const SITE_URL = 'https://www.bikashjaiswal.com';
 
+/**
+ * Calculates estimated reading time for the blog post.
+ * Uses average reading speed of 200 words per minute.
+ * 
+ * @param text - The full text content of the blog post
+ * @returns Estimated reading time in minutes (minimum 1)
+ */
 function calculateReadingTime(text: string): number {
   const wordsPerMinute = 200;
   const wordCount = text.trim().split(/\s+/).length;
   return Math.max(1, Math.ceil(wordCount / wordsPerMinute));
 }
 
+/**
+ * Generates dynamic metadata for SEO and social sharing.
+ * 
+ * Called by: Next.js at build time for each static page.
+ * Purpose: Provides page-specific title, description, OpenGraph data, and Twitter cards
+ * for search engines and social media previews.
+ * 
+ * @param params - Contains the slug from the URL (e.g., /blog/why-system-design)
+ * @returns Metadata object with title, description, openGraph, twitter, and canonical URL
+ */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
@@ -90,13 +135,44 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export const generateStaticParams = async () => {
+/**
+ * Pre-generates all possible URL paths for static site generation (SSG).
+ * 
+ * Called by: Next.js at build time when using `output: 'export'` in next.config.js.
+ * Purpose: Tells Next.js which dynamic routes to pre-render as static HTML files.
+ * Without this function, dynamic routes like /blog/[slug] cannot be statically exported.
+ * 
+ * How it works:
+ * 1. Fetches all blog posts from content/posts/*.md files
+ * 2. Returns an array of { slug } objects for each post
+ * 3. Next.js generates a static HTML page for each slug
+ * 
+ * @returns Array of slug parameters for all blog posts
+ */
+export async function generateStaticParams() {
   const posts = await getPostMetadata();
   return posts.map((post: PostMetadata) => ({
     slug: post.slug,
   }));
-};
+}
 
+/**
+ * Main page component for displaying a single blog post.
+ * 
+ * Called by: Next.js when a user navigates to /blog/[slug]
+ * Purpose: Renders the full blog post page including:
+ * - Reading progress indicator
+ * - Hero section with cover image, title, and metadata
+ * - Markdown content with syntax highlighting
+ * - Table of contents for navigation
+ * - Social share buttons
+ * - Newsletter signup form
+ * - Related posts section
+ * 
+ * This is a Server Component - data fetching happens on the server.
+ * 
+ * @param params - Contains the slug from the URL to identify which post to display
+ */
 export default async function PostDetails({ params }: Props) {
   const resolvedParams = await params;
   const slug = resolvedParams.slug;

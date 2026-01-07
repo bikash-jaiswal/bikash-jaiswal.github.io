@@ -1,8 +1,19 @@
+/**
+ * Reading List Page
+ * 
+ * Displays a list of all books, articles, papers, and blogs the author is reading or has read.
+ * Each item links to its dedicated detail page at /reading/[slug].
+ * 
+ * Route: /reading
+ * Data Source: content/reading/*.md files via lib/reading.ts
+ */
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { FiBook, FiArrowRight } from 'react-icons/fi';
 import { getReadingMetadata, ReadingMetadata } from '../../lib/reading';
 
+/** Tailwind CSS classes for category badge styling based on reading item type */
 const categoryColors: Record<string, string> = {
   book: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20',
   article: 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20',
@@ -10,12 +21,25 @@ const categoryColors: Record<string, string> = {
   blog: 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20',
 };
 
+/** Tailwind CSS classes for status badge styling based on reading progress */
 const statusColors: Record<string, string> = {
   reading: 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400',
   completed: 'bg-green-500/10 text-green-600 dark:text-green-400',
   queued: 'bg-gray-500/10 text-gray-600 dark:text-gray-400',
 };
 
+/**
+ * Main reading list page component.
+ * 
+ * Called by: Next.js when user navigates to /reading
+ * Purpose: Fetches all reading items and renders them as a compact list with:
+ * - Cover image thumbnail (or placeholder icon)
+ * - Title and author
+ * - Category and status badges
+ * - Link to detail page
+ * 
+ * This is a Server Component - data fetching happens on the server.
+ */
 export default async function ReadingPage() {
   const readingList = await getReadingMetadata();
 

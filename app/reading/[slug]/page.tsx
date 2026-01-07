@@ -7,12 +7,18 @@ import { getPostMetadata } from '../../../lib/posts';
 import { Metadata } from 'next';
 import MarkdownContent from '../../blog/[slug]/MarkdownContent';
 
+/**
+ * Props for the dynamic reading detail page.
+ * Next.js App Router passes params as a Promise for dynamic routes.
+ */
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
+/** Base URL for the site, used for generating canonical URLs and OpenGraph metadata */
 const SITE_URL = 'https://www.bikashjaiswal.com';
 
+/** Tailwind CSS classes for category badge styling based on reading item type */
 const categoryColors = {
   book: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
   article: 'bg-green-500/20 text-green-400 border-green-500/30',
@@ -20,12 +26,23 @@ const categoryColors = {
   blog: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
 };
 
+/** Tailwind CSS classes for status badge styling based on reading progress */
 const statusColors = {
   reading: 'bg-yellow-500/20 text-yellow-400',
   completed: 'bg-green-500/20 text-green-400',
   queued: 'bg-gray-500/20 text-gray-400',
 };
 
+/**
+ * Generates dynamic metadata for SEO and social sharing.
+ * 
+ * Called by: Next.js at build time for each static page, and at request time for dynamic pages.
+ * Purpose: Provides page-specific title, description, and OpenGraph data for search engines
+ * and social media previews (Twitter cards, Facebook shares, etc.).
+ * 
+ * @param params - Contains the slug from the URL (e.g., /reading/understanding-distributed-systems)
+ * @returns Metadata object with title, description, openGraph, and canonical URL
+ */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
@@ -55,13 +72,39 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export const generateStaticParams = async () => {
+/**
+ * Pre-generates all possible URL paths for static site generation (SSG).
+ * 
+ * Called by: Next.js at build time when using `output: 'export'` in next.config.js.
+ * Purpose: Tells Next.js which dynamic routes to pre-render as static HTML files.
+ * Without this function, dynamic routes like /reading/[slug] cannot be statically exported.
+ * 
+ * How it works:
+ * 1. Fetches all reading items from content/reading/*.md files
+ * 2. Returns an array of { slug } objects for each reading item
+ * 3. Next.js generates a static HTML page for each slug (e.g., /reading/understanding-distributed-systems/index.html)
+ * 
+ * @returns Array of slug parameters for all reading items
+ */
+export async function generateStaticParams() {
   const items = await getReadingMetadata();
   return items.map((item) => ({
     slug: item.slug,
   }));
-};
+}
 
+/**
+ * Main page component for displaying a single reading item's details.
+ * 
+ * Called by: Next.js when a user navigates to /reading/[slug]
+ * Purpose: Renders the full reading item page including:
+ * - Book/article metadata (title, author, cover image, rating)
+ * - External links (official website, Amazon purchase link)
+ * - Markdown content with notes and learnings
+ * - Related blog posts that reference this reading item
+ * 
+ * @param params - Contains the slug from the URL to identify which reading item to display
+ */
 export default async function ReadingDetails({ params }: Props) {
   const resolvedParams = await params;
   const slug = resolvedParams.slug;

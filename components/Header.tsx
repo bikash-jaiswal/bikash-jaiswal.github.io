@@ -1,3 +1,16 @@
+/**
+ * Header/Navbar Component
+ * 
+ * Main navigation component for the site. Features:
+ * - Responsive design with mobile hamburger menu
+ * - Animated transitions using Framer Motion
+ * - Scroll-aware styling (compact on scroll)
+ * - Theme toggle integration
+ * - Active route highlighting
+ * 
+ * Used by: app/layout.tsx (rendered on every page)
+ */
+
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -6,12 +19,22 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX, FiArrowRight } from 'react-icons/fi';
 import ThemeToggle from './ThemeToggle';
 
+/**
+ * Props for individual navigation item component.
+ * @property href - The URL path for the navigation link
+ * @property label - Display text for the navigation item
+ * @property isActive - Whether this item represents the current route
+ */
 interface NavItemProps {
   href: string;
   label: string;
   isActive: boolean;
 }
 
+/**
+ * Individual navigation item with animated active indicator.
+ * Uses Framer Motion's layoutId for smooth indicator transitions between items.
+ */
 const NavItem: React.FC<NavItemProps> = ({ href, label, isActive }) => {
   return (
     <Link
@@ -35,6 +58,16 @@ const NavItem: React.FC<NavItemProps> = ({ href, label, isActive }) => {
   );
 };
 
+/**
+ * Main navbar component with responsive design.
+ * 
+ * Features:
+ * - Desktop: Horizontal nav items with animated active indicator
+ * - Mobile: Hamburger menu with slide-down animation
+ * - Scroll detection: Compact styling when user scrolls down
+ * - Theme toggle button
+ * - "Today I Learned" call-to-action button
+ */
 const Navbar: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
@@ -49,6 +82,7 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  /** Navigation items configuration - defines all main site routes */
   const navItems = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
