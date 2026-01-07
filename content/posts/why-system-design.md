@@ -58,7 +58,7 @@ Client → Load Balancer → API Gateway → Service A → Message Queue → Ser
 
 When nodes need to agree on something (leader election, distributed locks, transaction commits), you need **consensus algorithms**:
 
-- **The CAP Theorem**: You can only guarantee 2 of 3—Consistency, Availability, Partition Tolerance. Choose wisely based on your use case.
+- **The CAP Theorem**: You can only guarantee 2 of 3 among Consistency, Availability, Partition Tolerance. Choose wisely based on your use case.
 - **Consensus Algorithms**: Paxos, Raft, and Zab (used by ZooKeeper) help nodes agree even when some fail.
 - **Network Partitions**: When nodes can't communicate, how does your system behave? Does it favor consistency (reject writes) or availability (accept writes, resolve conflicts later)?
 - **Distributed Locks**: Tools like Redis (Redlock), ZooKeeper, or etcd help coordinate access to shared resources.
@@ -103,8 +103,6 @@ A resilient system continues operating even when components fail. Failures are *
 - **Replication**: Data copied across nodes (leader-follower, multi-leader, leaderless)
 - **Failover**: Automatic switching to healthy nodes when failures occur
 - **Self-healing**: Auto-restart failed containers, auto-scaling based on load
-- **Chaos Engineering**: Intentionally inject failures to test resilience (Netflix's Chaos Monkey)
-
 ---
 
 ### 5. Observability & Operations
@@ -119,7 +117,7 @@ You can't fix what you can't see. **Observability** is the ability to understand
 **Operational Excellence**:
 - **Alerting**: Notify on-call engineers when SLOs are at risk (PagerDuty, OpsGenie)
 - **Runbooks**: Documented procedures for common incidents
-- **Post-mortems**: Blameless analysis after incidents to prevent recurrence
+- **Postmortems**: Blameless analysis after incidents to prevent recurrence
 - **SLIs/SLOs/SLAs**: Define and measure service level indicators, objectives, and agreements
 
 ---
@@ -142,5 +140,4 @@ In distributed systems, **consistency** defines how and when updates become visi
 ---
 
 ## Conclusion
-
-System design isn't just for architects or senior engineers—it's a fundamental skill for anyone building software that serves real users. Start with these concepts, apply them in your projects, and you'll be well-equipped to design systems that are scalable, resilient, and maintainable.
+System design is a fundamental skill for anyone building software that serves real users.
