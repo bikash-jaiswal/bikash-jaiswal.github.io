@@ -74,7 +74,8 @@ troubleshooting engineer might ask for the following information:
 4. Or a routing issue (Internet Layer)?
 5. Is network connectivity issue (Data Link Layer)?
 
-## Transmission Control Protocol (TCP)
+## Transport Layer Protocols (TCP and UDP.)
+### Transmission Control Protocol (TCP)
 
 TCP is a protocol to ensure reliable data exchange between two process on top of IP.
 It guarantees that data is delivered in the correct order, without any gaps, duplicates and loss.
@@ -92,33 +93,52 @@ The process of sending data over TCP is as follows:
    gets. If a confirmation is not received, the system knows that the information was lost and must be resent.
 4. Connection Closure: The sender and receiver close the connection using a four-way handshake.
 
-### TCP Features
-1. Flow Control: TCP ensures that the sender does not send data faster than the receiver can process it.
-2. Congestion Control: TCP controls the amount of data sent to prevent network congestion.
+### Key Characteristics of TCP
+1. Connection-oriented: Establishes a dedicated connection before data transfer
+2. Reliable delivery: Guarantees that data arrives in order and without errors
+3. Flow control: Prevents overwhelming receivers with too much data
+4. Congestion control: Adapts to network congestion to prevent collapse
 
-> **Pro tip**: TCP's reliability and stability come at the cost of lower bandwidth and higher latencies.
+> TCP's reliability and stability come at the cost of lower bandwidth and higher latencies.
 
-## User Datagram Protocol (UDP)
+### User Datagram Protocol (UDP) 
 If there is no need for reliability and stability in data exchange, UDP can be used to send data over the network.
+UDP is perfect for applications where speed is more important than reliability, such as live video streaming, online 
+gaming, VoIP, and DNS lookups.
 
-For example, treaming and gaming services rely on UDP because real-time data has a short shelf life. If a packet is lost during transmission, retransmitting it serves no purpose—the game or stream has already moved on. By the time the retransmitted data arrives, it's outdated. This is where UDP excels: unlike TCP, which would insist on redelivering lost packets and introduce latency, UDP prioritizes speed over reliability, keeping the user experience smooth.
+Streaming and gaming services rely on UDP because real-time data has a short shelf life. 
+If a packet is lost during transmission, retransmitting it serves no purpose—the game or stream has already moved on. 
+By the time the retransmitted data arrives, it's outdated. This is where UDP excels: unlike TCP, which would insist on 
+redelivering lost packets and introduce latency, UDP prioritizes speed over reliability, keeping the user experience smooth.
 
-## Security protocols in Transport Layer
-TLS (Transport Layer Security) runs on top of TCP and provides secure communication channel so that application layer protocols like HTTP can be securely transmitted over the network.
+### Key characteristics of UDP include:
+1. Connectionless: No handshake or connection setup
+2. No guarantee of delivery: Packets may be lost without notification
+3. No ordering: Packets may arrive in a different order than sent
+4. Lower latency: Less overhead means faster transmission
 
+### Security protocols in Transport Layer
+TLS (Transport Layer Security) runs on top of TCP and provides secure communication channel so that application layer 
+protocols like HTTP can be securely transmitted over the network.
 TLS provide encryption, authentication and integrity to the data transmitted over the network.
 
 ### Asymmetric encryption: 
 Client and server exchange public and private keys to encrypt and decrypt data.
-The shared secret key is never transmitted over the network. Although asymmetric encryption is slow and expensive, it's only used to create the shared encryption key. 
+The shared secret key is never transmitted over the network. Although asymmetric encryption is slow and expensive, 
+it's only used to create the shared encryption key. 
 
-### symmetric encryption: 
+### Symmetric encryption: 
 Client and server priodically renegotiated to minimize amount of the data that
 can be deciphered if shared secret key is broken. The shared secret key is transmitted over the network.
 
 TLS implements authentication using digital signatures based on asymmetric cryptography. 
-The client has no idea whether the public key shared by the server is authentic, so we have certificates to prove the ownership of a public key for a specific entity. 
+The client has no idea whether the public key shared by the server is authentic, so we have certificates to prove the 
+ownership of a public key for a specific entity.
 
-A certificate authority (CA) is a trusted third party that issues digital certificates to verify the identity of a server. we have certificates to prove the ownership of a public key. 
+A certificate authority (CA) is a trusted third party that issues digital certificates to verify the identity of a 
+server. we have certificates to prove the ownership of a public key. 
 
 When it rides on top of TLS, it’s also referred to as HTTPS. You should use HTTPS by default.
+
+> Modern applications often use both protocols. For example, a web-based video conferencing app might use TCP/HTTP for 
+> signaling and authentication but UDP/WebRTC for the actual audio/video streams.
