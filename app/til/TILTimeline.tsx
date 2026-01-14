@@ -69,15 +69,17 @@ function TILCard({ entry, index }: { entry: TILEntry; index: number }) {
       <div className={`absolute left-0 top-6 w-4 h-4 rounded-full border-2 border-cyan-500 z-10 ${isDark ? 'bg-gray-900' : 'bg-white'}`} />
       
       <div 
-        className={`p-5 rounded-xl border transition-all duration-300 cursor-pointer ${
+        className={`p-5 rounded-xl border transition-all duration-300 ${
           isDark 
             ? `bg-gray-900/50 ${isExpanded ? 'border-cyan-500/50 shadow-lg shadow-cyan-500/10' : 'border-gray-800/50 hover:border-gray-700/50'}`
             : `bg-white ${isExpanded ? 'border-cyan-500 shadow-lg shadow-cyan-500/10' : 'border-gray-200 hover:border-gray-300'}`
         }`}
-        onClick={() => setIsExpanded(!isExpanded)}
       >
         {/* Header */}
-        <div className="flex items-start justify-between gap-4">
+        <div 
+          className="flex items-start justify-between gap-4 cursor-pointer"
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
           <div className="flex-1">
             <div className="flex flex-wrap items-center gap-2 mb-2">
               <span className={`inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded ${isDark ? 'text-cyan-400 bg-cyan-500/10' : 'text-cyan-600 bg-cyan-50'}`}>
