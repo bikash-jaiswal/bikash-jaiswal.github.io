@@ -17,7 +17,7 @@ import { getReadingMetadata, ReadingMetadata } from '../../lib/reading';
 const categoryColors: Record<string, string> = {
   book: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20',
   article: 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20',
-  paper: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20',
+  paper: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20',
   blog: 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20',
 };
 
@@ -48,7 +48,7 @@ export default async function ReadingPage() {
       <div className="max-w-4xl mx-auto">
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <FiBook className="w-8 h-8 text-violet-400" />
+            <FiBook className="w-8 h-8 text-emerald-400" />
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Stuff I am Reading</h1>
           </div>
           <p className="text-gray-600 dark:text-gray-400 text-lg">
@@ -67,7 +67,7 @@ export default async function ReadingPage() {
               <Link
                 key={item.slug}
                 href={`/reading/${item.slug}`}
-                className="flex items-center gap-4 bg-gray-100 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-xl p-4 hover:border-violet-500/30 transition-all duration-300 group"
+                className="flex items-center gap-4 bg-gray-100 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-xl p-4 hover:border-emerald-500/30 transition-all duration-300 group"
               >
                 {item.coverImage ? (
                   <div className="relative w-12 h-16 flex-shrink-0 rounded-lg overflow-hidden">
@@ -80,16 +80,16 @@ export default async function ReadingPage() {
                     />
                   </div>
                 ) : (
-                  <div className="w-12 h-16 flex-shrink-0 rounded-lg bg-gradient-to-br from-violet-500/20 to-blue-500/20 flex items-center justify-center">
-                    <FiBook className="w-5 h-5 text-violet-400" />
+                  <div className="w-12 h-16 flex-shrink-0 rounded-lg bg-gradient-to-br from-emerald-500/20 to-blue-500/20 flex items-center justify-center">
+                    <FiBook className="w-5 h-5 text-emerald-400" />
                   </div>
                 )}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-violet-400 transition-colors truncate">
+                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-emerald-400 transition-colors truncate">
                       {item.title}
                     </h2>
-                    <FiArrowRight className="w-4 h-4 flex-shrink-0 text-gray-500 group-hover:text-violet-400 group-hover:translate-x-1 transition-all" />
+                    <FiArrowRight className="w-4 h-4 flex-shrink-0 text-gray-500 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all" />
                   </div>
                   <p className="text-gray-600 dark:text-gray-400 text-sm">
                     {item.author && <span>by {item.author}</span>}

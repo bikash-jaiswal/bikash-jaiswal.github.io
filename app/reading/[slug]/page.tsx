@@ -22,7 +22,7 @@ const SITE_URL = 'https://www.bikashjaiswal.com';
 const categoryColors = {
   book: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
   article: 'bg-green-500/20 text-green-400 border-green-500/30',
-  paper: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
+  paper: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
   blog: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
 };
 
@@ -129,7 +129,7 @@ export default async function ReadingDetails({ params }: Props) {
         <nav className="mb-8">
           <Link
             href="/reading"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-gray-300 hover:text-white hover:border-violet-500/50 transition-all text-sm group"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-gray-300 hover:text-white hover:border-emerald-500/50 transition-all text-sm group"
           >
             <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" size={16} />
             <span>Back to Reading List</span>
@@ -158,8 +158,8 @@ export default async function ReadingDetails({ params }: Props) {
                 />
               </div>
             ) : (
-              <div className="p-4 bg-gradient-to-br from-violet-500/20 to-blue-500/20 rounded-xl border border-violet-500/20">
-                <FiBook className="w-8 h-8 text-violet-400" />
+              <div className="p-4 bg-gradient-to-br from-emerald-500/20 to-blue-500/20 rounded-xl border border-emerald-500/20">
+                <FiBook className="w-8 h-8 text-emerald-400" />
               </div>
             )}
             <div className="flex-1">
@@ -181,7 +181,7 @@ export default async function ReadingDetails({ params }: Props) {
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-800/50 border border-gray-700/50 rounded-lg text-violet-400 hover:text-violet-300 hover:border-violet-500/50 transition-all text-sm"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-800/50 border border-gray-700/50 rounded-lg text-emerald-400 hover:text-emerald-300 hover:border-emerald-500/50 transition-all text-sm"
               >
                 <FiExternalLink size={14} />
                 Official Website
@@ -230,13 +230,13 @@ export default async function ReadingDetails({ params }: Props) {
           prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6
           prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4
           prose-p:text-gray-300 prose-p:leading-[1.8] prose-p:mb-6
-          prose-a:text-violet-400 prose-a:no-underline prose-a:border-b prose-a:border-violet-400/30 hover:prose-a:border-violet-400 prose-a:transition-colors
+          prose-a:text-emerald-400 prose-a:no-underline prose-a:border-b prose-a:border-emerald-400/30 hover:prose-a:border-emerald-400 prose-a:transition-colors
           prose-strong:text-white prose-strong:font-semibold
-          prose-code:text-violet-300 prose-code:bg-gray-800/80 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:text-sm
+          prose-code:text-emerald-300 prose-code:bg-gray-800/80 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:text-sm
           prose-pre:bg-gray-900/80 prose-pre:backdrop-blur-sm prose-pre:border prose-pre:border-gray-700/50 prose-pre:rounded-xl
-          prose-blockquote:border-l-4 prose-blockquote:border-violet-500 prose-blockquote:bg-gradient-to-r prose-blockquote:from-violet-500/10 prose-blockquote:to-transparent prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-xl prose-blockquote:not-italic prose-blockquote:text-gray-300
+          prose-blockquote:border-l-4 prose-blockquote:border-emerald-500 prose-blockquote:bg-gradient-to-r prose-blockquote:from-emerald-500/10 prose-blockquote:to-transparent prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-xl prose-blockquote:not-italic prose-blockquote:text-gray-300
           prose-ul:text-gray-300 prose-ol:text-gray-300
-          prose-li:marker:text-violet-400 prose-li:my-2
+          prose-li:marker:text-emerald-400 prose-li:my-2
           prose-img:rounded-xl prose-img:shadow-2xl prose-img:my-10
           prose-hr:border-gray-800 prose-hr:my-12
         ">
@@ -246,7 +246,7 @@ export default async function ReadingDetails({ params }: Props) {
         {relatedPosts.length > 0 && (
           <section className="mt-16 pt-8 border-t border-gray-800/50">
             <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-              <FiFileText className="text-violet-400" />
+              <FiFileText className="text-emerald-400" />
               Related Blog Posts
             </h2>
             <div className="grid gap-4">
@@ -254,9 +254,9 @@ export default async function ReadingDetails({ params }: Props) {
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  className="block p-5 bg-gray-800/50 border border-gray-700/50 rounded-xl hover:border-violet-500/30 transition-all group"
+                  className="block p-5 bg-gray-800/50 border border-gray-700/50 rounded-xl hover:border-emerald-500/30 transition-all group"
                 >
-                  <h3 className="text-lg font-semibold text-white group-hover:text-violet-400 transition-colors mb-2">
+                  <h3 className="text-lg font-semibold text-white group-hover:text-emerald-400 transition-colors mb-2">
                     {post.title}
                   </h3>
                   {post.subtitle && (
@@ -279,7 +279,7 @@ export default async function ReadingDetails({ params }: Props) {
         <footer className="mt-16 pt-8 border-t border-gray-800/50">
           <Link
             href="/reading"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-800/50 border border-gray-700/50 text-gray-300 hover:text-white hover:border-violet-500/50 transition-all group"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-800/50 border border-gray-700/50 text-gray-300 hover:text-white hover:border-emerald-500/50 transition-all group"
           >
             <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" size={18} />
             <span>Back to Reading List</span>

@@ -52,7 +52,7 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsExpanded(!isExpanded)}
-        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-800/50 border border-gray-700/50 text-gray-400 hover:text-white hover:border-violet-500/50 transition-all text-sm"
+        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-800/50 border border-gray-700/50 text-gray-400 hover:text-white hover:border-emerald-500/50 transition-all text-sm"
       >
         <FiShare2 size={14} />
         <span>Share</span>
@@ -92,7 +92,7 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
               className={`p-2.5 rounded-full border transition-all ${
                 copied
                   ? 'bg-green-500 border-green-500 text-white'
-                  : 'bg-gray-800/50 border-gray-700/50 text-gray-400 hover:text-white hover:bg-violet-600 hover:border-violet-600'
+                  : 'bg-gray-800/50 border-gray-700/50 text-gray-400 hover:text-white hover:bg-emerald-600 hover:border-emerald-600'
               }`}
               aria-label={copied ? 'Link copied!' : 'Copy link'}
             >

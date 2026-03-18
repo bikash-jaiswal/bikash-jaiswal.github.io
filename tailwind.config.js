@@ -26,15 +26,15 @@ module.exports = {
       },
       colors: {
         primary: {
-          100: '#f0ecff',
-          200: '#d9ceff',
-          300: '#c0afff',
-          400: '#a78bfa',
-          500: '#8157ff',
-          600: '#5d31f6',
-          700: '#4925d1',
-          800: '#34209d',
-          900: '#22186b',
+          100: '#ecfdf5',
+          200: '#d1fae5',
+          300: '#a7f3d0',
+          400: '#6ee7b7',
+          500: '#34d399',
+          600: '#10b981',
+          700: '#059669',
+          800: '#047857',
+          900: '#064e3b',
         },
         neutral: {
           50: '#f7f7fb',
@@ -64,8 +64,8 @@ module.exports = {
       },
       boxShadow: {
         'soft-lg': '0 22px 40px -24px rgba(20, 20, 43, 0.45)',
-        glow: '0 0 0 1px rgba(111, 78, 255, 0.25), 0 16px 32px -16px rgba(111, 78, 255, 0.35)',
-        focus: '0 0 0 3px rgba(111, 78, 255, 0.25)',
+        glow: '0 0 0 1px rgba(16, 185, 129, 0.25), 0 16px 32px -16px rgba(16, 185, 129, 0.35)',
+        focus: '0 0 0 3px rgba(16, 185, 129, 0.25)',
       },
       borderRadius: {
         xl: 'var(--radius-xl)',
@@ -78,7 +78,7 @@ module.exports = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'aurora': 'radial-gradient(120% 120% at 0% 0%, rgba(111, 78, 255, 0.35), transparent 60%), radial-gradient(120% 120% at 80% 0%, rgba(34, 211, 238, 0.25), transparent 65%), radial-gradient(140% 120% at 50% 100%, rgba(249, 115, 22, 0.22), transparent 70%)',
+        'aurora': 'radial-gradient(120% 120% at 0% 0%, rgba(16, 185, 129, 0.35), transparent 60%), radial-gradient(120% 120% at 80% 0%, rgba(34, 211, 238, 0.25), transparent 65%), radial-gradient(140% 120% at 50% 100%, rgba(249, 115, 22, 0.22), transparent 70%)',
       },
       keyframes: {
         float: {

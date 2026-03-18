@@ -40,12 +40,12 @@ export default function ProjectsPage() {
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-violet-500/10 text-violet-400 mb-6">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-emerald-500/10 text-emerald-400 mb-6">
             <FiCode size={32} />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             My{' '}
-            <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
               Projects
             </span>
           </h1>
@@ -57,7 +57,7 @@ export default function ProjectsPage() {
             href="https://github.com/bikash-jaiswal"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gray-800/50 hover:bg-gray-700/50 text-gray-300 hover:text-white rounded-xl border border-gray-700/50 hover:border-violet-500/50 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gray-800/50 hover:bg-gray-700/50 text-gray-300 hover:text-white rounded-xl border border-gray-700/50 hover:border-emerald-500/50 transition-all duration-300"
           >
             <FiGithub size={20} />
             <span>View GitHub Profile</span>

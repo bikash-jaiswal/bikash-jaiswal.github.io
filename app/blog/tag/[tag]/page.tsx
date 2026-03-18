@@ -65,7 +65,7 @@ export default async function TagPage({ params }: Props) {
         </Link>
         
         <div className="flex items-center gap-4 mb-4">
-          <div className="p-3 rounded-xl bg-violet-500/20 text-violet-400">
+          <div className="p-3 rounded-xl bg-emerald-500/20 text-emerald-400">
             <FiTag size={24} />
           </div>
           <div>
@@ -94,7 +94,7 @@ export default async function TagPage({ params }: Props) {
                 <p className="text-gray-400 text-lg">No posts found with this tag.</p>
                 <Link
                   href="/blog"
-                  className="inline-flex items-center gap-2 mt-4 text-violet-400 hover:text-violet-300 transition-colors"
+                  className="inline-flex items-center gap-2 mt-4 text-emerald-400 hover:text-emerald-300 transition-colors"
                 >
                   <FiArrowLeft size={16} />
                   <span>View all posts</span>
@@ -115,7 +115,7 @@ export default async function TagPage({ params }: Props) {
                   href={`/blog/tag/${encodeURIComponent(t)}`}
                   className={`px-3 py-1.5 text-sm rounded-lg transition-all duration-200 ${
                     t.toLowerCase() === tag.toLowerCase()
-                      ? 'bg-violet-600 text-white shadow-lg shadow-violet-500/25'
+                      ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-500/25'
                       : 'bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 border border-gray-700/50'
                   }`}
                 >

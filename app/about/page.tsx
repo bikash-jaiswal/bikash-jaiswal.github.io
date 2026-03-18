@@ -104,7 +104,7 @@ export default function AboutPage() {
           <motion.div variants={fadeInUp} className="mb-8">
             <div className="relative inline-block">
               {/* Avatar placeholder - replace with actual image */}
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center text-5xl md:text-6xl font-bold text-white mx-auto shadow-2xl shadow-violet-500/25">
+              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-emerald-500 to-blue-500 flex items-center justify-center text-5xl md:text-6xl font-bold text-white mx-auto shadow-2xl shadow-emerald-500/25">
                 B
               </div>
               <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-green-500 rounded-full border-4 border-gray-900 flex items-center justify-center">
@@ -118,7 +118,7 @@ export default function AboutPage() {
             className="text-4xl md:text-5xl font-bold text-white mb-4"
           >
             Hey, I&apos;m{' '}
-            <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
               Bikash Jaiswal
             </span>
           </motion.h1>
@@ -144,7 +144,7 @@ export default function AboutPage() {
               href="https://github.com/bikash-jaiswal"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-xl bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 border border-gray-700/50 hover:border-violet-500/50 transition-all"
+              className="p-3 rounded-xl bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 border border-gray-700/50 hover:border-emerald-500/50 transition-all"
             >
               <FiGithub size={20} />
             </a>
@@ -152,13 +152,13 @@ export default function AboutPage() {
               href="https://www.linkedin.com/in/bikash-jaiswal/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-xl bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 border border-gray-700/50 hover:border-violet-500/50 transition-all"
+              className="p-3 rounded-xl bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 border border-gray-700/50 hover:border-emerald-500/50 transition-all"
             >
               <FiLinkedin size={20} />
             </a>
             <Link
               href="/contacts"
-              className="p-3 rounded-xl bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 border border-gray-700/50 hover:border-violet-500/50 transition-all"
+              className="p-3 rounded-xl bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 border border-gray-700/50 hover:border-emerald-500/50 transition-all"
             >
               <FiMail size={20} />
             </Link>
@@ -174,7 +174,7 @@ export default function AboutPage() {
           className="mb-20"
         >
           <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 rounded-lg bg-violet-500/10 text-violet-400">
+            <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
               <FiUser size={20} />
             </div>
             <h2 className="text-2xl font-bold text-white">My Story</h2>
@@ -236,7 +236,7 @@ export default function AboutPage() {
                     whileInView={{ width: `${skill.level}%` }}
                     viewport={{ once: true }}
                     transition={{ duration: 1, delay: index * 0.1 }}
-                    className="h-full bg-gradient-to-r from-violet-500 to-blue-500 rounded-full"
+                    className="h-full bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full"
                   />
                 </div>
               </motion.div>
@@ -306,12 +306,12 @@ export default function AboutPage() {
                   className="relative pl-12"
                 >
                   {/* Timeline dot */}
-                  <div className="absolute left-0 w-8 h-8 rounded-full bg-violet-500/20 border-2 border-violet-500 flex items-center justify-center">
-                    <div className="w-2 h-2 rounded-full bg-violet-500" />
+                  <div className="absolute left-0 w-8 h-8 rounded-full bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center">
+                    <div className="w-2 h-2 rounded-full bg-emerald-500" />
                   </div>
                   
                   <div className="p-4 rounded-xl bg-gray-900/50 border border-gray-800/50">
-                    <span className="text-sm text-violet-400 font-medium">{item.year}</span>
+                    <span className="text-sm text-emerald-400 font-medium">{item.year}</span>
                     <h3 className="text-lg font-semibold text-white mt-1">{item.title}</h3>
                     <p className="text-gray-400 text-sm mt-1">{item.description}</p>
                   </div>
@@ -361,7 +361,7 @@ export default function AboutPage() {
           transition={{ duration: 0.5 }}
           className="text-center"
         >
-          <div className="p-8 rounded-2xl bg-gradient-to-br from-violet-500/10 to-blue-500/10 border border-violet-500/20">
+          <div className="p-8 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/20">
             <h2 className="text-2xl font-bold text-white mb-4">Let&apos;s Connect!</h2>
             <p className="text-gray-400 mb-6 max-w-lg mx-auto">
               I&apos;m always open to interesting conversations, collaboration opportunities, 
@@ -370,14 +370,14 @@ export default function AboutPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contacts"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-violet-600 hover:bg-violet-500 text-white rounded-xl transition-all shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl transition-all shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40"
               >
                 <span>Get in Touch</span>
                 <FiArrowRight size={18} />
               </Link>
               <Link
                 href="/blog"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-800/50 hover:bg-gray-700/50 text-gray-300 hover:text-white rounded-xl border border-gray-700/50 hover:border-violet-500/50 transition-all"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-800/50 hover:bg-gray-700/50 text-gray-300 hover:text-white rounded-xl border border-gray-700/50 hover:border-emerald-500/50 transition-all"
               >
                 <FiBookOpen size={18} />
                 <span>Read My Blog</span>

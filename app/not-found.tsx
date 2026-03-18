@@ -15,10 +15,10 @@ export default function NotFound() {
         className="relative mb-8"
       >
         {/* Glow effect */}
-        <div className="absolute inset-0 blur-3xl bg-gradient-to-r from-violet-600/30 to-blue-600/30 rounded-full" />
+        <div className="absolute inset-0 blur-3xl bg-gradient-to-r from-emerald-600/30 to-blue-600/30 rounded-full" />
         
         <h1 className="relative text-[150px] md:text-[200px] font-black leading-none">
-          <span className="bg-gradient-to-br from-violet-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
             4
           </span>
           <motion.span
@@ -31,11 +31,11 @@ export default function NotFound() {
               repeat: Infinity,
               repeatDelay: 3
             }}
-            className="inline-block bg-gradient-to-br from-violet-400 via-purple-400 to-blue-400 bg-clip-text text-transparent"
+            className="inline-block bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent"
           >
             0
           </motion.span>
-          <span className="bg-gradient-to-br from-violet-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-br from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
             4
           </span>
         </h1>
@@ -66,7 +66,7 @@ export default function NotFound() {
       >
         <Link
           href="/"
-          className="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-violet-600 hover:bg-violet-500 text-white font-medium rounded-xl transition-all duration-300 shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40"
+          className="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-xl transition-all duration-300 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40"
         >
           <FiHome size={18} />
           <span>Go Home</span>
@@ -74,7 +74,7 @@ export default function NotFound() {
         
         <Link
           href="/blog"
-          className="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-800/50 hover:bg-gray-700/50 text-gray-300 hover:text-white font-medium rounded-xl border border-gray-700/50 hover:border-violet-500/50 transition-all duration-300"
+          className="group inline-flex items-center justify-center gap-2 px-6 py-3 bg-gray-800/50 hover:bg-gray-700/50 text-gray-300 hover:text-white font-medium rounded-xl border border-gray-700/50 hover:border-emerald-500/50 transition-all duration-300"
         >
           <FiBookOpen size={18} />
           <span>Read Blog</span>
@@ -98,7 +98,7 @@ export default function NotFound() {
             <Link
               key={link.href}
               href={link.href}
-              className="px-4 py-2 text-sm text-gray-400 hover:text-violet-400 bg-gray-800/30 hover:bg-gray-800/50 rounded-lg border border-gray-800/50 hover:border-violet-500/30 transition-all duration-300"
+              className="px-4 py-2 text-sm text-gray-400 hover:text-emerald-400 bg-gray-800/30 hover:bg-gray-800/50 rounded-lg border border-gray-800/50 hover:border-emerald-500/30 transition-all duration-300"
             >
               {link.label}
             </Link>
@@ -107,9 +107,9 @@ export default function NotFound() {
       </motion.div>
 
       {/* Decorative elements */}
-      <div className="absolute top-1/4 left-10 w-2 h-2 bg-violet-500 rounded-full animate-pulse opacity-50" />
+      <div className="absolute top-1/4 left-10 w-2 h-2 bg-emerald-500 rounded-full animate-pulse opacity-50" />
       <div className="absolute top-1/3 right-20 w-3 h-3 bg-blue-500 rounded-full animate-pulse opacity-30" />
-      <div className="absolute bottom-1/4 left-1/4 w-2 h-2 bg-purple-500 rounded-full animate-pulse opacity-40" />
+      <div className="absolute bottom-1/4 left-1/4 w-2 h-2 bg-cyan-500 rounded-full animate-pulse opacity-40" />
     </div>
   );
 }

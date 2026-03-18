@@ -39,7 +39,7 @@ function CircularProgress({
             className="px-3 py-1.5 rounded-lg bg-gray-900/95 backdrop-blur-sm border border-gray-700/50 shadow-xl"
           >
             <div className="flex items-center gap-2 text-sm">
-              <FiClock size={14} className="text-violet-400" />
+              <FiClock size={14} className="text-emerald-400" />
               <span className="text-gray-300 font-medium">{timeRemaining}</span>
             </div>
           </motion.div>
@@ -51,7 +51,7 @@ function CircularProgress({
         onMouseEnter={() => setShowTime(true)}
         onMouseLeave={() => setShowTime(false)}
         onClick={() => setShowTime(!showTime)}
-        className="w-14 h-14 rounded-full bg-gray-900/90 backdrop-blur-sm border border-gray-700/50 flex items-center justify-center shadow-xl cursor-pointer hover:border-violet-500/50 transition-colors"
+        className="w-14 h-14 rounded-full bg-gray-900/90 backdrop-blur-sm border border-gray-700/50 flex items-center justify-center shadow-xl cursor-pointer hover:border-emerald-500/50 transition-colors"
       >
         <svg className="w-12 h-12 -rotate-90">
           <circle
@@ -76,7 +76,7 @@ function CircularProgress({
           />
           <defs>
             <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#8b5cf6" />
+              <stop offset="0%" stopColor="#10b981" />
               <stop offset="100%" stopColor="#3b82f6" />
             </linearGradient>
           </defs>
@@ -128,7 +128,7 @@ export default function ReadingProgress({ readingTime = 5 }: ReadingProgressProp
     <>
       <div className="fixed top-0 left-0 right-0 z-[60] h-[3px] bg-gray-900/50 backdrop-blur-sm">
         <motion.div
-          className="h-full bg-gradient-to-r from-violet-600 via-violet-500 to-blue-500 shadow-lg shadow-violet-500/50"
+          className="h-full bg-gradient-to-r from-emerald-600 via-emerald-500 to-blue-500 shadow-lg shadow-emerald-500/50"
           style={{ width }}
         />
         <div 

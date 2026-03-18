@@ -144,12 +144,12 @@ const ResourcesPage: React.FC = () => {
     return (
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-violet-600">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-600">
             Developer Resources
           </h1>
           <p className="text-xl text-gray-300">Loading resources...</p>
           <div className="flex justify-center mt-8">
-            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-violet-500"></div>
+            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-emerald-500"></div>
           </div>
         </div>
       </div>
@@ -161,13 +161,13 @@ const ResourcesPage: React.FC = () => {
     return (
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-violet-600">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-600">
             Developer Resources
           </h1>
           <p className="text-xl text-red-400 mb-4">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-violet-600 text-white rounded-md hover:bg-violet-700 transition-colors"
+            className="px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors"
           >
             Retry
           </button>
@@ -184,7 +184,7 @@ const ResourcesPage: React.FC = () => {
         transition={{ duration: 0.5 }}
         className="mb-12 text-center"
       >
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-violet-600">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-600">
           Developer Resources
         </h1>
         <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -203,7 +203,7 @@ const ResourcesPage: React.FC = () => {
               value={filters.searchTerm}
               onChange={(e) => handleFilterChange('searchTerm', e.target.value)}
               placeholder="Search resources..."
-              className="w-full py-3 pl-10 pr-4 bg-gray-800 rounded-lg border border-gray-700 focus:border-violet-500 focus:outline-none text-white"
+              className="w-full py-3 pl-10 pr-4 bg-gray-800 rounded-lg border border-gray-700 focus:border-emerald-500 focus:outline-none text-white"
             />
             <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             {filters.searchTerm && (
@@ -221,7 +221,7 @@ const ResourcesPage: React.FC = () => {
           <div className="flex items-center space-x-4">
             <button
               onClick={() => setIsFilterExpanded(!isFilterExpanded)}
-              className="flex items-center px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg hover:border-violet-500 focus:outline-none focus-ring transition-colors duration-200"
+              className="flex items-center px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg hover:border-emerald-500 focus:outline-none focus-ring transition-colors duration-200"
             >
               <FiFilter className="mr-2" />
               <span>{isFilterExpanded ? 'Hide Filters' : 'Show Filters'}</span>
@@ -254,7 +254,7 @@ const ResourcesPage: React.FC = () => {
 
               <button
                 onClick={handleResetFilters}
-                className="text-xs text-violet-400 hover:underline focus:outline-none focus-ring px-1 rounded"
+                className="text-xs text-emerald-400 hover:underline focus:outline-none focus-ring px-1 rounded"
               >
                 Reset All Filters
               </button>
@@ -268,8 +268,8 @@ const ResourcesPage: React.FC = () => {
                   onClick={() => handleFilterChange('category', category.value)}
                   className={`px-3 py-1 text-sm rounded-full transition-colors ${
                     filters.category === category.value
-                      ? 'bg-violet-600/20 text-violet-400 border border-violet-500/30'
-                      : 'bg-gray-700 text-gray-300 border border-gray-600 hover:border-violet-500/30'
+                      ? 'bg-emerald-600/20 text-emerald-400 border border-emerald-500/30'
+                      : 'bg-gray-700 text-gray-300 border border-gray-600 hover:border-emerald-500/30'
                   }`}
                 >
                   {category.label}
@@ -318,7 +318,7 @@ const ResourcesPage: React.FC = () => {
             <p className="text-lg mb-2">No resources match your filters</p>
             <button
               onClick={handleResetFilters}
-              className="text-violet-400 hover:underline focus:outline-none focus-ring px-1 rounded"
+              className="text-emerald-400 hover:underline focus:outline-none focus-ring px-1 rounded"
             >
               Reset All Filters
             </button>

@@ -66,7 +66,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
           className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-700/20 transition-colors"
         >
           <div className="flex items-center gap-2">
-            <FiList size={16} className="text-violet-400" />
+            <FiList size={16} className="text-emerald-400" />
             <span className="text-sm font-semibold text-white">On this page</span>
           </div>
           <span className="text-xs text-gray-500">{headings.length} sections</span>
@@ -85,7 +85,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                 <div className="absolute left-5 top-0 bottom-5 w-px bg-gray-700/50" />
                 
                 <motion.div
-                  className="absolute left-5 w-px bg-gradient-to-b from-violet-500 to-blue-500"
+                  className="absolute left-5 w-px bg-gradient-to-b from-emerald-500 to-blue-500"
                   initial={false}
                   animate={{
                     top: `${(activeIndex / headings.length) * 100}%`,

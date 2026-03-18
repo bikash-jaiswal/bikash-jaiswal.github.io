@@ -206,7 +206,7 @@ export default async function PostDetails({ params }: Props) {
             <nav className="mb-8">
               <Link
                 href="/blog"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-gray-300 hover:text-white hover:border-violet-500/50 transition-all text-sm group"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-gray-300 hover:text-white hover:border-emerald-500/50 transition-all text-sm group"
               >
                 <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" size={16} />
                 <span>Back to Blog</span>
@@ -219,7 +219,7 @@ export default async function PostDetails({ params }: Props) {
                   {post.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 bg-violet-500/20 backdrop-blur-sm text-violet-300 rounded-full text-xs font-medium border border-violet-500/30"
+                      className="px-3 py-1 bg-emerald-500/20 backdrop-blur-sm text-emerald-300 rounded-full text-xs font-medium border border-emerald-500/30"
                     >
                       {tag}
                     </span>
@@ -239,7 +239,7 @@ export default async function PostDetails({ params }: Props) {
 
               <div className="flex flex-wrap items-center gap-6 pt-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-blue-500 flex items-center justify-center">
                     <FiUser size={18} className="text-white" />
                   </div>
                   <div>
@@ -274,13 +274,13 @@ export default async function PostDetails({ params }: Props) {
                 prose-h2:text-2xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:scroll-mt-24
                 prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:scroll-mt-24
                 prose-p:text-gray-300 prose-p:leading-[1.8] prose-p:mb-6
-                prose-a:text-violet-400 prose-a:no-underline prose-a:border-b prose-a:border-violet-400/30 hover:prose-a:border-violet-400 prose-a:transition-colors
+                prose-a:text-emerald-400 prose-a:no-underline prose-a:border-b prose-a:border-emerald-400/30 hover:prose-a:border-emerald-400 prose-a:transition-colors
                 prose-strong:text-white prose-strong:font-semibold
-                prose-code:text-violet-300 prose-code:bg-gray-800/80 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:text-sm prose-code:before:content-none prose-code:after:content-none prose-code:font-normal
+                prose-code:text-emerald-300 prose-code:bg-gray-800/80 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:text-sm prose-code:before:content-none prose-code:after:content-none prose-code:font-normal
                 prose-pre:bg-gray-900/80 prose-pre:backdrop-blur-sm prose-pre:border prose-pre:border-gray-700/50 prose-pre:rounded-xl prose-pre:shadow-2xl
-                prose-blockquote:border-l-4 prose-blockquote:border-violet-500 prose-blockquote:bg-gradient-to-r prose-blockquote:from-violet-500/10 prose-blockquote:to-transparent prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-xl prose-blockquote:not-italic prose-blockquote:text-gray-300
+                prose-blockquote:border-l-4 prose-blockquote:border-emerald-500 prose-blockquote:bg-gradient-to-r prose-blockquote:from-emerald-500/10 prose-blockquote:to-transparent prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-xl prose-blockquote:not-italic prose-blockquote:text-gray-300
                 prose-ul:text-gray-300 prose-ol:text-gray-300
-                prose-li:marker:text-violet-400 prose-li:my-2
+                prose-li:marker:text-emerald-400 prose-li:my-2
                 prose-img:rounded-xl prose-img:shadow-2xl prose-img:my-10
                 prose-hr:border-gray-800 prose-hr:my-12
               ">
@@ -305,7 +305,7 @@ export default async function PostDetails({ params }: Props) {
             <div className="flex items-center justify-between py-8 mt-8 border-t border-gray-800/50">
               <Link
                 href="/blog"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-800/50 border border-gray-700/50 text-gray-300 hover:text-white hover:border-violet-500/50 transition-all group"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-800/50 border border-gray-700/50 text-gray-300 hover:text-white hover:border-emerald-500/50 transition-all group"
               >
                 <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" size={18} />
                 <span>View all posts</span>

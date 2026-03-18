@@ -180,7 +180,7 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
           if (isInline) {
             return (
               <code 
-                className="px-1.5 py-0.5 rounded-md bg-violet-500/10 text-violet-600 dark:text-violet-400 text-sm font-medium"
+                className="px-1.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-sm font-medium"
                 {...props}
               >
                 {children}

@@ -53,7 +53,7 @@ export default function GitHubProject({
   updatedAt,
   index = 0,
 }: GitHubProjectProps) {
-  const langColor = language ? languageColors[language] || '#8b5cf6' : '#8b5cf6';
+  const langColor = language ? languageColors[language] || '#10b981' : '#10b981';
   
   // Format the update date
   const formatDate = (dateString?: string) => {

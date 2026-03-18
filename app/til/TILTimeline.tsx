@@ -224,7 +224,7 @@ export default function TILTimeline({ entries, groupedEntries }: TILTimelineProp
       {/* Timeline */}
       <div className="relative">
         {/* Timeline line */}
-        <div className="absolute left-2 top-6 bottom-6 w-0.5 bg-gradient-to-b from-cyan-500 via-violet-500 to-blue-500 rounded-full" />
+        <div className="absolute left-2 top-6 bottom-6 w-0.5 bg-gradient-to-b from-cyan-500 via-emerald-500 to-blue-500 rounded-full" />
         
         <div className="space-y-4">
           {filteredEntries.map((entry, index) => (
