@@ -122,6 +122,13 @@ export const metadata: Metadata = {
   authors: [{ name: 'Bikash Jaiswal' }],
   creator: 'Bikash Jaiswal',
   publisher: 'Bikash Jaiswal',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    shortcut: '/favicon.ico',
+  },
   robots: {
     index: true,
     follow: true,
