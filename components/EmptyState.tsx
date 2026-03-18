@@ -25,7 +25,7 @@ export function EmptyState({ title, message, searchTerm, showHomeLink = false }:
       {showHomeLink && (
         <Link
           href="/"
-          className="inline-block text-white px-6 py-3 border-2 border-white hover:bg-violet-600 transition-colors duration-200 rounded-md"
+          className="inline-block text-white px-6 py-3 border-2 border-white hover:bg-gray-700 transition-colors duration-200 rounded-md"
         >
           Return Home
         </Link>

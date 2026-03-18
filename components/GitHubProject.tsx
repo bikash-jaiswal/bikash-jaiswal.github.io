@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { FiExternalLink, FiGithub, FiStar, FiGitBranch, FiEye } from 'react-icons/fi';
+import { fadeInUp, springSoft } from '../lib/motion';
 
 // Language color mapping
 const languageColors: Record<string, string> = {
@@ -70,112 +71,104 @@ export default function GitHubProject({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
+      variants={fadeInUp(index * 0.06)}
+      initial="initial"
+      whileInView="animate"
+      viewport={{ once: true, amount: 0.3 }}
       className="group relative"
     >
-      {/* Gradient border glow on hover */}
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-600 to-blue-600 rounded-2xl opacity-0 group-hover:opacity-30 blur transition-opacity duration-500" />
-      
-      <div className="relative h-full flex flex-col bg-gray-900/80 backdrop-blur-sm border border-gray-800/50 rounded-2xl p-6 hover:border-violet-500/50 transition-all duration-300">
-        {/* Header */}
-        <div className="flex items-start justify-between mb-4">
+      <div className="absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-500/12 via-transparent to-accent-blue/12 blur-lg" />
+      </div>
+
+      <div className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-neutral-800/60 bg-neutral-900/70 p-7 shadow-lg shadow-black/20 transition-all duration-500 hover:-translate-y-1 hover:border-primary-400/40 hover:shadow-glow">
+        <div className="relative z-10 flex items-start justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-gray-800/80 text-violet-400 group-hover:bg-violet-500/20 transition-colors">
+            <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-neutral-800/70 bg-neutral-900 text-primary-200">
               <FiGithub size={20} />
-            </div>
+            </span>
             <div>
-              <h3 className="text-lg font-semibold text-white group-hover:text-violet-300 transition-colors line-clamp-1">
+              <h3 className="text-lg font-semibold text-white transition-colors duration-300 group-hover:text-primary-100 line-clamp-1">
                 {name}
               </h3>
               {updatedAt && (
-                <span className="text-xs text-gray-500">
-                  Updated {formatDate(updatedAt)}
-                </span>
+                <span className="text-xs text-neutral-400">Updated {formatDate(updatedAt)}</span>
               )}
             </div>
           </div>
         </div>
 
-        {/* Description */}
-        <p className="text-gray-400 text-sm mb-4 line-clamp-2 flex-grow">
+        <p className="mt-4 text-sm leading-relaxed text-neutral-300 line-clamp-3 flex-grow">
           {description || 'No description available'}
         </p>
 
-        {/* Tech Stack / Topics */}
         {topics.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mb-4">
+          <div className="mt-4 flex flex-wrap gap-2 text-xs text-neutral-300">
             {topics.slice(0, 4).map((topic) => (
               <span
                 key={topic}
-                className="text-xs px-2.5 py-1 bg-gray-800/80 text-gray-300 rounded-lg border border-gray-700/50 hover:border-violet-500/50 hover:text-violet-300 transition-colors"
+                className="rounded-full border border-neutral-800/70 bg-neutral-900/80 px-2.5 py-1 transition-colors duration-300 group-hover:border-primary-400/40 group-hover:text-primary-200"
               >
                 {topic}
               </span>
             ))}
             {topics.length > 4 && (
-              <span className="text-xs px-2.5 py-1 text-gray-500">
+              <span className="rounded-full border border-neutral-800/70 bg-neutral-900/80 px-2.5 py-1 text-neutral-500">
                 +{topics.length - 4} more
               </span>
             )}
           </div>
         )}
 
-        {/* Stats Row */}
-        <div className="flex items-center gap-4 mb-5 text-sm">
+        <div className="mt-5 flex items-center gap-4 text-sm text-neutral-300">
           {language && (
-            <div className="flex items-center gap-1.5">
-              <span 
-                className="w-3 h-3 rounded-full" 
-                style={{ backgroundColor: langColor }}
-              />
-              <span className="text-gray-400">{language}</span>
+            <div className="flex items-center gap-2">
+              <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: langColor }} />
+              <span>{language}</span>
             </div>
           )}
-          
-          <div className="flex items-center gap-1 text-gray-400 hover:text-yellow-400 transition-colors">
+          <div className="flex items-center gap-1 text-neutral-400">
             <FiStar size={14} />
             <span>{stars}</span>
           </div>
-          
           {forks > 0 && (
-            <div className="flex items-center gap-1 text-gray-400 hover:text-blue-400 transition-colors">
+            <div className="flex items-center gap-1 text-neutral-400">
               <FiGitBranch size={14} />
               <span>{forks}</span>
             </div>
           )}
-          
           {watchers > 0 && (
-            <div className="flex items-center gap-1 text-gray-400 hover:text-green-400 transition-colors">
+            <div className="flex items-center gap-1 text-neutral-400">
               <FiEye size={14} />
               <span>{watchers}</span>
             </div>
           )}
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex gap-3 mt-auto">
-          <a
+        <div className="mt-6 flex gap-3">
+          <motion.a
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-800/80 hover:bg-gray-700/80 text-gray-300 hover:text-white rounded-xl border border-gray-700/50 hover:border-gray-600 transition-all duration-300 text-sm font-medium"
+            whileHover={{ x: 4 }}
+            transition={springSoft}
+            className="flex flex-1 items-center justify-center gap-2 rounded-2xl border border-neutral-800/70 bg-neutral-900/60 px-4 py-2.5 text-sm font-semibold text-neutral-200 transition-colors duration-300 hover:border-primary-400/40 hover:text-primary-200"
           >
             <FiGithub size={16} />
-            <span>Code</span>
-          </a>
-          
+            Code
+          </motion.a>
           {homepage && (
-            <a
+            <motion.a
               href={homepage}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-xl shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 transition-all duration-300 text-sm font-medium"
+              whileHover={{ x: 4 }}
+              transition={springSoft}
+              className="flex flex-1 items-center justify-center gap-2 rounded-2xl border border-primary-500/40 bg-primary-500/20 px-4 py-2.5 text-sm font-semibold text-primary-100 transition-colors duration-300 hover:border-primary-400/60 hover:text-white"
             >
               <FiExternalLink size={16} />
-              <span>Demo</span>
-            </a>
+              Demo
+            </motion.a>
           )}
         </div>
       </div>

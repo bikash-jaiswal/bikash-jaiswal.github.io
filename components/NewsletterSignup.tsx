@@ -56,7 +56,7 @@ export default function NewsletterSignup({ variant = 'card', className = '' }: N
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-gray-800/50 border border-gray-700/50 text-white placeholder-gray-500 focus:border-violet-500 focus:outline-none transition-colors"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-gray-800/50 border border-gray-700/50 text-white placeholder-gray-500 focus:border-gray-500 focus:outline-none transition-colors"
             disabled={status === 'loading' || status === 'success'}
           />
         </div>
@@ -65,7 +65,7 @@ export default function NewsletterSignup({ variant = 'card', className = '' }: N
           whileTap={{ scale: 0.98 }}
           type="submit"
           disabled={status === 'loading' || status === 'success'}
-          className="px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-medium transition-colors disabled:opacity-50"
+          className="px-5 py-2.5 rounded-xl bg-gray-700 hover:bg-gray-600 text-white font-medium transition-colors disabled:opacity-50"
         >
           {status === 'loading' ? (
             <span className="flex items-center gap-2">
@@ -87,7 +87,7 @@ export default function NewsletterSignup({ variant = 'card', className = '' }: N
 
   if (variant === 'inline') {
     return (
-      <div className={`p-6 rounded-2xl bg-gradient-to-r from-violet-600/10 to-blue-600/10 border border-violet-500/20 ${className}`}>
+      <div className={`p-6 rounded-2xl bg-gradient-to-r from-gray-600/10 to-gray-500/10 border border-gray-500/20 ${className}`}>
         <div className="flex flex-col md:flex-row md:items-center gap-4">
           <div className="flex-1">
             <h3 className="text-lg font-semibold text-white mb-1">Stay in the loop</h3>
@@ -99,7 +99,7 @@ export default function NewsletterSignup({ variant = 'card', className = '' }: N
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="flex-1 px-4 py-2.5 rounded-xl bg-gray-800/50 border border-gray-700/50 text-white placeholder-gray-500 focus:border-violet-500 focus:outline-none transition-colors"
+              className="flex-1 px-4 py-2.5 rounded-xl bg-gray-800/50 border border-gray-700/50 text-white placeholder-gray-500 focus:border-gray-500 focus:outline-none transition-colors"
               disabled={status === 'loading' || status === 'success'}
             />
             <motion.button
@@ -107,7 +107,7 @@ export default function NewsletterSignup({ variant = 'card', className = '' }: N
               whileTap={{ scale: 0.98 }}
               type="submit"
               disabled={status === 'loading' || status === 'success'}
-              className="px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-medium transition-colors disabled:opacity-50 flex items-center gap-2"
+              className="px-5 py-2.5 rounded-xl bg-gray-700 hover:bg-gray-600 text-white font-medium transition-colors disabled:opacity-50 flex items-center gap-2"
             >
               {status === 'success' ? <FiCheck size={18} /> : <FiArrowRight size={18} />}
             </motion.button>
@@ -138,7 +138,7 @@ export default function NewsletterSignup({ variant = 'card', className = '' }: N
       className={`relative overflow-hidden rounded-2xl ${className}`}
     >
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-violet-600/20 via-transparent to-blue-600/20" />
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-600/20 via-transparent to-gray-500/20" />
       <div className="absolute inset-0 bg-gray-900/80 backdrop-blur-sm" />
       
       {/* Content */}
@@ -164,7 +164,7 @@ export default function NewsletterSignup({ variant = 'card', className = '' }: N
               <p className="text-gray-400 mb-6">{message}</p>
               <button
                 onClick={resetForm}
-                className="text-violet-400 hover:text-violet-300 text-sm font-medium transition-colors"
+                className="text-gray-400 hover:text-gray-300 text-sm font-medium transition-colors"
               >
                 Subscribe another email
               </button>
@@ -177,8 +177,8 @@ export default function NewsletterSignup({ variant = 'card', className = '' }: N
               exit={{ opacity: 0 }}
             >
               {/* Icon */}
-              <div className="w-12 h-12 mb-6 rounded-xl bg-violet-500/20 flex items-center justify-center">
-                <FiMail size={24} className="text-violet-400" />
+              <div className="w-12 h-12 mb-6 rounded-xl bg-gray-700/20 flex items-center justify-center">
+                <FiMail size={24} className="text-gray-400" />
               </div>
 
               {/* Heading */}
@@ -202,7 +202,7 @@ export default function NewsletterSignup({ variant = 'card', className = '' }: N
                       if (status === 'error') resetForm();
                     }}
                     placeholder="Enter your email address"
-                    className="w-full pl-12 pr-4 py-4 rounded-xl bg-gray-800/50 border border-gray-700/50 text-white placeholder-gray-500 focus:border-violet-500 focus:outline-none transition-all focus:ring-2 focus:ring-violet-500/20"
+                    className="w-full pl-12 pr-4 py-4 rounded-xl bg-gray-800/50 border border-gray-700/50 text-white placeholder-gray-500 focus:border-gray-500 focus:outline-none transition-all focus:ring-2 focus:ring-gray-500/20"
                     disabled={status === 'loading'}
                   />
                 </div>
@@ -212,7 +212,7 @@ export default function NewsletterSignup({ variant = 'card', className = '' }: N
                   whileTap={{ scale: 0.99 }}
                   type="submit"
                   disabled={status === 'loading'}
-                  className="w-full py-4 rounded-xl bg-gradient-to-r from-violet-600 to-violet-700 hover:from-violet-500 hover:to-violet-600 text-white font-semibold transition-all shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="w-full py-4 rounded-xl bg-gray-700 hover:bg-gray-600 text-white font-semibold transition-all shadow-lg shadow-black/25 hover:shadow-black/40 disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   {status === 'loading' ? (
                     <>
@@ -249,7 +249,7 @@ export default function NewsletterSignup({ variant = 'card', className = '' }: N
                 {/* Privacy note */}
                 <p className="text-gray-500 text-xs text-center">
                   No spam, unsubscribe anytime. By subscribing, you agree to our{' '}
-                  <a href="/privacy-policy" className="text-violet-400 hover:underline">
+                  <a href="/privacy-policy" className="text-gray-400 hover:underline">
                     Privacy Policy
                   </a>
                   .
@@ -261,7 +261,7 @@ export default function NewsletterSignup({ variant = 'card', className = '' }: N
       </div>
 
       {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+      <div className="absolute top-0 right-0 w-64 h-64 bg-gray-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
       <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
     </motion.div>
   );

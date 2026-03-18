@@ -15,6 +15,7 @@ import {
   FiTool,
   FiActivity,
 } from 'react-icons/fi';
+import { fadeInUp, springSoft } from '../lib/motion';
 
 interface ResourceCardProps {
   resource: Resource;
@@ -37,16 +38,16 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, onToggleFavorite 
   const { id, title, description, url, category, tags, favorite, dateAdded, icon } = resource;
 
   const categoryColors: Record<string, string> = {
-    tool: 'bg-blue-600/20 text-blue-400',
-    reference: 'bg-violet-600/20 text-violet-400',
-    library: 'bg-green-600/20 text-green-400',
-    framework: 'bg-yellow-600/20 text-yellow-400',
-    tutorial: 'bg-orange-600/20 text-orange-400',
-    course: 'bg-pink-600/20 text-pink-400',
-    book: 'bg-sky-600/20 text-sky-400',
-    article: 'bg-teal-600/20 text-teal-400',
-    documentation: 'bg-indigo-600/20 text-indigo-400',
-    cheatsheet: 'bg-red-600/20 text-red-400',
+    tool: 'border-accent-blue/40 text-accent-blue',
+    reference: 'border-neutral-500/40 text-neutral-300',
+    library: 'border-accent-teal/40 text-accent-teal',
+    framework: 'border-accent-amber/40 text-accent-amber',
+    tutorial: 'border-primary-400/40 text-primary-200',
+    course: 'border-primary-500/40 text-primary-200',
+    book: 'border-accent-blue/40 text-accent-blue',
+    article: 'border-accent-teal/40 text-accent-teal',
+    documentation: 'border-primary-400/40 text-primary-200',
+    cheatsheet: 'border-primary-500/40 text-primary-200',
   };
 
   const formatDate = (dateString: string) => {
@@ -56,63 +57,71 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, onToggleFavorite 
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="card !p-4 border-gray-800 overflow-hidden group"
-      whileHover={{ y: -4 }}
+      variants={fadeInUp(0.05)}
+      initial="initial"
+      whileInView="animate"
+      viewport={{ once: true, amount: 0.3 }}
+      className="group h-full"
     >
-      <div className="flex flex-col h-full">
-        {/* Card header with icon and category */}
-        <div className="flex justify-between items-start mb-3">
-          <div className="flex items-center gap-2">
-            <div className="text-violet-400 text-xl">
-              {icon && iconMap[icon] ? iconMap[icon] : <FiCode />}
+      <div className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-neutral-800/60 bg-neutral-900/60 p-6 shadow-lg shadow-black/10 transition-all duration-500 hover:-translate-y-1 hover:border-primary-400/40 hover:shadow-glow">
+        <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 via-transparent to-accent-teal/10" />
+        </div>
+        <div className="relative z-10 flex flex-col gap-5">
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-neutral-800/70 bg-neutral-900 text-primary-200">
+                {icon && iconMap[icon] ? iconMap[icon] : <FiCode />}
+              </span>
+              <span
+                className={`inline-flex items-center rounded-full border bg-neutral-900/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.35em] ${categoryColors[category] || 'border-neutral-700/50 text-neutral-300'}`}
+              >
+                {category}
+              </span>
             </div>
-            <span
-              className={`inline-block px-2 py-0.5 text-xs font-medium rounded-full ${categoryColors[category] || 'bg-gray-600/20 text-gray-400'}`}
+            <motion.button
+              onClick={() => onToggleFavorite?.(id)}
+              whileTap={{ scale: 0.9 }}
+              className={`rounded-full border border-neutral-700/60 p-2 transition-colors duration-300 ${favorite ? 'text-primary-200' : 'text-neutral-400 hover:text-primary-200'}`}
+              aria-label={favorite ? 'Remove from favorites' : 'Add to favorites'}
             >
-              {category}
-            </span>
+              <FiStar className={favorite ? 'fill-current' : ''} />
+            </motion.button>
           </div>
-          <motion.button
-            onClick={() => onToggleFavorite?.(id)}
-            whileTap={{ scale: 0.9 }}
-            className="text-gray-400 hover:text-yellow-400 focus:outline-none focus-ring rounded-full p-1"
-            aria-label={favorite ? 'Remove from favorites' : 'Add to favorites'}
-          >
-            <FiStar className={favorite ? 'fill-yellow-400 text-yellow-400' : ''} />
-          </motion.button>
-        </div>
 
-        {/* Resource title and description */}
-        <h3 className="text-lg font-bold text-white group-hover:text-violet-400 transition-colors mb-2">
-          {title}
-        </h3>
-        <p className="text-gray-300 text-sm mb-4 line-clamp-2">{description}</p>
+          <div className="space-y-3">
+            <h3 className="text-lg font-semibold text-white transition-colors duration-300 group-hover:text-primary-100">
+              {title}
+            </h3>
+            <p className="text-sm leading-relaxed text-neutral-300 line-clamp-3">{description}</p>
+          </div>
 
-        {/* Tags */}
-        <div className="mb-3 flex flex-wrap gap-1">
-          {tags.map((tag, index) => (
-            <span key={index} className="text-xs bg-gray-800 text-gray-400 px-2 py-0.5 rounded">
-              #{tag}
-            </span>
-          ))}
-        </div>
+          <div className="flex flex-wrap gap-2 text-xs text-neutral-300">
+            {tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-neutral-800/70 bg-neutral-900/80 px-2.5 py-1 transition-colors duration-300 group-hover:border-primary-400/40 group-hover:text-primary-200"
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
 
-        {/* Footer with date and link */}
-        <div className="mt-auto pt-2 flex items-center justify-between text-xs text-gray-400 border-t border-gray-800">
-          <div className="text-gray-500">Added {formatDate(dateAdded)}</div>
-
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-violet-400 font-medium flex items-center hover:underline focus-ring rounded px-1"
-            aria-label={`Visit ${title}`}
-          >
-            Visit <FiExternalLink className="ml-1" size={12} />
-          </a>
+          <div className="mt-auto flex items-center justify-between border-t border-neutral-800/60 pt-4 text-xs text-neutral-400">
+            <span>Added {formatDate(dateAdded)}</span>
+            <motion.a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ x: 4 }}
+              transition={springSoft}
+              className="inline-flex items-center gap-2 font-semibold text-primary-200"
+              aria-label={`Visit ${title}`}
+            >
+              Visit
+              <FiExternalLink size={12} />
+            </motion.a>
+          </div>
         </div>
       </div>
     </motion.div>

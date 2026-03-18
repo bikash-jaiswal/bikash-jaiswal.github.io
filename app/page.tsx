@@ -1,6 +1,7 @@
 import ProfessionalIntro from '../components/whoAmI';
 import { Suspense } from 'react';
 import Link from 'next/link';
+import { FiArrowRight } from 'react-icons/fi';
 import { getPostMetadata } from '../lib/posts';
 import { BlogPostPreview } from '../components/BlogPostPreview';
 import { PostMetadata } from '../types/blog';
@@ -13,26 +14,33 @@ export default async function Home(): Promise<React.ReactElement> {
     <main className="flex flex-col">
       <ProfessionalIntro />
 
-      <section className="max-w-4xl mx-auto px-4 py-12 w-full">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold text-white">Recent Articles</h2>
-          <Link href="/blog" className="text-violet-400 hover:text-violet-300 transition-colors">
-            View all articles →
-          </Link>
-        </div>
+      <section className="w-full px-6 py-20 md:px-12">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <h2 className="text-3xl font-semibold text-white">Recent Articles</h2>
+            <Link
+              href="/blog"
+              className="group relative inline-flex items-center gap-2 text-sm font-medium text-gray-400 transition-all duration-300 ease-in-out"
+            >
+              <span>View all articles</span>
+              <FiArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+              <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-gray-400 transition-all duration-300 ease-in-out group-hover:w-full" />
+            </Link>
+          </div>
 
-        <div className="grid gap-8">
-          <Suspense fallback={<div>Loading recent articles...</div>}>
-            {recentPosts.length > 0 ? (
-              recentPosts.map((post: PostMetadata) => (
-                <BlogPostPreview key={post.slug} post={post} />
-              ))
-            ) : (
-              <div className="text-center py-6 text-gray-400">
-                No articles available yet. Check back soon!
-              </div>
-            )}
-          </Suspense>
+          <div className="grid gap-8 md:grid-cols-2">
+            <Suspense fallback={<div>Loading recent articles...</div>}>
+              {recentPosts.length > 0 ? (
+                recentPosts.map((post: PostMetadata) => (
+                  <BlogPostPreview key={post.slug} post={post} />
+                ))
+              ) : (
+                <div className="py-6 text-center text-gray-400">
+                  No articles available yet. Check back soon!
+                </div>
+              )}
+            </Suspense>
+          </div>
         </div>
       </section>
     </main>

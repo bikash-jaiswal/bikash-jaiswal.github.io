@@ -73,11 +73,11 @@ export function SearchBar({
     <div className="w-full max-w-2xl mx-auto mb-8 space-y-4">
       {/* Search Input */}
       <div className="relative group">
-        <div className={`absolute -inset-0.5 bg-gradient-to-r from-violet-600 to-blue-600 rounded-xl opacity-0 blur transition-opacity duration-300 ${isFocused ? 'opacity-30' : 'group-hover:opacity-20'}`} />
+        <div className={`absolute -inset-0.5 bg-gradient-to-r from-gray-600 to-gray-500 rounded-xl opacity-0 blur transition-opacity duration-300 ${isFocused ? 'opacity-30' : 'group-hover:opacity-20'}`} />
         
         <div className="relative flex items-center">
           <FiSearch 
-            className={`absolute left-4 transition-colors duration-200 ${isFocused ? 'text-violet-400' : 'text-gray-500'}`} 
+            className={`absolute left-4 transition-colors duration-200 ${isFocused ? 'text-gray-400' : 'text-gray-500'}`} 
             size={20} 
           />
           
@@ -91,7 +91,7 @@ export function SearchBar({
             onBlur={() => setIsFocused(false)}
             placeholder={placeholder}
             className="w-full pl-12 pr-24 py-3.5 text-white bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-xl 
-                     focus:outline-none focus:border-violet-500/50 focus:bg-gray-900 transition-all duration-200
+                     focus:outline-none focus:border-gray-500 focus:bg-gray-900 transition-all duration-200
                      placeholder:text-gray-500"
             aria-label="Search posts"
             autoComplete="off"
@@ -129,7 +129,7 @@ export function SearchBar({
             onClick={() => onTagSelect(null)}
             className={`px-3 py-1.5 text-sm rounded-lg transition-all duration-200 ${
               !selectedTag
-                ? 'bg-violet-600 text-white shadow-lg shadow-violet-500/25'
+                ? 'bg-gray-700 text-white shadow-lg shadow-black/25'
                 : 'bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 border border-gray-700/50'
             }`}
           >
@@ -141,7 +141,7 @@ export function SearchBar({
               onClick={() => onTagSelect(tag === selectedTag ? null : tag)}
               className={`px-3 py-1.5 text-sm rounded-lg transition-all duration-200 ${
                 selectedTag === tag
-                  ? 'bg-violet-600 text-white shadow-lg shadow-violet-500/25'
+                  ? 'bg-gray-700 text-white shadow-lg shadow-black/25'
                   : 'bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 border border-gray-700/50'
               }`}
             >

@@ -123,3 +123,6 @@ stats.html
 
 # Sentry
 .sentryclirc
+
+.agents
+skills-lock.json

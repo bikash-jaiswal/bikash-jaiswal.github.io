@@ -43,7 +43,7 @@ export function Pagination({
           key={1}
           onClick={() => onPageChange(1)}
           onKeyDown={(e) => handleKeyDown(e, 1)}
-          className="px-3 py-1 rounded-md text-white hover:bg-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-500"
+          className="px-3 py-1 rounded-md text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
           aria-label="First page"
         >
           1
@@ -65,8 +65,8 @@ export function Pagination({
           key={i}
           onClick={() => onPageChange(i)}
           onKeyDown={(e) => handleKeyDown(e, i)}
-          className={`px-3 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 ${
-            isCurrentPage ? 'bg-violet-600 text-white' : 'text-white hover:bg-violet-600'
+          className={`px-3 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 ${
+            isCurrentPage ? 'bg-gray-700 text-white' : 'text-white hover:bg-gray-700'
           }`}
           aria-label={`Page ${i}`}
           aria-current={isCurrentPage ? 'page' : undefined}
@@ -89,7 +89,7 @@ export function Pagination({
           key={totalPages}
           onClick={() => onPageChange(totalPages)}
           onKeyDown={(e) => handleKeyDown(e, totalPages)}
-          className="px-3 py-1 rounded-md text-white hover:bg-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-500"
+          className="px-3 py-1 rounded-md text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
           aria-label="Last page"
         >
           {totalPages}
@@ -112,7 +112,7 @@ export function Pagination({
         disabled={!hasPrevPage}
         className={`px-3 py-1 rounded-md transition-colors duration-200 ${
           hasPrevPage
-            ? 'text-white hover:bg-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-500'
+            ? 'text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500'
             : 'text-gray-500 cursor-not-allowed'
         }`}
         aria-label="Previous page"
@@ -130,7 +130,7 @@ export function Pagination({
         disabled={!hasNextPage}
         className={`px-3 py-1 rounded-md transition-colors duration-200 ${
           hasNextPage
-            ? 'text-white hover:bg-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-500'
+            ? 'text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500'
             : 'text-gray-500 cursor-not-allowed'
         }`}
         aria-label="Next page"

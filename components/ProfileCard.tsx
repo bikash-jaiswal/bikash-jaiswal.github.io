@@ -15,7 +15,7 @@ const ProfileCard: React.FC = () => {
       className="rounded-xl overflow-hidden bg-gray-800 border border-gray-700 shadow-lg"
     >
       {/* Profile Header with gradient background */}
-      <div className="relative h-32 bg-gradient-to-r from-violet-600 to-indigo-600">
+      <div className="relative h-32 bg-gradient-to-r from-gray-700 to-gray-600">
         <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
           <div className="rounded-full border-4 border-gray-800 overflow-hidden h-24 w-24 flex items-center justify-center bg-gray-700">
             {imageError ? (
@@ -40,7 +40,7 @@ const ProfileCard: React.FC = () => {
       {/* Profile Info */}
       <div className="pt-14 pb-6 px-4 text-center">
         <h3 className="text-xl font-semibold text-white mb-1">Bikash Jaiswal</h3>
-        <p className="text-violet-400 text-sm mb-4">Software Developer & Entrepreneur</p>
+        <p className="text-gray-400 text-sm mb-4">Software Developer & Entrepreneur</p>
 
         {/* Social Links */}
         <div className="flex justify-center space-x-4 mb-6">

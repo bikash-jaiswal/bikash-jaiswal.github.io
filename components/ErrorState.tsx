@@ -25,7 +25,7 @@ export function ErrorState({
       {showHomeLink && (
         <Link
           href="/"
-          className="inline-block bg-violet-600 hover:bg-violet-700 text-white font-medium py-2 px-6 rounded-md transition-colors"
+          className="inline-block bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-6 rounded-md transition-colors"
         >
           Return Home
         </Link>

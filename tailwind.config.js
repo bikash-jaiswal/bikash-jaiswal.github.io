@@ -8,13 +8,98 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', 'sans-serif'],
+        sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
+        display: ['ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
+      },
+      spacing: {
+        '3xs': 'var(--space-3xs)',
+        '2xs': 'var(--space-2xs)',
+        xs: 'var(--space-xs)',
+        sm: 'var(--space-sm)',
+        md: 'var(--space-md)',
+        lg: 'var(--space-lg)',
+        xl: 'var(--space-xl)',
+        '2xl': 'var(--space-2xl)',
+        '3xl': 'var(--space-3xl)',
+        'section-y': 'var(--space-section-y)',
+        'gutter': 'var(--space-gutter)',
+      },
+      colors: {
+        primary: {
+          100: '#f0ecff',
+          200: '#d9ceff',
+          300: '#c0afff',
+          400: '#a78bfa',
+          500: '#8157ff',
+          600: '#5d31f6',
+          700: '#4925d1',
+          800: '#34209d',
+          900: '#22186b',
+        },
+        neutral: {
+          50: '#f7f7fb',
+          100: '#efeff5',
+          200: '#dcdde7',
+          300: '#b6b8c9',
+          400: '#8f92ae',
+          500: '#696d92',
+          600: '#4d5172',
+          700: '#353956',
+          800: '#1f2237',
+          900: '#121426',
+        },
+        surface: {
+          50: 'var(--surface-50)',
+          100: 'var(--surface-100)',
+          200: 'var(--surface-200)',
+          300: 'var(--surface-300)',
+          900: 'var(--surface-900)',
+        },
+        accent: {
+          purple: 'var(--accent-purple)',
+          blue: 'var(--accent-blue)',
+          teal: 'var(--accent-teal)',
+          amber: 'var(--accent-amber)',
+        },
+      },
+      boxShadow: {
+        'soft-lg': '0 22px 40px -24px rgba(20, 20, 43, 0.45)',
+        glow: '0 0 0 1px rgba(111, 78, 255, 0.25), 0 16px 32px -16px rgba(111, 78, 255, 0.35)',
+        focus: '0 0 0 3px rgba(111, 78, 255, 0.25)',
+      },
+      borderRadius: {
+        xl: 'var(--radius-xl)',
+        '2xl': 'var(--radius-2xl)',
+        '3xl': 'var(--radius-3xl)',
+      },
+      transitionTimingFunction: {
+        spring: 'cubic-bezier(0.21, 1.02, 0.73, 1)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'aurora': 'radial-gradient(120% 120% at 0% 0%, rgba(111, 78, 255, 0.35), transparent 60%), radial-gradient(120% 120% at 80% 0%, rgba(34, 211, 238, 0.25), transparent 65%), radial-gradient(140% 120% at 50% 100%, rgba(249, 115, 22, 0.22), transparent 70%)',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translate3d(0, 0, 0)' },
+          '50%': { transform: 'translate3d(0, -8px, 0)' },
+        },
+        shimmer: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+        fadeUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        float: 'float 6s ease-in-out infinite',
+        shimmer: 'shimmer 2.4s infinite linear',
+        'fade-up': 'fadeUp 0.6s var(--ease-spring) forwards',
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
 };

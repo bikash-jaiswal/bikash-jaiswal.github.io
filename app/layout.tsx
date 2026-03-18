@@ -16,13 +16,20 @@ import '../styles/globals.css';
 import Navbar from '../components/Header';
 import Footer from '../components/Footer';
 import { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Bricolage_Grotesque } from 'next/font/google';
 
 /** Inter font configuration from Google Fonts with Latin subset */
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
+});
+
+const display = Bricolage_Grotesque({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+  variable: '--font-display',
 });
 
 /** Viewport configuration for responsive design */
@@ -34,16 +41,61 @@ export const viewport = {
 /** Base URL for the site, used in metadata and structured data */
 const SITE_URL = 'https://www.bikashjaiswal.com';
 
-/** JSON-LD structured data for SEO - helps search engines understand the site owner */
+/** JSON-LD structured data for SEO - comprehensive Person schema */
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Bikash Jaiswal',
+  alternateName: 'Bikash Jaiswal',
+  description: 'Software Developer, Investor and Tech Entrepreneur sharing insights on technology, programming, and business',
   url: SITE_URL,
+  image: `${SITE_URL}/images/profile.jpg`,
   jobTitle: 'Software Developer',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Self-employed'
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'Canada'
+  },
   sameAs: [
     'https://github.com/bikash-jaiswal',
+    'https://linkedin.com/in/bikashjaiswal',
+    'https://twitter.com/bikash_jaiswal'
   ],
+  knowsAbout: [
+    'Software Development',
+    'Web Development',
+    'System Design',
+    'Software Architecture',
+    'Business Strategy',
+    'Technology Investment',
+    'Entrepreneurship',
+    'JavaScript',
+    'TypeScript',
+    'React',
+    'Next.js',
+    'Node.js'
+  ],
+  hasOccupation: [
+    {
+      '@type': 'Occupation',
+      name: 'Software Developer',
+      occupationLocation: {
+        '@type': 'City',
+        name: 'Canada'
+      }
+    },
+    {
+      '@type': 'Occupation',
+      name: 'Entrepreneur'
+    },
+    {
+      '@type': 'Occupation',
+      name: 'Investor'
+    }
+  ]
 };
 
 /** Default metadata for SEO - can be overridden by individual pages */
@@ -119,8 +171,10 @@ interface RootLayoutProps {
  */
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <body className="min-h-screen flex flex-col bg-neutral-900 font-sans">
+    <html lang="en" className="dark" data-theme="midnight">
+      <body
+        className={`${inter.variable} ${display.variable} min-h-screen flex flex-col bg-dark-900 text-gray-300 antialiased font-sans`}
+      >
         <main className="flex-grow max-w-7xl mx-auto px-4 w-full" role="main">
           <Navbar />
           <div>{children}</div>

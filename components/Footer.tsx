@@ -18,7 +18,7 @@ const FooterLink: React.FC<{ href: string; label: string; isExternal?: boolean }
         href={href}
         className={`group inline-flex items-center gap-1 text-sm transition-all duration-200 hover:translate-x-1 ${
           isActive 
-            ? 'text-violet-500 font-medium' 
+            ? 'text-white font-medium' 
             : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
         }`}
         target={isExternal ? '_blank' : undefined}
@@ -42,7 +42,7 @@ const SocialLink: React.FC<{ href: string; icon: React.ReactNode; label: string 
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-800/50 dark:bg-gray-800/50 text-gray-400 hover:text-white hover:bg-violet-600 border border-gray-700/50 hover:border-violet-500 transition-all duration-300 shadow-sm hover:shadow-lg hover:shadow-violet-500/20"
+    className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-800/50 dark:bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700 border border-gray-700/50 hover:border-gray-500 transition-all duration-300 shadow-sm hover:shadow-lg hover:shadow-black/20"
     aria-label={label}
   >
     {icon}
@@ -71,7 +71,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="relative mt-20">
       {/* Gradient divider */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/50 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent" />
       
       <div className="bg-gray-900/50 dark:bg-gray-900/50 backdrop-blur-sm border-t border-gray-800/50">
         <motion.div 
@@ -86,8 +86,8 @@ const Footer: React.FC = () => {
             <motion.div className="md:col-span-5" variants={itemVariants}>
               <Link href="/" className="inline-flex items-center gap-3 group mb-6">
                 <div className="relative">
-                  <div className="absolute -inset-2 bg-gradient-to-r from-violet-600 to-blue-600 rounded-xl opacity-0 group-hover:opacity-20 blur-lg transition-opacity duration-500" />
-                  <span className="relative text-3xl font-black bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">
+                  <div className="absolute -inset-2 bg-gradient-to-r from-gray-500 to-gray-400 rounded-xl opacity-0 group-hover:opacity-20 blur-lg transition-opacity duration-500" />
+                  <span className="relative text-3xl font-black text-white">
                     Bikash Jaiswal
                   </span>
                 </div>
@@ -160,7 +160,7 @@ const Footer: React.FC = () => {
               </p>
               <Link
                 href="/blog"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-violet-600 to-violet-700 hover:from-violet-500 hover:to-violet-600 text-white text-sm font-medium rounded-xl transition-all duration-300 shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 group"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-700 hover:bg-gray-600 text-white text-sm font-medium rounded-xl transition-all duration-300 shadow-lg shadow-black/25 hover:shadow-black/40 group"
               >
                 <span>Read the Blog</span>
                 <FiArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -187,12 +187,12 @@ const Footer: React.FC = () => {
                 </Link>
                 <span className="text-gray-600">•</span>
                 <p className="text-gray-500 text-sm flex items-center gap-1.5">
-                  Built with <FiHeart size={14} className="text-violet-400" /> using{' '}
+                  Built with <FiHeart size={14} className="text-gray-400" /> using{' '}
                   <a
                     href="https://nextjs.org"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-violet-400 transition-colors font-medium"
+                    className="text-gray-400 hover:text-white transition-colors font-medium"
                   >
                     Next.js
                   </a>

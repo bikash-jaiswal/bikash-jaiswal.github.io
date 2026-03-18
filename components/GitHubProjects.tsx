@@ -120,7 +120,7 @@ export default function GitHubProjects() {
         <p className="text-gray-400 mb-6">{error}</p>
         <button
           onClick={() => window.location.reload()}
-          className="px-6 py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-xl transition-colors"
+          className="px-6 py-2.5 bg-gray-700 hover:bg-gray-600 text-white rounded-xl transition-colors"
         >
           Try Again
         </button>
@@ -162,7 +162,7 @@ export default function GitHubProjects() {
             placeholder="Search projects..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 bg-gray-900/80 border border-gray-800/50 rounded-xl text-white placeholder:text-gray-500 focus:outline-none focus:border-violet-500/50 transition-colors"
+            className="w-full pl-11 pr-4 py-3 bg-gray-900/80 border border-gray-800/50 rounded-xl text-white placeholder:text-gray-500 focus:outline-none focus:border-gray-500 transition-colors"
           />
           {searchTerm && (
             <button
@@ -180,7 +180,7 @@ export default function GitHubProjects() {
           <select
             value={selectedLanguage || ''}
             onChange={(e) => setSelectedLanguage(e.target.value || null)}
-            className="appearance-none pl-11 pr-10 py-3 bg-gray-900/80 border border-gray-800/50 rounded-xl text-white focus:outline-none focus:border-violet-500/50 transition-colors cursor-pointer min-w-[160px]"
+            className="appearance-none pl-11 pr-10 py-3 bg-gray-900/80 border border-gray-800/50 rounded-xl text-white focus:outline-none focus:border-gray-500 transition-colors cursor-pointer min-w-[160px]"
           >
             <option value="">All Languages</option>
             {languages.map((lang) => (
@@ -194,7 +194,7 @@ export default function GitHubProjects() {
       {(searchTerm || selectedLanguage) && (
         <p className="text-gray-400 text-sm">
           Showing {filteredProjects.length} of {projects.length} projects
-          {selectedLanguage && <span className="text-violet-400"> in {selectedLanguage}</span>}
+          {selectedLanguage && <span className="text-gray-400"> in {selectedLanguage}</span>}
         </p>
       )}
 
