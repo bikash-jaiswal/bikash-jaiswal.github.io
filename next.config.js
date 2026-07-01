@@ -10,6 +10,10 @@ const nextConfig = {
   
   // Fix workspace root detection
   outputFileTracingRoot: path.join(__dirname),
+
+  experimental: {
+    optimizePackageImports: ['react-icons', 'framer-motion', 'lucide-react'],
+  },
   
   compiler: {
     removeConsole:
