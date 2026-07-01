@@ -1,4 +1,4 @@
-# Optimized workflow for building and deploying a Next.js site to GitHub Pages
+# Optimized workflow for building and deploying a Next.js site to GitHub Pages using Bun
 name: Deploy Next.js site to Pages
 
 on:
@@ -29,16 +29,10 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          version: 8
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'pnpm'
+          version: latest
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -46,10 +40,10 @@ jobs:
           static_site_generator: next
 
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: bun ci
 
       - name: Build with Next.js
-        run: pnpm build
+        run: bun run build
         env:
           NODE_TLS_REJECT_UNAUTHORIZED: 0
           NEXT_TELEMETRY_DISABLED: 1

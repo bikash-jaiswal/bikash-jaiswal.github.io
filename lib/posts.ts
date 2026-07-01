@@ -11,15 +11,14 @@
  * - app/reading/[slug]/page.tsx (to fetch related posts)
  */
 
-import { readdir, readFile } from 'fs/promises';
-import { existsSync, mkdirSync } from 'fs';
+import { readdir, readFile, access, mkdir } from 'fs/promises';
+import { join } from 'path';
 import matter from 'gray-matter';
-import path from 'path';
 import { PostContent, PostMetadata } from '../types/blog';
 import { sortByDate } from '../lib/date';
 
 /** Absolute path to the blog posts content directory */
-const POSTS_DIRECTORY = path.join(process.cwd(), 'content/posts');
+const POSTS_DIRECTORY = join(process.cwd(), 'content/posts');
 
 /** Flag to determine if caching should be bypassed (disabled in development for hot reload) */
 const isDev = process.env.NODE_ENV === 'development';
@@ -168,8 +167,10 @@ async function parsePostFile(filePath: string, slug: string): Promise<PostMetada
 export async function getPostMetadata(): Promise<PostMetadata[]> {
   if (!isDev && cache.metadata) return cache.metadata;
 
-  if (!existsSync(POSTS_DIRECTORY)) {
-    mkdirSync(POSTS_DIRECTORY, { recursive: true });
+  try {
+    await access(POSTS_DIRECTORY);
+  } catch {
+    await mkdir(POSTS_DIRECTORY, { recursive: true });
     return [];
   }
 
@@ -179,7 +180,7 @@ export async function getPostMetadata(): Promise<PostMetadata[]> {
 
     const posts = await Promise.all(
       mdFiles.map((file) => {
-        const filePath = path.join(POSTS_DIRECTORY, file);
+        const filePath = join(POSTS_DIRECTORY, file);
         const slug = createSlug(file);
         return parsePostFile(filePath, slug);
       })
@@ -207,9 +208,11 @@ export async function getPostContent(slug: string): Promise<string | null> {
     return cache.content.get(slug) ?? null;
   }
 
-  const filePath = path.join(POSTS_DIRECTORY, `${slug}.md`);
+  const filePath = join(POSTS_DIRECTORY, `${slug}.md`);
 
-  if (!existsSync(filePath)) {
+  try {
+    await access(filePath);
+  } catch {
     cache.content.set(slug, null);
     return null;
   }

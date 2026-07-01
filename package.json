@@ -3,16 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "format": "prettier --write .",
-    "type-check": "tsc --noEmit",
-    "analyze": "ANALYZE=true next build",
+    "dev": "bun run next dev",
+    "build": "bun run next build",
+    "start": "bun run next start",
+    "test": "bun test",
+    "lint": "bun run eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "bun run eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "bun run prettier --write .",
+    "type-check": "bun run tsc --noEmit",
+    "analyze": "ANALYZE=true bun run next build",
     "clean": "rm -rf .next out .vercel",
-    "preview": "next build && next start"
+    "preview": "bun run next build && bun run next start"
   },
   "dependencies": {
     "framer-motion": "^12.23.26",
@@ -32,6 +33,7 @@
     "@next/bundle-analyzer": "^15.5.9",
     "@tailwindcss/forms": "^0.5.11",
     "@tailwindcss/typography": "^0.5.19",
+    "@types/bun": "latest",
     "@types/node": "^20.19.27",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
@@ -54,6 +56,6 @@
     "typescript": "^5.9.3"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "bun": ">=1.0.0"
   }
 }

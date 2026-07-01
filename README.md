@@ -31,6 +31,7 @@ A modern, high-performance personal website and blog built with cutting-edge web
 
 ### 🛠️ Tech Stack
 
+[![Bun](https://img.shields.io/badge/Bun-1.3-FF6058?style=flat-square&logo=bun&logoColor=white)](https://bun.sh/)
 [![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=flat-square&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React_19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -43,8 +44,7 @@ A modern, high-performance personal website and blog built with cutting-edge web
 
 ### Prerequisites
 
-- **Node.js** 18.0.0 or later
-- **pnpm** (recommended) or npm
+- **Bun** 1.0.0 or later
 
 ### Installation
 
@@ -53,11 +53,17 @@ A modern, high-performance personal website and blog built with cutting-edge web
 git clone https://github.com/bikash-jaiswal/bikash-jaiswal.github.io.git
 cd bikash-jaiswal.github.io
 
+# Install Bun (if not already installed)
+# Windows:
+powershell -c "irm bun.sh/install.ps1 | iex"
+# macOS/Linux:
+curl -fsSL https://bun.sh/install | bash
+
 # Install dependencies
-pnpm install
+bun install
 
 # Start development server
-pnpm dev
+bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the site.
@@ -66,15 +72,15 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 
 | Command | Description |
 |---------|-------------|
-| `pnpm dev` | Start development server |
-| `pnpm build` | Build for production |
-| `pnpm start` | Start production server |
-| `pnpm lint` | Run ESLint |
-| `pnpm lint:fix` | Fix ESLint errors |
-| `pnpm format` | Format with Prettier |
-| `pnpm type-check` | TypeScript type checking |
-| `pnpm analyze` | Analyze bundle size |
-| `pnpm clean` | Clean build artifacts |
+| `bun dev` | Start development server |
+| `bun build` | Build for production |
+| `bun start` | Start production server |
+| `bun lint` | Run ESLint |
+| `bun lint:fix` | Fix ESLint errors |
+| `bun format` | Format with Prettier |
+| `bun type-check` | TypeScript type checking |
+| `bun analyze` | Analyze bundle size |
+| `bun clean` | Clean build artifacts |
 
 ---
 
@@ -148,10 +154,10 @@ Your content here with **markdown** support and `code blocks`.
 
 ### GitHub Pages
 
-This site is configured for GitHub Pages deployment:
+This site is configured for GitHub Pages deployment using Bun:
 
 ```bash
-pnpm build
+bun run build
 # Deploy the `out/` directory
 ```
 

@@ -10,13 +10,12 @@
  * - app/reading/[slug]/page.tsx (individual reading item details)
  */
 
-import { readdir, readFile } from 'fs/promises';
-import { existsSync, mkdirSync } from 'fs';
+import { readdir, readFile, access, mkdir } from 'fs/promises';
+import { join } from 'path';
 import matter from 'gray-matter';
-import path from 'path';
 
 /** Absolute path to the reading content directory */
-const READING_DIRECTORY = path.join(process.cwd(), 'content/reading');
+const READING_DIRECTORY = join(process.cwd(), 'content/reading');
 
 /** Flag to determine if caching should be bypassed (disabled in development for hot reload) */
 const isDev = process.env.NODE_ENV === 'development';
@@ -126,8 +125,10 @@ async function parseReadingFile(filePath: string, slug: string): Promise<Reading
 export async function getReadingMetadata(): Promise<ReadingMetadata[]> {
   if (!isDev && cache.metadata) return cache.metadata;
 
-  if (!existsSync(READING_DIRECTORY)) {
-    mkdirSync(READING_DIRECTORY, { recursive: true });
+  try {
+    await access(READING_DIRECTORY);
+  } catch {
+    await mkdir(READING_DIRECTORY, { recursive: true });
     return [];
   }
 
@@ -137,7 +138,7 @@ export async function getReadingMetadata(): Promise<ReadingMetadata[]> {
 
     const items = await Promise.all(
       mdFiles.map((file) => {
-        const filePath = path.join(READING_DIRECTORY, file);
+        const filePath = join(READING_DIRECTORY, file);
         const slug = createSlug(file);
         return parseReadingFile(filePath, slug);
       })
@@ -168,9 +169,11 @@ export async function getReadingContent(slug: string): Promise<string | null> {
     return cache.content.get(slug) ?? null;
   }
 
-  const filePath = path.join(READING_DIRECTORY, `${slug}.md`);
+  const filePath = join(READING_DIRECTORY, `${slug}.md`);
 
-  if (!existsSync(filePath)) {
+  try {
+    await access(filePath);
+  } catch {
     cache.content.set(slug, null);
     return null;
   }

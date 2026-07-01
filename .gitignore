@@ -12,6 +12,12 @@ node_modules/
 !.yarn/sdks
 !.yarn/versions
 
+# Bun
+bun.lockb
+bun.lock
+.bun-cache/
+.bun/install-cache/
+
 # ============================================
 # BUILD OUTPUT
 # ============================================
