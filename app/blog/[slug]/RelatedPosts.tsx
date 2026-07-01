@@ -16,16 +16,15 @@ export default function RelatedPosts({ posts, currentSlug }: RelatedPostsProps) 
   if (relatedPosts.length === 0) return null;
 
   return (
-    <div className="mb-12">
-      <div className="flex items-center gap-3 mb-8">
-        <div className="h-px flex-1 bg-gradient-to-r from-emerald-500/50 to-transparent" />
-        <h3 className="text-lg font-semibold text-gray-400 uppercase tracking-wider">
+    <div>
+      <div className="flex items-center gap-3 mb-12">
+        <div className="h-px flex-1 bg-gray-200 dark:bg-white/10" />\n        <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
           Continue Reading
         </h3>
-        <div className="h-px flex-1 bg-gradient-to-l from-emerald-500/50 to-transparent" />
+        <div className="h-px flex-1 bg-gray-200 dark:bg-white/10" />
       </div>
       
-      <div className="grid md:grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-3 gap-6">
         {relatedPosts.map((post, index) => (
           <motion.div
             key={post.slug}
@@ -36,12 +35,10 @@ export default function RelatedPosts({ posts, currentSlug }: RelatedPostsProps) 
           >
             <Link
               href={`/blog/${post.slug}`}
-              className="group relative block h-full p-5 rounded-2xl bg-gradient-to-br from-gray-800/40 to-gray-900/40 border border-gray-700/30 hover:border-emerald-500/30 transition-all duration-300 overflow-hidden"
+              className="group relative block h-full p-6 rounded-2xl bg-white dark:bg-white/[0.02] border border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-300 overflow-hidden hover:shadow-lg"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/5 to-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              
-              <div className="relative space-y-3">
-                <div className="flex items-center gap-2 text-xs text-gray-500">
+              <div className="relative space-y-4">
+                <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
                   <FiCalendar size={12} />
                   <time dateTime={post.date}>
                     {new Date(post.date + 'T00:00:00').toLocaleDateString('en-US', {
@@ -51,17 +48,17 @@ export default function RelatedPosts({ posts, currentSlug }: RelatedPostsProps) 
                   </time>
                 </div>
                 
-                <h4 className="font-semibold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-emerald-400 group-hover:to-blue-400 transition-all duration-300 line-clamp-2 leading-snug">
+                <h4 className="font-bold text-black dark:text-white text-lg leading-tight group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors duration-300 line-clamp-2">
                   {post.title}
                 </h4>
                 
                 {post.subtitle && (
-                  <p className="text-gray-500 text-sm line-clamp-2 leading-relaxed">
+                  <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-2 leading-relaxed">
                     {post.subtitle}
                   </p>
                 )}
                 
-                <div className="flex items-center gap-1 text-emerald-400 text-sm font-medium pt-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                <div className="flex items-center gap-1 text-black dark:text-white text-sm font-semibold pt-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
                   <span>Read article</span>
                   <FiArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </div>

@@ -124,67 +124,57 @@ export default async function ReadingDetails({ params }: Props) {
     : [];
 
   return (
-    <article className="min-h-screen py-12">
-      <div className="max-w-4xl mx-auto px-4">
-        <nav className="mb-8">
+    <article className="min-h-screen py-24">
+      <div className="container-narrow">
+        <nav className="mb-12">
           <Link
             href="/reading"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-gray-300 hover:text-white hover:border-emerald-500/50 transition-all text-sm group"
+            className="inline-flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white transition-colors"
           >
-            <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" size={16} />
-            <span>Back to Reading List</span>
+            <FiArrowLeft size={14} />
+            <span>Back to reading list</span>
           </Link>
         </nav>
 
-        <header className="mb-12">
-          <div className="flex flex-wrap gap-2 mb-4">
-            <span className={`px-3 py-1 rounded-full text-xs font-medium border ${categoryColors[item.category]}`}>
+        <header className="mb-16">
+          <div className="flex items-center gap-4 mb-6">
+            <span className="text-[10px] font-medium uppercase tracking-widest text-gray-500 dark:text-gray-400 border border-gray-100 dark:border-white/5 px-2 py-0.5 rounded">
               {item.category}
             </span>
-            <span className={`px-3 py-1 rounded-full text-xs font-medium ${statusColors[item.status]}`}>
+            <span className="text-[10px] font-medium uppercase tracking-widest text-gray-400 dark:text-gray-500">
               {item.status}
             </span>
           </div>
 
-          <div className="flex items-start gap-6 mb-6">
-            {item.coverImage ? (
-              <div className="relative w-32 h-44 flex-shrink-0 rounded-xl overflow-hidden shadow-xl">
-                <Image
-                  src={item.coverImage}
-                  alt={item.title}
-                  fill
-                  className="object-cover"
-                  sizes="128px"
-                />
-              </div>
-            ) : (
-              <div className="p-4 bg-gradient-to-br from-emerald-500/20 to-blue-500/20 rounded-xl border border-emerald-500/20">
-                <FiBook className="w-8 h-8 text-emerald-400" />
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-black dark:text-white mb-6">
+            {item.title}
+          </h1>
+          
+          <div className="flex flex-wrap items-center gap-6">
+            {item.author && (
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                <FiUser size={14} />
+                <span>{item.author}</span>
               </div>
             )}
-            <div className="flex-1">
-              <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                {item.title}
-              </h1>
-              {item.author && (
-                <p className="text-lg text-gray-400 flex items-center gap-2">
-                  <FiUser size={16} />
-                  by {item.author}
-                </p>
-              )}
-            </div>
+            {item.date && (
+              <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500">
+                <FiCalendar size={14} />
+                <span>{new Date(item.date + 'T00:00:00').toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</span>
+              </div>
+            )}
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-wrap gap-3">
             {item.url && (
               <a
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-800/50 border border-gray-700/50 rounded-lg text-emerald-400 hover:text-emerald-300 hover:border-emerald-500/50 transition-all text-sm"
+                className="inline-flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white"
               >
                 <FiExternalLink size={14} />
-                Official Website
+                <span>Official site</span>
               </a>
             )}
             {item.amazonUrl && (
@@ -192,97 +182,47 @@ export default async function ReadingDetails({ params }: Props) {
                 href={item.amazonUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500/10 border border-orange-500/30 rounded-lg text-orange-400 hover:text-orange-300 hover:border-orange-500/50 transition-all text-sm"
+                className="inline-flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white"
               >
                 <FiShoppingCart size={14} />
-                Buy on Amazon
+                <span>View on Amazon</span>
               </a>
             )}
           </div>
-
-          {item.date && (
-            <div className="mt-4 flex items-center gap-2 text-sm text-gray-500">
-              <FiCalendar size={14} />
-              <span>Started: {new Date(item.date + 'T00:00:00').toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}</span>
-            </div>
-          )}
-
-          {item.rating && (
-            <div className="mt-4 flex items-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <span
-                  key={i}
-                  className={`text-lg ${i < item.rating! ? 'text-yellow-400' : 'text-gray-600'}`}
-                >
-                  ★
-                </span>
-              ))}
-            </div>
-          )}
         </header>
 
-        <div className="prose prose-invert prose-lg max-w-none
-          prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight
-          prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6
-          prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4
-          prose-p:text-gray-300 prose-p:leading-[1.8] prose-p:mb-6
-          prose-a:text-emerald-400 prose-a:no-underline prose-a:border-b prose-a:border-emerald-400/30 hover:prose-a:border-emerald-400 prose-a:transition-colors
-          prose-strong:text-white prose-strong:font-semibold
-          prose-code:text-emerald-300 prose-code:bg-gray-800/80 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:text-sm
-          prose-pre:bg-gray-900/80 prose-pre:backdrop-blur-sm prose-pre:border prose-pre:border-gray-700/50 prose-pre:rounded-xl
-          prose-blockquote:border-l-4 prose-blockquote:border-emerald-500 prose-blockquote:bg-gradient-to-r prose-blockquote:from-emerald-500/10 prose-blockquote:to-transparent prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-xl prose-blockquote:not-italic prose-blockquote:text-gray-300
-          prose-ul:text-gray-300 prose-ol:text-gray-300
-          prose-li:marker:text-emerald-400 prose-li:my-2
-          prose-img:rounded-xl prose-img:shadow-2xl prose-img:my-10
-          prose-hr:border-gray-800 prose-hr:my-12
-        ">
+        <div className="prose prose-elegant">
           <MarkdownContent content={content} />
         </div>
 
         {relatedPosts.length > 0 && (
-          <section className="mt-16 pt-8 border-t border-gray-800/50">
-            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-              <FiFileText className="text-emerald-400" />
-              Related Blog Posts
-            </h2>
-            <div className="grid gap-4">
+          <section className="mt-24 pt-12 border-t border-gray-100 dark:border-white/5">
+            <h2 className="text-xl font-bold tracking-tight text-black dark:text-white mb-8">Related writing</h2>
+            <div className="grid gap-6">
               {relatedPosts.map((post) => (
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  className="block p-5 bg-gray-800/50 border border-gray-700/50 rounded-xl hover:border-emerald-500/30 transition-all group"
+                  className="group block"
                 >
-                  <h3 className="text-lg font-semibold text-white group-hover:text-emerald-400 transition-colors mb-2">
+                  <h3 className="text-lg font-bold tracking-tight text-black dark:text-white group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors">
                     {post.title}
                   </h3>
                   {post.subtitle && (
-                    <p className="text-gray-400 text-sm line-clamp-2">{post.subtitle}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">{post.subtitle}</p>
                   )}
-                  <div className="mt-3 flex items-center gap-4 text-xs text-gray-500">
-                    <span>{new Date(post.date + 'T00:00:00').toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric',
-                    })}</span>
-                    {post.readingTime && <span>{post.readingTime} min read</span>}
-                  </div>
                 </Link>
               ))}
             </div>
           </section>
         )}
 
-        <footer className="mt-16 pt-8 border-t border-gray-800/50">
+        <footer className="mt-24 pt-12 border-t border-gray-100 dark:border-white/5 flex justify-center">
           <Link
             href="/reading"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-800/50 border border-gray-700/50 text-gray-300 hover:text-white hover:border-emerald-500/50 transition-all group"
+            className="text-sm font-medium text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white transition-colors"
           >
-            <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" size={18} />
-            <span>Back to Reading List</span>
+            Back to reading list
           </Link>
         </footer>
       </div>

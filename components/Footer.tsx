@@ -16,7 +16,7 @@ const FooterLink: React.FC<{ href: string; label: string; isExternal?: boolean }
     <li>
       <Link
         href={href}
-        className={`group inline-flex items-center gap-1 text-sm transition-all duration-200 hover:translate-x-1 ${
+        className={`group inline-flex items-center gap-1 text-base transition-all duration-200 hover:translate-x-1 ${
           isActive 
             ? 'text-white font-medium' 
             : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
@@ -52,155 +52,56 @@ const SocialLink: React.FC<{ href: string; icon: React.ReactNode; label: string 
 const Footer: React.FC = () => {
   const currentYear: number = new Date().getFullYear();
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   return (
-    <footer className="relative mt-20">
-      {/* Gradient divider */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent" />
-      
-      <div className="bg-gray-900/50 dark:bg-gray-900/50 backdrop-blur-sm border-t border-gray-800/50">
-        <motion.div 
-          className="container-custom py-16"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={containerVariants}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
-            {/* Brand Column */}
-            <motion.div className="md:col-span-5" variants={itemVariants}>
-              <Link href="/" className="inline-flex items-center gap-3 group mb-6">
-                <div className="relative">
-                  <div className="absolute -inset-2 bg-gradient-to-r from-gray-500 to-gray-400 rounded-xl opacity-0 group-hover:opacity-20 blur-lg transition-opacity duration-500" />
-                  <span className="relative text-3xl font-black text-white">
-                    Bikash Jaiswal
-                  </span>
-                </div>
-              </Link>
-              
-              <p className="text-gray-400 mb-6 text-sm leading-relaxed max-w-sm">
-                Software developer, entrepreneur, and investor focused on building innovative
-                solutions and sharing knowledge with the community.
-              </p>
-              
-              {/* Social Links */}
-              <div className="flex items-center gap-3">
-                <SocialLink
-                  href="https://github.com/bikash-jaiswal"
-                  icon={<FiGithub size={18} />}
-                  label="GitHub Profile"
-                />
-                <SocialLink
-                  href="https://www.linkedin.com/in/bikash-jaiswal/"
-                  icon={<FiLinkedin size={18} />}
-                  label="LinkedIn Profile"
-                />
-                <SocialLink
-                  href="https://twitter.com/bikash_jaiswal"
-                  icon={<FiTwitter size={18} />}
-                  label="Twitter Profile"
-                />
-                <SocialLink
-                  href="mailto:contact@bikashjaiswal.com"
-                  icon={<FiMail size={18} />}
-                  label="Email"
-                />
-              </div>
-            </motion.div>
-
-            {/* Quick Links */}
-            <motion.div className="md:col-span-2" variants={itemVariants}>
-              <h3 className="text-white font-semibold mb-5 text-xs uppercase tracking-widest">
-                Navigate
-              </h3>
-              <ul className="space-y-3">
-                <FooterLink href="/" label="Home" />
-                <FooterLink href="/projects" label="Projects" />
-                <FooterLink href="/blog" label="Blog" />
-                <FooterLink href="/resources" label="Resources" />
-                <FooterLink href="/contacts" label="Contact" />
-              </ul>
-            </motion.div>
-
-            {/* Resources */}
-            <motion.div className="md:col-span-2" variants={itemVariants}>
-              <h3 className="text-white font-semibold mb-5 text-xs uppercase tracking-widest">
-                Topics
-              </h3>
-              <ul className="space-y-3">
-                <FooterLink href="/blog" label="Development" />
-                <FooterLink href="/blog" label="System Design" />
-                <FooterLink href="/blog" label="Investing" />
-                <FooterLink href="/blog" label="Entrepreneurship" />
-              </ul>
-            </motion.div>
-
-            {/* Newsletter / CTA */}
-            <motion.div className="md:col-span-3" variants={itemVariants}>
-              <h3 className="text-white font-semibold mb-5 text-xs uppercase tracking-widest">
-                Stay Updated
-              </h3>
-              <p className="text-gray-400 text-sm mb-4">
-                Get notified about new articles and projects.
-              </p>
-              <Link
-                href="/blog"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-700 hover:bg-gray-600 text-white text-sm font-medium rounded-xl transition-all duration-300 shadow-lg shadow-black/25 hover:shadow-black/40 group"
-              >
-                <span>Read the Blog</span>
-                <FiArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </Link>
-            </motion.div>
+    <footer className="py-12 mt-20 border-t border-gray-100 dark:border-white/5">
+      <div className="container-narrow">
+        <div className="flex flex-col items-center gap-8">
+          <div className="flex items-center gap-6">
+            <a
+              href="https://github.com/bikash-jaiswal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 transition-colors hover:text-black dark:hover:text-white"
+              aria-label="GitHub"
+            >
+              <FiGithub size={20} />
+            </a>
+            <a
+              href="https://linkedin.com/in/bikash-jaiswal/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 transition-colors hover:text-black dark:hover:text-white"
+              aria-label="LinkedIn"
+            >
+              <FiLinkedin size={20} />
+            </a>
+            <a
+              href="https://twitter.com/bikash_jaiswal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 transition-colors hover:text-black dark:hover:text-white"
+              aria-label="Twitter"
+            >
+              <FiTwitter size={20} />
+            </a>
+            <a
+              href="mailto:contact@bikashjaiswal.com"
+              className="text-gray-400 transition-colors hover:text-black dark:hover:text-white"
+              aria-label="Email"
+            >
+              <FiMail size={20} />
+            </a>
           </div>
 
-          {/* Bottom Bar */}
-          <motion.div 
-            className="mt-16 pt-8 border-t border-gray-800/50"
-            variants={itemVariants}
-          >
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-gray-500 text-sm">
-                © {currentYear} Bikash Jaiswal. All rights reserved.
-              </p>
-              
-              <div className="flex items-center gap-6">
-                <Link href="/privacy-policy" className="text-gray-500 hover:text-gray-300 text-sm transition-colors">
-                  Privacy
-                </Link>
-                <Link href="/terms" className="text-gray-500 hover:text-gray-300 text-sm transition-colors">
-                  Terms
-                </Link>
-                <span className="text-gray-600">•</span>
-                <p className="text-gray-500 text-sm flex items-center gap-1.5">
-                  Built with <FiHeart size={14} className="text-gray-400" /> using{' '}
-                  <a
-                    href="https://nextjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-white transition-colors font-medium"
-                  >
-                    Next.js
-                  </a>
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
+          <div className="flex flex-col items-center gap-2 text-center">
+            <p className="text-sm font-medium text-black dark:text-white">
+              Bikash Jaiswal
+            </p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              © {currentYear} — Built with simplicity.
+            </p>
+          </div>
+        </div>
       </div>
     </footer>
   );

@@ -56,7 +56,7 @@ export default function NewsletterSignup({ variant = 'card', className = '' }: N
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-gray-800/50 border border-gray-700/50 text-white placeholder-gray-500 focus:border-gray-500 focus:outline-none transition-colors"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700/50 text-black dark:text-white placeholder-gray-500 focus:border-black dark:focus:border-gray-500 focus:outline-none transition-colors"
             disabled={status === 'loading' || status === 'success'}
           />
         </div>
@@ -87,11 +87,11 @@ export default function NewsletterSignup({ variant = 'card', className = '' }: N
 
   if (variant === 'inline') {
     return (
-      <div className={`p-6 rounded-2xl bg-gradient-to-r from-gray-600/10 to-gray-500/10 border border-gray-500/20 ${className}`}>
+      <div className={`p-6 rounded-2xl bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700/50 ${className}`}>
         <div className="flex flex-col md:flex-row md:items-center gap-4">
           <div className="flex-1">
-            <h3 className="text-lg font-semibold text-white mb-1">Stay in the loop</h3>
-            <p className="text-gray-400 text-sm">Get notified when I publish new articles.</p>
+            <h3 className="text-lg font-semibold text-black dark:text-white mb-1">Stay in the loop</h3>
+            <p className="text-gray-600 dark:text-gray-400 text-sm">Get notified when I publish new articles.</p>
           </div>
           <form onSubmit={handleSubmit} className="flex gap-2 flex-1">
             <input
@@ -99,7 +99,7 @@ export default function NewsletterSignup({ variant = 'card', className = '' }: N
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="flex-1 px-4 py-2.5 rounded-xl bg-gray-800/50 border border-gray-700/50 text-white placeholder-gray-500 focus:border-gray-500 focus:outline-none transition-colors"
+              className="flex-1 px-4 py-2.5 rounded-xl bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 text-black dark:text-white placeholder-gray-500 focus:border-black dark:focus:border-gray-500 focus:outline-none transition-colors"
               disabled={status === 'loading' || status === 'success'}
             />
             <motion.button
@@ -132,41 +132,27 @@ export default function NewsletterSignup({ variant = 'card', className = '' }: N
   // Default: card variant
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className={`relative overflow-hidden rounded-2xl ${className}`}
+      className={`p-8 md:p-12 rounded-xl border border-gray-100 dark:border-white/5 bg-gray-50 dark:bg-white/5 ${className}`}
     >
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-600/20 via-transparent to-gray-500/20" />
-      <div className="absolute inset-0 bg-gray-900/80 backdrop-blur-sm" />
-      
-      {/* Content */}
-      <div className="relative p-8 md:p-10">
+      <div className="max-w-md mx-auto text-center">
         <AnimatePresence mode="wait">
           {status === 'success' ? (
             <motion.div
               key="success"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              className="text-center py-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="py-4"
             >
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-                className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-500/20 flex items-center justify-center"
-              >
-                <FiCheck size={32} className="text-green-400" />
-              </motion.div>
-              <h3 className="text-xl font-bold text-white mb-2">You&apos;re subscribed!</h3>
-              <p className="text-gray-400 mb-6">{message}</p>
+              <h3 className="text-xl font-bold tracking-tight text-black dark:text-white mb-2">Subscribed.</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">{message}</p>
               <button
                 onClick={resetForm}
-                className="text-gray-400 hover:text-gray-300 text-sm font-medium transition-colors"
+                className="text-xs font-medium text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white underline"
               >
-                Subscribe another email
+                Use another email
               </button>
             </motion.div>
           ) : (
@@ -174,95 +160,47 @@ export default function NewsletterSignup({ variant = 'card', className = '' }: N
               key="form"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
             >
-              {/* Icon */}
-              <div className="w-12 h-12 mb-6 rounded-xl bg-gray-700/20 flex items-center justify-center">
-                <FiMail size={24} className="text-gray-400" />
-              </div>
-
-              {/* Heading */}
-              <h3 className="text-2xl font-bold text-white mb-2">
-                Subscribe to my newsletter
+              <h3 className="text-2xl font-bold tracking-tight text-black dark:text-white mb-3">
+                Newsletter
               </h3>
-              <p className="text-gray-400 mb-6 leading-relaxed">
-                Get exclusive content, early access to new articles, and insights on software development, 
-                system design, and entrepreneurship delivered to your inbox.
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+                Insights on systems and engineering, delivered occasionally.
               </p>
 
-              {/* Form */}
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="relative">
-                  <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      if (status === 'error') resetForm();
-                    }}
-                    placeholder="Enter your email address"
-                    className="w-full pl-12 pr-4 py-4 rounded-xl bg-gray-800/50 border border-gray-700/50 text-white placeholder-gray-500 focus:border-gray-500 focus:outline-none transition-all focus:ring-2 focus:ring-gray-500/20"
-                    disabled={status === 'loading'}
-                  />
-                </div>
+              <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (status === 'error') resetForm();
+                  }}
+                  placeholder="Email address"
+                  className="w-full px-6 py-3 rounded-full bg-white dark:bg-black border border-gray-100 dark:border-white/10 text-sm focus:outline-none focus:border-black dark:focus:border-white transition-all"
+                  disabled={status === 'loading'}
+                />
 
-                <motion.button
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.99 }}
+                <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="w-full py-4 rounded-xl bg-gray-700 hover:bg-gray-600 text-white font-semibold transition-all shadow-lg shadow-black/25 hover:shadow-black/40 disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="w-full py-3 rounded-full bg-black text-white dark:bg-white dark:text-black text-sm font-medium transition-all hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-50"
                 >
-                  {status === 'loading' ? (
-                    <>
-                      <motion.span
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                        className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
-                      />
-                      <span>Subscribing...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Subscribe</span>
-                      <FiArrowRight size={18} />
-                    </>
-                  )}
-                </motion.button>
+                  {status === 'loading' ? 'Joining...' : 'Subscribe'}
+                </button>
 
-                {/* Error message */}
-                <AnimatePresence>
-                  {status === 'error' && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="flex items-center gap-2 text-red-400 text-sm"
-                    >
-                      <FiX size={16} />
-                      <span>{message}</span>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Privacy note */}
-                <p className="text-gray-500 text-xs text-center">
-                  No spam, unsubscribe anytime. By subscribing, you agree to our{' '}
-                  <a href="/privacy-policy" className="text-gray-400 hover:underline">
-                    Privacy Policy
-                  </a>
-                  .
+                {status === 'error' && (
+                  <p className="mt-2 text-xs text-red-500">{message}</p>
+                )}
+                
+                <p className="mt-6 text-[10px] text-gray-400 dark:text-gray-500">
+                  Unsubscribe at any time.
                 </p>
               </form>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
-
-      {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-gray-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
     </motion.div>
   );
 }

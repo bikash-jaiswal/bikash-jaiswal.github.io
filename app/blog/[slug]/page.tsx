@@ -185,136 +185,74 @@ export default async function PostDetails({ params }: Props) {
     <>
       <ReadingProgress readingTime={post.readingTime || 1} />
       
-      <article className="relative">
-        {/* Hero Section */}
-        <div className="relative mb-12">
-          {post.coverImage && (
-            <div className="absolute inset-0 h-[400px] md:h-[500px]">
-              <Image
-                src={post.coverImage}
-                alt={post.title}
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-gray-900/60 via-gray-900/80 to-gray-900" />
+      <article className="min-h-screen py-24">
+        <div className="container-narrow">
+          <nav className="mb-12 animate-in fade-in slide-in-from-left-2 duration-500">
+            <Link
+              href="/blog"
+              className="link-elegant inline-flex items-center gap-1 text-sm font-medium text-gray-500 dark:text-gray-400"
+            >
+              <FiArrowLeft size={14} />
+              <span>Back to blog</span>
+            </Link>
+          </nav>
+
+          <header className="mb-20 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
+            <div className="flex items-center gap-4 mb-8">
+              <time dateTime={post.date} className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
+                {formattedDate}
+              </time>
+              <span className="text-gray-300 dark:text-gray-700">/</span>
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
+                {post.readingTime || 1} min read
+              </span>
             </div>
-          )}
-          
-          <div className="relative max-w-4xl mx-auto px-4 pt-8 pb-12">
-            <nav className="mb-8">
-              <Link
-                href="/blog"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-gray-300 hover:text-white hover:border-emerald-500/50 transition-all text-sm group"
-              >
-                <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" size={16} />
-                <span>Back to Blog</span>
-              </Link>
-            </nav>
 
-            <header className="space-y-6">
-              {post.tags && post.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {post.tags.slice(0, 3).map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 bg-emerald-500/20 backdrop-blur-sm text-emerald-300 rounded-full text-xs font-medium border border-emerald-500/30"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-black dark:text-white mb-8 leading-[1.1]">
+              {post.title}
+            </h1>
+            
+            {post.subtitle && (
+              <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl">
+                {post.subtitle}
+              </p>
+            )}
+
+            <div className="mt-12 flex items-center justify-between border-t border-gray-200 dark:border-white/10 pt-8">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-white/10 dark:to-white/5 flex items-center justify-center text-sm font-bold text-black dark:text-white border border-gray-200 dark:border-white/10">
+                  B
                 </div>
-              )}
-
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight">
-                {post.title}
-              </h1>
-              
-              {post.subtitle && (
-                <p className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-3xl">
-                  {post.subtitle}
-                </p>
-              )}
-
-              <div className="flex flex-wrap items-center gap-6 pt-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-blue-500 flex items-center justify-center">
-                    <FiUser size={18} className="text-white" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-white">{post.author || 'Bikash Jaiswal'}</p>
-                    <div className="flex items-center gap-3 text-xs text-gray-400">
-                      <span className="flex items-center gap-1">
-                        <FiCalendar size={12} />
-                        <time dateTime={post.date}>{formattedDate}</time>
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <FiClock size={12} />
-                        {post.readingTime || 1} min read
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="ml-auto">
-                  <ShareButtons title={post.title} url={`${SITE_URL}/blog/${slug}`} />
+                <div className="flex flex-col">
+                  <span className="text-sm font-semibold text-black dark:text-white">Bikash Jaiswal</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">Senior AI Engineer</span>
                 </div>
               </div>
-            </header>
-          </div>
-        </div>
-
-        {/* Content Section */}
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="flex gap-12">
-            <div className="flex-1 min-w-0">
-              <div className="prose prose-invert prose-lg max-w-none
-                prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight
-                prose-h2:text-2xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:scroll-mt-24
-                prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:scroll-mt-24
-                prose-p:text-gray-300 prose-p:leading-[1.8] prose-p:mb-6
-                prose-a:text-emerald-400 prose-a:no-underline prose-a:border-b prose-a:border-emerald-400/30 hover:prose-a:border-emerald-400 prose-a:transition-colors
-                prose-strong:text-white prose-strong:font-semibold
-                prose-code:text-emerald-300 prose-code:bg-gray-800/80 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:text-sm prose-code:before:content-none prose-code:after:content-none prose-code:font-normal
-                prose-pre:bg-gray-900/80 prose-pre:backdrop-blur-sm prose-pre:border prose-pre:border-gray-700/50 prose-pre:rounded-xl prose-pre:shadow-2xl
-                prose-blockquote:border-l-4 prose-blockquote:border-emerald-500 prose-blockquote:bg-gradient-to-r prose-blockquote:from-emerald-500/10 prose-blockquote:to-transparent prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-xl prose-blockquote:not-italic prose-blockquote:text-gray-300
-                prose-ul:text-gray-300 prose-ol:text-gray-300
-                prose-li:marker:text-emerald-400 prose-li:my-2
-                prose-img:rounded-xl prose-img:shadow-2xl prose-img:my-10
-                prose-hr:border-gray-800 prose-hr:my-12
-              ">
-                <MarkdownContent content={content} />
-              </div>
-            </div>
-            
-            <TableOfContents content={content} />
-          </div>
-        </div>
-
-        {/* Newsletter Section */}
-        <div className="max-w-4xl mx-auto px-4 mt-16">
-          <NewsletterSignup variant="card" />
-        </div>
-
-        {/* Footer Section */}
-        <footer className="max-w-4xl mx-auto px-4 mt-20">
-          <div className="pt-12 border-t border-gray-800/50">
-            <RelatedPosts posts={allPosts} currentSlug={slug} />
-            
-            <div className="flex items-center justify-between py-8 mt-8 border-t border-gray-800/50">
-              <Link
-                href="/blog"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-800/50 border border-gray-700/50 text-gray-300 hover:text-white hover:border-emerald-500/50 transition-all group"
-              >
-                <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" size={18} />
-                <span>View all posts</span>
-              </Link>
-              
               <ShareButtons title={post.title} url={`${SITE_URL}/blog/${slug}`} />
             </div>
+          </header>
+
+          <div className="prose prose-elegant">
+            <MarkdownContent content={content} />
           </div>
-        </footer>
+
+          <footer className="mt-32 pt-16 border-t border-gray-200 dark:border-white/10 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="space-y-20">
+              <RelatedPosts posts={allPosts} currentSlug={slug} />
+              
+              <div className="flex flex-col items-center gap-8 py-16">
+                <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">Thanks for reading.</p>
+                <Link
+                  href="/blog"
+                  className="link-elegant inline-flex items-center gap-1 text-sm font-semibold text-black dark:text-white"
+                >
+                  <FiArrowLeft size={14} />
+                  <span>View all articles</span>
+                </Link>
+              </div>
+            </div>
+          </footer>
+        </div>
       </article>
     </>
   );

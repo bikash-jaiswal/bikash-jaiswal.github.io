@@ -1,7 +1,8 @@
 import GitHubProjects from '../../components/GitHubProjects';
 import { Metadata } from 'next';
-import { FiGithub, FiCode, FiExternalLink } from 'react-icons/fi';
-import Link from 'next/link';
+import { FiGithub, FiExternalLink } from 'react-icons/fi';
+import SectionHeader from '../../components/ui/SectionHeader';
+import ProjectCard from '../../components/ui/ProjectCard';
 
 export const metadata: Metadata = {
   title: 'Projects',
@@ -23,50 +24,73 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/projects',
   },
-  keywords: [
-    'GitHub',
-    'projects',
-    'repositories',
-    'code',
-    'portfolio',
-    'developer',
-    'software engineer',
-  ],
 };
+
+const featuredProjects = [
+  {
+    title: 'Agentic System (MWA)',
+    description:
+      'Architected a complex agentic system using Google ADK and Azure AI Foundry. Features custom SSE token-streaming and multi-turn tool-calling orchestration.',
+    technologies: ['Google ADK', 'Azure AI', 'SSE Streaming', 'LangChain4j'],
+    status: 'Production',
+  },
+  {
+    title: 'Real-Time Communication',
+    description:
+      'High-performance backend for real-time messaging handling gRPC orchestration and Redis-backed state management.',
+    technologies: ['Python', 'gRPC', 'Redis', 'Kafka'],
+    status: 'Production',
+  },
+  {
+    title: 'LLM Enterprise Wrappers',
+    description:
+      'Custom LLM wrappers adapting LangChain4j to enterprise-grade Mistral endpoints with deep JSON-Schema and protocol stabilization.',
+    technologies: ['Java', 'LangChain4j', 'Mistral', 'JSON-Schema'],
+    status: 'Completed',
+  },
+];
 
 export default function ProjectsPage() {
   return (
-    <div className="min-h-screen">
-      <div className="max-w-6xl mx-auto px-4 py-12">
+    <div className="min-h-screen py-24">
+      <div className="container-narrow">
         {/* Hero Section */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-emerald-500/10 text-emerald-400 mb-6">
-            <FiCode size={32} />
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            My{' '}
-            <span className="bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
-              Projects
-            </span>
+        <div className="text-center mb-24">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-black dark:text-white mb-6">
+            Projects
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-8">
-            A collection of my open-source projects and experiments. 
-            From web applications to machine learning, here&apos;s what I&apos;ve been building.
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10">
+            A collection of production systems and open-source experiments.
           </p>
           <a
             href="https://github.com/bikash-jaiswal"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gray-800/50 hover:bg-gray-700/50 text-gray-300 hover:text-white rounded-xl border border-gray-700/50 hover:border-emerald-500/50 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-6 py-2 bg-black text-white dark:bg-white dark:text-black rounded-full text-sm font-medium transition-all hover:bg-gray-800 dark:hover:bg-gray-200"
           >
-            <FiGithub size={20} />
-            <span>View GitHub Profile</span>
-            <FiExternalLink size={16} className="opacity-50" />
+            <FiGithub size={18} />
+            <span>GitHub Profile</span>
+            <FiExternalLink size={14} className="opacity-50" />
           </a>
         </div>
 
-        {/* Projects Grid */}
-        <GitHubProjects />
+        {/* Featured Projects */}
+        <div className="mb-24">
+          <SectionHeader kicker="Selected Work" title="Featured Projects" />
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            {featuredProjects.map((project, index) => (
+              <ProjectCard key={project.title} {...project} delay={index * 0.1} />
+            ))}
+          </div>
+        </div>
+
+        {/* GitHub Projects */}
+        <div>
+          <SectionHeader kicker="Open Source" title="GitHub Repositories" />
+          <div className="mt-12">
+            <GitHubProjects />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -177,156 +177,85 @@ const ResourcesPage: React.FC = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="mb-12 text-center"
-      >
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-600">
-          Developer Resources
-        </h1>
-        <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-          A curated collection of tools, libraries, tutorials and resources I frequently use for
-          software development.
-        </p>
-      </motion.div>
+    <div className="min-h-screen py-24">
+      <div className="container-narrow">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-20"
+        >
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-black dark:text-white mb-6">
+            Resources
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            A curated collection of tools, libraries, and references I use for high-performance backend systems and machine learning.
+          </p>
+        </motion.div>
 
-      {/* Filters Section */}
-      <div className="mb-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-          {/* Search Box */}
-          <div className="relative flex-grow max-w-lg">
+        {/* Search and Quick Filters */}
+        <div className="mb-12 space-y-6">
+          <div className="relative">
+            <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="text"
               value={filters.searchTerm}
               onChange={(e) => handleFilterChange('searchTerm', e.target.value)}
               placeholder="Search resources..."
-              className="w-full py-3 pl-10 pr-4 bg-gray-800 rounded-lg border border-gray-700 focus:border-emerald-500 focus:outline-none text-white"
+              className="w-full py-3 pl-12 pr-12 bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/5 rounded-full text-sm focus:outline-none focus:border-black dark:focus:border-white transition-all"
             />
-            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             {filters.searchTerm && (
               <button
                 onClick={() => handleFilterChange('searchTerm', '')}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white focus:outline-none focus-ring rounded-full p-1"
-                aria-label="Clear search"
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-black dark:hover:text-white"
               >
-                <FiX size={16} />
+                <FiX size={14} />
               </button>
             )}
           </div>
 
-          {/* Filter Toggle Button */}
-          <div className="flex items-center space-x-4">
-            <button
-              onClick={() => setIsFilterExpanded(!isFilterExpanded)}
-              className="flex items-center px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg hover:border-emerald-500 focus:outline-none focus-ring transition-colors duration-200"
-            >
-              <FiFilter className="mr-2" />
-              <span>{isFilterExpanded ? 'Hide Filters' : 'Show Filters'}</span>
-            </button>
-
-            <button
-              onClick={() => handleFilterChange('showFavoritesOnly', !filters.showFavoritesOnly)}
-              className={`flex items-center px-4 py-2 rounded-lg transition-colors duration-200 focus:outline-none focus-ring ${
-                filters.showFavoritesOnly
-                  ? 'bg-yellow-600/20 text-yellow-400 border border-yellow-500/30'
-                  : 'bg-gray-800 border border-gray-700 hover:border-yellow-500/30'
-              }`}
-            >
-              <FiStar className={`mr-2 ${filters.showFavoritesOnly ? 'fill-yellow-400' : ''}`} />
-              <span>Favorites</span>
-            </button>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {categories.map((category) => (
+              <button
+                key={category.value}
+                onClick={() => handleFilterChange('category', category.value)}
+                className={`px-4 py-1.5 text-xs font-medium rounded-full transition-all ${
+                  filters.category === category.value
+                    ? 'bg-black text-white dark:bg-white dark:text-black'
+                    : 'bg-gray-50 text-gray-500 hover:text-black dark:bg-white/5 dark:text-gray-400 dark:hover:text-white border border-gray-100 dark:border-white/5'
+                }`}
+              >
+                {category.label}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Expanded Filter Panel */}
-        {isFilterExpanded && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="bg-gray-800 border border-gray-700 rounded-lg p-4 mb-4"
-          >
-            <div className="flex flex-wrap items-center justify-between mb-4">
-              <h3 className="font-medium mb-2">Categories</h3>
-
+        {/* Resources Grid */}
+        <div className="grid gap-6">
+          {filteredResources.length > 0 ? (
+            filteredResources.map((resource) => (
+              <ResourceCard
+                key={resource.id}
+                resource={resource}
+                onToggleFavorite={handleToggleFavorite}
+              />
+            ))
+          ) : (
+            <div className="text-center py-24 text-gray-500 dark:text-gray-400">
+              <p className="text-sm">No resources match your search.</p>
               <button
                 onClick={handleResetFilters}
-                className="text-xs text-emerald-400 hover:underline focus:outline-none focus-ring px-1 rounded"
+                className="mt-4 text-xs font-medium text-black dark:text-white hover:underline"
               >
-                Reset All Filters
+                Clear all filters
               </button>
             </div>
-
-            {/* Category Filters */}
-            <div className="flex flex-wrap gap-2 mb-6">
-              {categories.map((category) => (
-                <button
-                  key={category.value}
-                  onClick={() => handleFilterChange('category', category.value)}
-                  className={`px-3 py-1 text-sm rounded-full transition-colors ${
-                    filters.category === category.value
-                      ? 'bg-emerald-600/20 text-emerald-400 border border-emerald-500/30'
-                      : 'bg-gray-700 text-gray-300 border border-gray-600 hover:border-emerald-500/30'
-                  }`}
-                >
-                  {category.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Tag Filters */}
-            <h3 className="font-medium mb-2">Tags</h3>
-            <div className="flex flex-wrap gap-2">
-              {availableTags.map((tag) => (
-                <button
-                  key={tag}
-                  onClick={() => handleTagToggle(tag)}
-                  className={`px-3 py-1 text-sm rounded-full transition-colors ${
-                    filters.tags.includes(tag)
-                      ? 'bg-teal-600/20 text-teal-400 border border-teal-500/30'
-                      : 'bg-gray-700 text-gray-300 border border-gray-600 hover:border-teal-500/30'
-                  }`}
-                >
-                  #{tag}
-                </button>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </div>
-
-      {/* Results count */}
-      <div className="mb-6 text-gray-400">
-        Found {filteredResources.length} resource{filteredResources.length !== 1 ? 's' : ''}
-      </div>
-
-      {/* Resources Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredResources.length > 0 ? (
-          filteredResources.map((resource) => (
-            <ResourceCard
-              key={resource.id}
-              resource={resource}
-              onToggleFavorite={handleToggleFavorite}
-            />
-          ))
-        ) : (
-          <div className="col-span-full text-center py-12 text-gray-400">
-            <p className="text-lg mb-2">No resources match your filters</p>
-            <button
-              onClick={handleResetFilters}
-              className="text-emerald-400 hover:underline focus:outline-none focus-ring px-1 rounded"
-            >
-              Reset All Filters
-            </button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
-};
+}
 
 export default ResourcesPage;

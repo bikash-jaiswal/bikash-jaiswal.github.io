@@ -11,7 +11,7 @@
 import { Suspense } from 'react';
 import { getPostMetadata } from '../../lib/posts';
 import { PostMetadata } from '../../types/blog';
-import { ErrorState } from '../../components/ErrorState';
+import { ErrorState } from '../../components/ui/State';
 import { LoadingState } from '../../components/LoadingState';
 import ClientBlogContent from './ClientBlogContent';
 import { Metadata } from 'next';
@@ -62,18 +62,27 @@ export default async function BlogPage(): Promise<React.ReactElement> {
 
   if (error) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="container-narrow py-24">
         <ErrorState error={error} showHomeLink />
       </div>
     );
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="font-bold text-white text-2xl mb-8 text-center">Blog Posts</h1>
-      <Suspense fallback={<LoadingState count={3} />}>
-        <ClientBlogContent initialPosts={posts} />
-      </Suspense>
+    <div className="min-h-screen py-24">
+      <div className="container-narrow">
+        <header className="mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-black dark:text-white mb-6">
+            Blog
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl">
+            Articles and insights on software development, technology, and personal projects.
+          </p>
+        </header>
+        <Suspense fallback={<LoadingState count={3} />}>
+          <ClientBlogContent initialPosts={posts} />
+        </Suspense>
+      </div>
     </div>
   );
 }

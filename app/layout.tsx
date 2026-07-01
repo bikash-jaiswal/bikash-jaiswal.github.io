@@ -15,6 +15,7 @@
 import '../styles/globals.css';
 import Navbar from '../components/Header';
 import Footer from '../components/Footer';
+import PageTransition from '../components/PageTransition';
 import { Metadata } from 'next';
 import { Inter, Bricolage_Grotesque } from 'next/font/google';
 
@@ -105,19 +106,18 @@ export const metadata: Metadata = {
     default: 'Bikash Jaiswal | Developer, Investor and Entrepreneur',
     template: '%s | Bikash Jaiswal',
   },
-  description:
-    'Portfolio and blog of Bikash Jaiswal - Software Developer, Investor and Tech Entrepreneur sharing insights on technology, programming, and business',
+  description: 'Senior AI Engineer sharing insights on agentic systems, distributed architectures, and large language models.',
   keywords: [
     'Bikash Jaiswal',
-    'developer',
-    'software engineer',
-    'portfolio',
-    'blog',
-    'technology',
-    'programming',
-    'web development',
-    'system design',
-    'software architecture',
+    'Senior AI Engineer',
+    'Agentic Systems',
+    'AI Orchestration',
+    'Google ADK',
+    'Azure AI Foundry',
+    'Distributed Systems',
+    'Large Language Models',
+    'Software Architecture',
+    'System Design',
   ],
   authors: [{ name: 'Bikash Jaiswal' }],
   creator: 'Bikash Jaiswal',
@@ -178,15 +178,34 @@ interface RootLayoutProps {
  */
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className="dark" data-theme="midnight">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.theme === 'dark' || !('theme' in localStorage)) {
+                  document.documentElement.classList.add('dark')
+                } else {
+                  document.documentElement.classList.remove('dark')
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
+      </head>
       <body
-        className={`${inter.variable} ${display.variable} min-h-screen flex flex-col bg-dark-900 text-gray-300 antialiased font-sans`}
+        className={`${inter.variable} ${display.variable} min-h-screen bg-background text-foreground antialiased font-sans selection:bg-muted selection:text-foreground`}
       >
-        <main className="flex-grow max-w-7xl mx-auto px-4 w-full" role="main">
+        <div className="flex flex-col min-h-screen">
           <Navbar />
-          <div>{children}</div>
+          <main className="flex-grow flex flex-col" role="main">
+            <PageTransition>
+              {children}
+            </PageTransition>
+          </main>
           <Footer />
-        </main>
+        </div>
       </body>
     </html>
   );

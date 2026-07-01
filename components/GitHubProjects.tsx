@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
-import { motion } from 'framer-motion';
-import { FiFilter, FiSearch, FiX } from 'react-icons/fi';
-import GitHubProject from './GitHubProject';
+import { useState, useEffect } from 'react';
+import { FiGithub, FiStar, FiExternalLink } from 'react-icons/fi';
+import Card from './ui/Card';
+import TechTag from './ui/TechTag';
 
 interface GitHubRepo {
   id: number;
@@ -12,218 +12,131 @@ interface GitHubRepo {
   html_url: string;
   homepage: string | null;
   stargazers_count: number;
-  forks_count: number;
-  watchers_count: number;
   language: string | null;
   topics: string[];
   fork: boolean;
-  updated_at: string;
+}
+
+interface GitHubProjectProps {
+  name: string;
+  description: string;
+  url: string;
+  homepage?: string;
+  stars: number;
+  language?: string;
+  topics: string[];
+  index?: number;
+}
+
+export function GitHubProject({
+  name,
+  description,
+  url,
+  homepage,
+  stars,
+  language,
+  topics,
+  index = 0,
+}: GitHubProjectProps) {
+  return (
+    <Card delay={index * 0.05} className="group flex flex-col h-full">
+      <div className="flex flex-col gap-4 h-full">
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="text-lg font-bold tracking-tight text-black dark:text-white group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors truncate">
+            {name}
+          </h3>
+          <div className="flex items-center gap-1 text-[10px] font-medium text-gray-500 dark:text-gray-400">
+            <FiStar size={12} />
+            <span>{stars}</span>
+          </div>
+        </div>
+
+        <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
+          {description || 'No description available'}
+        </p>
+
+        <div className="mt-auto pt-4 flex flex-wrap gap-2">
+          {language && <TechTag>{language}</TechTag>}
+          {topics.slice(0, 2).map((topic) => (
+            <TechTag key={topic}>{topic}</TechTag>
+          ))}
+        </div>
+
+        <div className="mt-4 pt-4 border-t border-gray-100 dark:border-white/5 flex gap-4">
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-xs font-medium text-black dark:text-white hover:underline"
+          >
+            Code
+            <FiGithub size={12} />
+          </a>
+          {homepage && (
+            <a
+              href={homepage}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-xs font-medium text-black dark:text-white hover:underline"
+            >
+              Demo
+              <FiExternalLink size={12} />
+            </a>
+          )}
+        </div>
+      </div>
+    </Card>
+  );
 }
 
 export default function GitHubProjects() {
   const [projects, setProjects] = useState<GitHubRepo[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         setLoading(true);
         const response = await fetch(
-          'https://api.github.com/users/bikash-jaiswal/repos?sort=updated&direction=desc&per_page=100'
+          'https://api.github.com/users/bikash-jaiswal/repos?sort=updated&direction=desc&per_page=12'
         );
-
-        if (!response.ok) {
-          throw new Error(`GitHub API responded with status: ${response.status}`);
-        }
-
+        if (!response.ok) throw new Error();
         const data: GitHubRepo[] = await response.json();
-        const filteredData = data.filter((repo) => !repo.fork);
-        setProjects(filteredData);
+        setProjects(data.filter((repo) => !repo.fork));
       } catch (err) {
-        console.error('Error fetching GitHub repos:', err);
-        setError('Failed to load GitHub projects. Please try again later.');
+        console.error(err);
       } finally {
         setLoading(false);
       }
     };
-
     fetchProjects();
   }, []);
-
-  // Extract unique languages
-  const languages = useMemo(() => {
-    const langSet = new Set<string>();
-    projects.forEach((p) => {
-      if (p.language) langSet.add(p.language);
-    });
-    return Array.from(langSet).sort();
-  }, [projects]);
-
-  // Filter projects
-  const filteredProjects = useMemo(() => {
-    return projects.filter((project) => {
-      const matchesSearch = 
-        project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.topics?.some((t) => t.toLowerCase().includes(searchTerm.toLowerCase()));
-      
-      const matchesLanguage = !selectedLanguage || project.language === selectedLanguage;
-      
-      return matchesSearch && matchesLanguage;
-    });
-  }, [projects, searchTerm, selectedLanguage]);
-
-  // Stats
-  const totalStars = useMemo(() => 
-    projects.reduce((sum, p) => sum + p.stargazers_count, 0), 
-    [projects]
-  );
 
   if (loading) {
     return (
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {[...Array(6)].map((_, index) => (
-          <div key={index} className="bg-gray-900/80 border border-gray-800/50 rounded-2xl p-6 animate-pulse">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-gray-800 rounded-xl" />
-              <div className="flex-1">
-                <div className="h-5 bg-gray-800 rounded w-2/3 mb-2" />
-                <div className="h-3 bg-gray-800 rounded w-1/3" />
-              </div>
-            </div>
-            <div className="h-4 bg-gray-800 rounded w-full mb-2" />
-            <div className="h-4 bg-gray-800 rounded w-4/5 mb-4" />
-            <div className="flex gap-2 mb-4">
-              <div className="h-6 bg-gray-800 rounded-lg w-16" />
-              <div className="h-6 bg-gray-800 rounded-lg w-20" />
-            </div>
-            <div className="flex gap-3">
-              <div className="h-10 bg-gray-800 rounded-xl flex-1" />
-              <div className="h-10 bg-gray-800 rounded-xl flex-1" />
-            </div>
-          </div>
+          <div key={index} className="h-48 rounded-xl border border-gray-100 dark:border-white/5 bg-gray-50 dark:bg-white/5 animate-pulse" />
         ))}
       </div>
     );
   }
 
-  if (error) {
-    return (
-      <div className="text-center py-16">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-500/10 text-red-400 mb-4">
-          <FiX size={32} />
-        </div>
-        <h2 className="text-white text-xl font-semibold mb-2">Something went wrong</h2>
-        <p className="text-gray-400 mb-6">{error}</p>
-        <button
-          onClick={() => window.location.reload()}
-          className="px-6 py-2.5 bg-gray-700 hover:bg-gray-600 text-white rounded-xl transition-colors"
-        >
-          Try Again
-        </button>
-      </div>
-    );
-  }
-
   return (
-    <div className="space-y-8">
-      {/* Stats Bar */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="flex flex-wrap items-center justify-center gap-6 p-4 bg-gray-900/50 rounded-2xl border border-gray-800/50"
-      >
-        <div className="text-center px-6">
-          <div className="text-2xl font-bold text-white">{projects.length}</div>
-          <div className="text-sm text-gray-400">Repositories</div>
-        </div>
-        <div className="w-px h-10 bg-gray-800 hidden sm:block" />
-        <div className="text-center px-6">
-          <div className="text-2xl font-bold text-yellow-400">{totalStars}</div>
-          <div className="text-sm text-gray-400">Total Stars</div>
-        </div>
-        <div className="w-px h-10 bg-gray-800 hidden sm:block" />
-        <div className="text-center px-6">
-          <div className="text-2xl font-bold text-blue-400">{languages.length}</div>
-          <div className="text-sm text-gray-400">Languages</div>
-        </div>
-      </motion.div>
-
-      {/* Search and Filter */}
-      <div className="flex flex-col sm:flex-row gap-4">
-        {/* Search */}
-        <div className="relative flex-1">
-          <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
-          <input
-            type="text"
-            placeholder="Search projects..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 bg-gray-900/80 border border-gray-800/50 rounded-xl text-white placeholder:text-gray-500 focus:outline-none focus:border-gray-500 transition-colors"
-          />
-          {searchTerm && (
-            <button
-              onClick={() => setSearchTerm('')}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white"
-            >
-              <FiX size={16} />
-            </button>
-          )}
-        </div>
-
-        {/* Language Filter */}
-        <div className="relative">
-          <FiFilter className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
-          <select
-            value={selectedLanguage || ''}
-            onChange={(e) => setSelectedLanguage(e.target.value || null)}
-            className="appearance-none pl-11 pr-10 py-3 bg-gray-900/80 border border-gray-800/50 rounded-xl text-white focus:outline-none focus:border-gray-500 transition-colors cursor-pointer min-w-[160px]"
-          >
-            <option value="">All Languages</option>
-            {languages.map((lang) => (
-              <option key={lang} value={lang}>{lang}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      {/* Results count */}
-      {(searchTerm || selectedLanguage) && (
-        <p className="text-gray-400 text-sm">
-          Showing {filteredProjects.length} of {projects.length} projects
-          {selectedLanguage && <span className="text-gray-400"> in {selectedLanguage}</span>}
-        </p>
-      )}
-
-      {/* Projects Grid */}
-      {filteredProjects.length > 0 ? (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredProjects.map((project, index) => (
-            <GitHubProject
-              key={project.id}
-              name={project.name}
-              description={project.description || 'No description available'}
-              url={project.html_url}
-              homepage={project.homepage || undefined}
-              stars={project.stargazers_count}
-              forks={project.forks_count}
-              watchers={project.watchers_count}
-              language={project.language || undefined}
-              topics={project.topics || []}
-              updatedAt={project.updated_at}
-              index={index}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-16">
-          <p className="text-gray-400 text-lg mb-2">No projects found</p>
-          <p className="text-gray-500 text-sm">Try adjusting your search or filters</p>
-        </div>
-      )}
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {projects.map((project, index) => (
+        <GitHubProject
+          key={project.id}
+          name={project.name}
+          description={project.description}
+          url={project.html_url}
+          homepage={project.homepage || undefined}
+          stars={project.stargazers_count}
+          language={project.language || undefined}
+          topics={project.topics || []}
+          index={index}
+        />
+      ))}
     </div>
   );
 }

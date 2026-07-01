@@ -44,64 +44,43 @@ export default async function ReadingPage() {
   const readingList = await getReadingMetadata();
 
   return (
-    <div className="min-h-screen py-12">
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-12">
-          <div className="flex items-center gap-3 mb-4">
-            <FiBook className="w-8 h-8 text-emerald-400" />
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Stuff I am Reading</h1>
-          </div>
-          <p className="text-gray-600 dark:text-gray-400 text-lg">
-            A curated list of books, articles, and papers I&apos;m currently reading or have found valuable.
+    <div className="min-h-screen py-24">
+      <div className="container-narrow">
+        <header className="mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-black dark:text-white mb-6">
+            Reading
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl">
+            A curated list of books and articles that have shaped my perspective on systems and engineering.
           </p>
-        </div>
+        </header>
 
         {readingList.length === 0 ? (
-          <div className="text-center py-12">
-            <FiBook className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-400">No reading items yet. Add markdown files to content/reading/</p>
+          <div className="text-center py-24">
+            <p className="text-sm text-gray-500 dark:text-gray-400">No items yet.</p>
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-4">
             {readingList.map((item: ReadingMetadata) => (
               <Link
                 key={item.slug}
                 href={`/reading/${item.slug}`}
-                className="flex items-center gap-4 bg-gray-100 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-xl p-4 hover:border-emerald-500/30 transition-all duration-300 group"
+                className="group flex flex-col gap-3 p-6 rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/[0.02] transition-all duration-300 hover:border-gray-300 dark:hover:border-white/20 hover:shadow-lg"
               >
-                {item.coverImage ? (
-                  <div className="relative w-12 h-16 flex-shrink-0 rounded-lg overflow-hidden">
-                    <Image
-                      src={item.coverImage}
-                      alt={item.title}
-                      fill
-                      className="object-cover"
-                      sizes="48px"
-                    />
-                  </div>
-                ) : (
-                  <div className="w-12 h-16 flex-shrink-0 rounded-lg bg-gradient-to-br from-emerald-500/20 to-blue-500/20 flex items-center justify-center">
-                    <FiBook className="w-5 h-5 text-emerald-400" />
-                  </div>
-                )}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-emerald-400 transition-colors truncate">
-                      {item.title}
-                    </h2>
-                    <FiArrowRight className="w-4 h-4 flex-shrink-0 text-gray-500 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all" />
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    {item.author && <span>by {item.author}</span>}
-                    {item.author && item.notes && <span className="mx-2">·</span>}
-                    {item.notes && <span className="text-gray-500 dark:text-gray-500 italic">{item.notes}</span>}
-                  </p>
-                </div>
-                <div className="flex gap-2 flex-shrink-0">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium border ${categoryColors[item.category]}`}>
+                <div className="flex items-center justify-between gap-4">
+                  <h2 className="text-xl md:text-2xl font-bold tracking-tight text-black dark:text-white leading-tight">
+                    <span className="link-elegant">{item.title}</span>
+                  </h2>
+                  <span className="shrink-0 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400">
                     {item.category}
                   </span>
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusColors[item.status]}`}>
+                </div>
+                
+                <div className="flex items-center justify-between gap-4">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                    {item.author && <span>{item.author}</span>}
+                  </p>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500">
                     {item.status}
                   </span>
                 </div>

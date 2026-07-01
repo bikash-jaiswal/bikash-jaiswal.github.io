@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import { usePosts } from '../../lib/hooks';
 import { SearchBar } from '../../components/SearchBar';
-import { EmptyState } from '../../components/EmptyState';
+import { EmptyState } from '../../components/ui/State';
 import { PostMetadata } from '../../types/blog';
 
 const BlogPostPreview = dynamic(
