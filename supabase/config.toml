@@ -1,0 +1,12 @@
+project_id = "gmfdpslpexvtfhrihzud"
+
+[auth]
+# Personal site: only the owner may hold an account. Disabling signup blocks
+# new users at the auth layer (the only_owner_signup DB trigger also enforces
+# it at the database layer).
+enable_signup = false
+
+[functions.enrich-link]
+# Reject unauthenticated calls at the gateway so only signed-in users can
+# invoke the enrichment agent (protects your Groq quota).
+verify_jwt = true
