@@ -16,6 +16,10 @@ import '../styles/globals.css';
 import Navbar from '../components/Header';
 import Footer from '../components/Footer';
 import PageTransition from '../components/PageTransition';
+import CommandPalette from '../components/CommandPalette';
+import QuickAddBookmarkModal from '../components/QuickAddBookmarkModal';
+import AuthModal from '../components/AuthModal';
+import { getGlobalSearchItems } from '../lib/search';
 import { Metadata } from 'next';
 import { Inter, Bricolage_Grotesque } from 'next/font/google';
 
@@ -122,6 +126,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Bikash Jaiswal' }],
   creator: 'Bikash Jaiswal',
   publisher: 'Bikash Jaiswal',
+  manifest: '/manifest.json',
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
@@ -176,7 +181,9 @@ interface RootLayoutProps {
  * 
  * @param children - The page content to render within the layout
  */
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const searchItems = await getGlobalSearchItems();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -199,6 +206,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <div className="flex flex-col min-h-screen">
           <Navbar />
+          <CommandPalette items={searchItems} />
+          <QuickAddBookmarkModal />
+          <AuthModal />
           <main className="flex-grow flex flex-col" role="main">
             <PageTransition>
               {children}

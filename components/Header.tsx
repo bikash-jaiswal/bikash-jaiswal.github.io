@@ -16,7 +16,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMenu, FiX, FiArrowRight } from 'react-icons/fi';
+import { FiMenu, FiX, FiArrowRight, FiSearch, FiBookmark } from 'react-icons/fi';
 import ThemeToggle from './ThemeToggle';
 
 /**
@@ -128,7 +128,31 @@ const Navbar: React.FC = () => {
             ))}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('open-command-palette'))}
+              className="flex items-center gap-2 px-2.5 py-1 text-xs font-medium text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white rounded-full border border-gray-200/80 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/20 bg-gray-50/80 dark:bg-white/[0.03] transition-colors"
+              aria-label="Search and commands (Cmd+K)"
+              title="Search and commands (Cmd+K)"
+            >
+              <FiSearch size={13} />
+              <span className="hidden sm:inline">Search</span>
+              <kbd className="hidden sm:inline-block text-[10px] tracking-wide font-mono bg-white dark:bg-white/10 px-1 py-0.2 rounded border border-gray-200/60 dark:border-white/10">
+                ⌘K
+              </kbd>
+            </button>
+            <Link
+              href="/bookmarks"
+              className={`p-2 rounded-full border transition-colors ${
+                pathname === '/bookmarks'
+                  ? 'border-black bg-black text-white dark:border-white dark:bg-white dark:text-black'
+                  : 'border-gray-200/80 dark:border-white/10 text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white bg-gray-50/80 dark:bg-white/[0.03]'
+              }`}
+              aria-label="Saved Bookmarks"
+              title="Saved Bookmarks & Posts"
+            >
+              <FiBookmark size={14} />
+            </Link>
             <ThemeToggle />
             <button
               className="md:hidden text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white"
@@ -150,6 +174,33 @@ const Navbar: React.FC = () => {
               className="absolute left-0 right-0 top-full mt-4 mx-4 origin-top rounded-2xl border border-gray-200 bg-white p-4 shadow-xl dark:border-white/10 dark:bg-black md:hidden"
             >
               <div className="flex flex-col gap-2">
+                <button
+                  onClick={() => {
+                    setMenuOpen(false);
+                    window.dispatchEvent(new CustomEvent('open-command-palette'));
+                  }}
+                  className="flex items-center justify-between rounded-lg px-4 py-2 text-base font-medium text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-white/5 transition-colors text-left"
+                >
+                  <span className="flex items-center gap-2">
+                    <FiSearch size={16} />
+                    <span>Search & Commands</span>
+                  </span>
+                  <kbd className="text-xs font-mono bg-gray-100 dark:bg-white/10 px-1.5 py-0.5 rounded">
+                    ⌘K
+                  </kbd>
+                </button>
+                <Link
+                  href="/bookmarks"
+                  className={`flex items-center gap-2 rounded-lg px-4 py-2 text-base font-medium ${
+                    pathname === '/bookmarks'
+                      ? 'bg-gray-100 text-black dark:bg-white/10 dark:text-white font-semibold'
+                      : 'text-gray-500 dark:text-gray-400'
+                  }`}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <FiBookmark size={16} />
+                  <span>Bookmarks</span>
+                </Link>
                 {navItems.map((item) => (
                   <Link
                     key={item.href}

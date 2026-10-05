@@ -56,19 +56,6 @@ export function SearchBar({
     };
   }, [debouncedSearch]);
 
-  // Keyboard shortcut (Cmd/Ctrl + K)
-  useEffect(() => {
-    const handleGlobalKeyDown = (e: globalThis.KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        const input = document.querySelector<HTMLInputElement>('[data-search-input]');
-        input?.focus();
-      }
-    };
-    window.addEventListener('keydown', handleGlobalKeyDown);
-    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
-  }, []);
-
   return (
     <div className="w-full max-w-2xl mx-auto mb-12 space-y-6">
       {/* Search Input */}
