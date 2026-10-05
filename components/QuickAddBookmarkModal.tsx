@@ -10,6 +10,7 @@ import {
   FiTwitter,
   FiGithub,
   FiStar,
+  FiLock,
   FiCheck,
   FiCpu,
   FiArrowRight,
@@ -22,6 +23,7 @@ export default function QuickAddBookmarkModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [url, setUrl] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isPrivate, setIsPrivate] = useState(false);
   const [status, setStatus] = useState<'idle' | 'analyzing' | 'saved' | 'error'>('idle');
   const [enrichedResult, setEnrichedResult] = useState<EnrichedBookmarkDetails | null>(null);
   const [errorMessage, setErrorMessage] = useState('');
@@ -33,6 +35,7 @@ export default function QuickAddBookmarkModal() {
       const customEvent = e as CustomEvent<{ url?: string }>;
       setUrl(customEvent?.detail?.url || '');
       setIsFavorite(false);
+      setIsPrivate(false);
       setIsOpen(true);
       setStatus('idle');
       setEnrichedResult(null);
@@ -56,6 +59,7 @@ export default function QuickAddBookmarkModal() {
     setIsOpen(false);
     setUrl('');
     setIsFavorite(false);
+    setIsPrivate(false);
     setStatus('idle');
     setEnrichedResult(null);
   };
@@ -81,6 +85,7 @@ export default function QuickAddBookmarkModal() {
         category: enriched.category,
         tags: enriched.tags,
         isFavorite,
+        isPublic: !isPrivate,
         source: enriched.source,
       });
 
@@ -248,18 +253,33 @@ export default function QuickAddBookmarkModal() {
                 </div>
 
                 <div className="flex items-center justify-between pt-2">
-                  <button
-                    type="button"
-                    onClick={() => setIsFavorite(!isFavorite)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
-                      isFavorite
-                        ? 'border-amber-400 bg-amber-400/10 text-amber-500'
-                        : 'border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400'
-                    }`}
-                  >
-                    <FiStar className={isFavorite ? 'fill-current' : ''} size={14} />
-                    <span>{isFavorite ? 'Favorited' : 'Mark Favorite'}</span>
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setIsFavorite(!isFavorite)}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                        isFavorite
+                          ? 'border-amber-400 bg-amber-400/10 text-amber-500'
+                          : 'border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400'
+                      }`}
+                    >
+                      <FiStar className={isFavorite ? 'fill-current' : ''} size={14} />
+                      <span>{isFavorite ? 'Favorited' : 'Mark Favorite'}</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setIsPrivate(!isPrivate)}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                        isPrivate
+                          ? 'border-red-400 bg-red-400/10 text-red-500'
+                          : 'border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400'
+                      }`}
+                      title="Private bookmarks are only visible to you"
+                    >
+                      <FiLock size={13} />
+                      <span>{isPrivate ? 'Private' : 'Public'}</span>
+                    </button>
+                  </div>
 
                   <div className="flex items-center gap-2">
                     <button

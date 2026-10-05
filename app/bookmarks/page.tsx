@@ -212,15 +212,17 @@ export default function BookmarksPage() {
           </div>
 
           <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => setShowConfigHelp(!showConfigHelp)}
-              className="p-2 text-xs font-medium text-gray-500 hover:text-black dark:hover:text-white rounded-xl border border-gray-200 dark:border-white/10 flex items-center gap-1.5 transition-colors"
-              title="View Supabase configuration instructions"
-            >
-              <FiHelpCircle size={14} />
-              <span className="hidden sm:inline">Supabase Setup</span>
-            </button>
+            {!isSupabaseConfigured() && (
+              <button
+                type="button"
+                onClick={() => setShowConfigHelp(!showConfigHelp)}
+                className="p-2 text-xs font-medium text-gray-500 hover:text-black dark:hover:text-white rounded-xl border border-gray-200 dark:border-white/10 flex items-center gap-1.5 transition-colors"
+                title="View Supabase configuration instructions"
+              >
+                <FiHelpCircle size={14} />
+                <span className="hidden sm:inline">Supabase Setup</span>
+              </button>
+            )}
 
             {user ? (
               <button
@@ -242,14 +244,16 @@ export default function BookmarksPage() {
               </button>
             )}
 
-            <button
-              type="button"
-              onClick={handleOpenAddModal}
-              className="px-4 py-1.5 text-xs font-medium bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl flex items-center gap-1.5 transition-colors shadow-sm"
-            >
-              <FiPlus size={14} />
-              <span>+ Add Bookmark</span>
-            </button>
+            {user && (
+              <button
+                type="button"
+                onClick={handleOpenAddModal}
+                className="px-4 py-1.5 text-xs font-medium bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl flex items-center gap-1.5 transition-colors shadow-sm"
+              >
+                <FiPlus size={14} />
+                <span>+ Add Bookmark</span>
+              </button>
+            )}
           </div>
         </div>
 
@@ -312,6 +316,8 @@ export default function BookmarksPage() {
               )}
             </div>
 
+            {/* Read-status and favorites are owner metadata — meaningless to guests */}
+            {user && (
             <div className="flex flex-wrap items-center gap-2">
               {/* Read / Unread Filter Pills */}
               <div className="flex items-center gap-1 p-1 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/5 rounded-xl text-xs">
@@ -369,6 +375,7 @@ export default function BookmarksPage() {
                 <span>Favorites</span>
               </button>
             </div>
+            )}
           </div>
 
           {/* Category Chips */}
@@ -444,6 +451,7 @@ export default function BookmarksPage() {
                 onToggleRead={handleToggleRead}
                 onTagClick={handleTagToggle}
                 onDelete={handleDelete}
+                readOnly={!user}
               />
             ))}
           </div>
@@ -456,15 +464,19 @@ export default function BookmarksPage() {
             <p className="text-xs text-gray-500 dark:text-gray-400 max-w-sm mx-auto mb-4">
               {filters.searchTerm || filters.category !== 'all' || filters.showFavoritesOnly
                 ? 'No saved items match your active filters.'
-                : 'You have not saved any LinkedIn resources or links yet.'}
+                : user
+                  ? 'You have not saved any LinkedIn resources or links yet.'
+                  : 'No public bookmarks have been shared yet.'}
             </p>
-            <button
-              type="button"
-              onClick={handleOpenAddModal}
-              className="px-4 py-2 text-xs font-medium bg-black text-white dark:bg-white dark:text-black rounded-xl hover:opacity-90 transition-opacity"
-            >
-              + Save Your First Link
-            </button>
+            {user && (
+              <button
+                type="button"
+                onClick={handleOpenAddModal}
+                className="px-4 py-2 text-xs font-medium bg-black text-white dark:bg-white dark:text-black rounded-xl hover:opacity-90 transition-opacity"
+              >
+                + Save Your First Link
+              </button>
+            )}
           </div>
         )}
       </div>

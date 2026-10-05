@@ -2,28 +2,39 @@ import { SupabaseClient } from '@supabase/supabase-js';
 import { Bookmark, BookmarkServiceInterface, UserProfile } from '../../types/bookmark';
 import { getSupabaseClient } from './supabaseClient';
 
-/** Row shape of public.bookmarks (snake_case) — mirrors supabase/schema.sql. */
+/**
+ * Row shape of public.bookmarks (snake_case) — mirrors supabase/schema.sql.
+ * Guest selects only return PUBLIC_COLUMNS, so owner-only fields are optional.
+ */
 interface BookmarkRow {
   id: string;
-  user_id: string;
+  user_id?: string;
   url: string;
   title: string;
   author: string | null;
   summary: string | null;
-  raw_content: string | null;
+  raw_content?: string | null;
   image_url: string | null;
   category: string;
   tags: string[] | null;
   source: string;
-  is_favorite: boolean;
-  is_read: boolean;
+  is_favorite?: boolean;
+  is_read?: boolean;
+  is_public?: boolean;
   created_at: string;
 }
+
+/**
+ * Columns granted to the anon role (see public_read_bookmarks migration).
+ * raw_content and user_id are intentionally excluded — guests never see them.
+ */
+const PUBLIC_COLUMNS =
+  'id,url,title,author,summary,image_url,category,tags,source,created_at';
 
 function rowToBookmark(row: BookmarkRow): Bookmark {
   return {
     id: row.id,
-    userId: row.user_id,
+    userId: row.user_id ?? '',
     url: row.url,
     title: row.title,
     author: row.author ?? undefined,
@@ -34,6 +45,7 @@ function rowToBookmark(row: BookmarkRow): Bookmark {
     tags: row.tags || [],
     isFavorite: !!row.is_favorite,
     isRead: !!row.is_read,
+    isPublic: row.is_public ?? true,
     source: (row.source as Bookmark['source']) || 'linkedin',
     createdAt: row.created_at,
   };
@@ -169,9 +181,15 @@ export class SupabaseBookmarkService implements BookmarkServiceInterface {
 
   async getBookmarks(): Promise<Bookmark[]> {
     const client = this.getClient();
+    // Guests hit RLS as anon and are only granted PUBLIC_COLUMNS — a bare
+    // select('*') would error on raw_content, so pick columns by session.
+    const {
+      data: { session },
+    } = await client.auth.getSession();
+
     const { data, error } = await client
       .from('bookmarks')
-      .select('*')
+      .select(session ? '*' : PUBLIC_COLUMNS)
       .order('created_at', { ascending: false });
 
     if (error) {
@@ -179,11 +197,23 @@ export class SupabaseBookmarkService implements BookmarkServiceInterface {
       return [];
     }
 
-    return ((data || []) as BookmarkRow[]).map(rowToBookmark);
+    // The dynamic select list isn't statically resolvable by postgrest-js's
+    // type-level parser (no generated Database types) — cast through unknown.
+    return ((data || []) as unknown as BookmarkRow[]).map(rowToBookmark);
   }
 
   async getTags(): Promise<string[]> {
     const client = this.getClient();
+    const {
+      data: { session },
+    } = await client.auth.getSession();
+
+    // The tags table is owner-only — guests derive tags from public bookmarks.
+    if (!session) {
+      const bookmarks = await this.getBookmarks();
+      return Array.from(new Set(bookmarks.flatMap((b) => b.tags || []))).sort();
+    }
+
     const { data, error } = await client
       .from('tags')
       .select('name')
@@ -219,6 +249,7 @@ export class SupabaseBookmarkService implements BookmarkServiceInterface {
       tags: normalizedTags,
       is_favorite: data.isFavorite,
       is_read: data.isRead ?? false,
+      is_public: data.isPublic ?? true,
       source: data.source,
     };
 

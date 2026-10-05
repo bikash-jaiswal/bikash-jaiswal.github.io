@@ -16,6 +16,7 @@ create table if not exists public.bookmarks (
   source text default 'linkedin',
   is_favorite boolean default false,
   is_read boolean default false,
+  is_public boolean default true,
   created_at timestamp with time zone default now()
 );
 
@@ -29,6 +30,16 @@ create policy "Users can manage their own bookmarks"
   on public.bookmarks for all
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
+
+-- Public read access: anon may read rows flagged is_public, and only the
+-- non-sensitive columns (raw_content / user_id stay private).
+create policy "Public read access"
+  on public.bookmarks for select
+  using (is_public = true);
+
+revoke select on public.bookmarks from anon;
+grant select (id, url, title, author, summary, image_url, category, tags, source, created_at)
+  on public.bookmarks to anon;
 
 -- Create Index for high performance queries
 create index if not exists idx_bookmarks_user_id on public.bookmarks(user_id);

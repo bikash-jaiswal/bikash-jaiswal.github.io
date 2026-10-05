@@ -20,6 +20,8 @@ interface BookmarkCardProps {
   onToggleRead: (id: string) => void;
   onTagClick?: (tag: string) => void;
   onDelete: (id: string) => void;
+  /** Guests get a read-only card — no favorite/read/delete controls. */
+  readOnly?: boolean;
 }
 
 export default function BookmarkCard({
@@ -28,6 +30,7 @@ export default function BookmarkCard({
   onToggleRead,
   onTagClick,
   onDelete,
+  readOnly = false,
 }: BookmarkCardProps) {
   const { id, title, url, author, summary, category, tags, isFavorite, isRead, source, createdAt } = bookmark;
 
@@ -74,43 +77,45 @@ export default function BookmarkCard({
             </span>
           </div>
 
-          <div className="flex items-center gap-1.5">
-            {/* Read / Unread toggle */}
-            <button
-              type="button"
-              onClick={() => onToggleRead(id)}
-              className={`flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-medium border transition-colors ${
-                isRead
-                  ? 'border-gray-200 dark:border-white/10 text-gray-400 hover:text-black dark:hover:text-white bg-gray-50/50 dark:bg-white/[0.02]'
-                  : 'border-emerald-500/20 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20'
-              }`}
-              title={isRead ? 'Mark as unread' : 'Mark as read'}
-            >
-              <FiCheckCircle size={13} className={isRead ? 'text-gray-400' : 'text-emerald-500'} />
-              <span>{isRead ? 'Read' : 'Unread'}</span>
-            </button>
+          {!readOnly && (
+            <div className="flex items-center gap-1.5">
+              {/* Read / Unread toggle */}
+              <button
+                type="button"
+                onClick={() => onToggleRead(id)}
+                className={`flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-medium border transition-colors ${
+                  isRead
+                    ? 'border-gray-200 dark:border-white/10 text-gray-400 hover:text-black dark:hover:text-white bg-gray-50/50 dark:bg-white/[0.02]'
+                    : 'border-emerald-500/20 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20'
+                }`}
+                title={isRead ? 'Mark as unread' : 'Mark as read'}
+              >
+                <FiCheckCircle size={13} className={isRead ? 'text-gray-400' : 'text-emerald-500'} />
+                <span>{isRead ? 'Read' : 'Unread'}</span>
+              </button>
 
-            <button
-              type="button"
-              onClick={() => onToggleFavorite(id)}
-              className={`p-1.5 rounded-lg transition-colors ${
-                isFavorite
-                  ? 'text-amber-500 hover:text-amber-600'
-                  : 'text-gray-400 hover:text-amber-500'
-              }`}
-              title={isFavorite ? 'Remove favorite' : 'Add to favorites'}
-            >
-              <FiStar size={16} className={isFavorite ? 'fill-current' : ''} />
-            </button>
-            <button
-              type="button"
-              onClick={() => onDelete(id)}
-              className="p-1.5 text-gray-400 hover:text-red-500 rounded-lg transition-colors"
-              title="Delete bookmark"
-            >
-              <FiTrash2 size={15} />
-            </button>
-          </div>
+              <button
+                type="button"
+                onClick={() => onToggleFavorite(id)}
+                className={`p-1.5 rounded-lg transition-colors ${
+                  isFavorite
+                    ? 'text-amber-500 hover:text-amber-600'
+                    : 'text-gray-400 hover:text-amber-500'
+                }`}
+                title={isFavorite ? 'Remove favorite' : 'Add to favorites'}
+              >
+                <FiStar size={16} className={isFavorite ? 'fill-current' : ''} />
+              </button>
+              <button
+                type="button"
+                onClick={() => onDelete(id)}
+                className="p-1.5 text-gray-400 hover:text-red-500 rounded-lg transition-colors"
+                title="Delete bookmark"
+              >
+                <FiTrash2 size={15} />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Title */}

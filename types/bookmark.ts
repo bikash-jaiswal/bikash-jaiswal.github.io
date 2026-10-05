@@ -13,6 +13,7 @@ export interface Bookmark {
   tags: string[];
   isFavorite: boolean;
   isRead?: boolean;
+  isPublic?: boolean;
   source: BookmarkSource;
   createdAt: string;
 }
