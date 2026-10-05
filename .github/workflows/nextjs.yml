@@ -45,9 +45,12 @@ jobs:
       - name: Build with Next.js
         run: bun run build
         env:
-          NODE_TLS_REJECT_UNAUTHORIZED: 0
           NEXT_TELEMETRY_DISABLED: 1
           NODE_OPTIONS: --max-old-space-size=4096
+          # Public-by-design values (anon key is client-safe, enforced by RLS).
+          # They are inlined into the static bundle at build time.
+          NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

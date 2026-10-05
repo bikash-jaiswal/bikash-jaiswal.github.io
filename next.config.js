@@ -11,6 +11,8 @@ const nextConfig = {
   // Fix workspace root detection
   outputFileTracingRoot: path.join(__dirname),
 
+  allowedDevOrigins: ['127.0.0.1:*', 'localhost:*'],
+
   experimental: {
     optimizePackageImports: ['react-icons', 'framer-motion', 'lucide-react'],
   },

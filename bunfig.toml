@@ -27,8 +27,7 @@ deadCodeElimination = true
 constantFolding = true
 
 # Smol mode - reduces binary size for production builds
-[smol]
-enable = true
+smol = false
 
 # JIT compilation - faster execution for hot paths
 [jit]

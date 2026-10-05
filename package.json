@@ -13,9 +13,11 @@
     "type-check": "bun run tsc --noEmit",
     "analyze": "ANALYZE=true bun run next build",
     "clean": "rm -rf .next out .vercel",
-    "preview": "bun run next build && bun run next start"
+    "preview": "bun run next build && bun run next start",
+    "deploy:functions": "supabase functions deploy enrich-link"
   },
   "dependencies": {
+    "@supabase/supabase-js": "2.117.2",
     "framer-motion": "^12.23.26",
     "gray-matter": "^4.0.3",
     "next": "^15.5.9",

@@ -31,7 +31,7 @@ A modern, high-performance personal website and blog built with cutting-edge web
 
 ### 🛠️ Tech Stack
 
-[![Bun](https://img.shields.io/badge/Bun-1.3-FF6058?style=flat-square&logo=bun&logoColor=white)](https://bun.sh/)
+[![Bun](https://img.shields.io/badge/Bun-1.4.2-FF6058?style=flat-square&logo=bun&logoColor=white)](https://bun.sh/)
 [![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=flat-square&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React_19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
