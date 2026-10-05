@@ -32,7 +32,6 @@ const inter = Inter({
 
 const display = Bricolage_Grotesque({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
   variable: '--font-display',
 });
